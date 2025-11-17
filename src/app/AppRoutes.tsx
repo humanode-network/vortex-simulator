@@ -1,7 +1,7 @@
 import { Outlet, Route, Routes } from "react-router";
 import Welcome from "../pages/Welcome";
 import AppShell from "./AppShell";
-import Chambers from "../pages/Chambers";
+import Page1 from "../pages/Page1";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const AppRoutes: React.FC = () => {
         }
       >
         <Route path="/" element={<Welcome />} />
-        <Route path="/chambers" element={<Chambers />} />
+        <Route path="/page1" element={<Page1 />} />
       </Route>
     </Routes>
   );
