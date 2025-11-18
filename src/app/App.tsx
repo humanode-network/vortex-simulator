@@ -1,11 +1,15 @@
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter } from "react-router";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <>
+      <CssBaseline />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </>
   );
 };
 
