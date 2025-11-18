@@ -31,13 +31,20 @@ type Node = {
   acm: number;
   mm: number;
   formationCapable?: boolean;
+  active: boolean;
+  formationProject?: string;
   tags: string[];
 };
 
 const sampleNodes: Node[] = [
-  { id: "Mozgiii", name: "Mozgiii", role: "Legate · Protocol Engineering", chamber: "protocol", tier: "legate", acm: 182, mm: 92, formationCapable: true, tags: ["protocol", "security", "research"] },
-  { id: "Raamara", name: "Raamara", role: "Consul · Economics", chamber: "economics", tier: "consul", acm: 168, mm: 80, formationCapable: true, tags: ["treasury", "formation", "community"] },
-  { id: "Nyx", name: "Nyx", role: "Ecclesiast · Security", chamber: "security", tier: "ecclesiast", acm: 155, mm: 78, formationCapable: false, tags: ["security", "infra", "audits"] },
+  { id: "Mozgiii", name: "Mozgiii", role: "Legate · Protocol Engineering", chamber: "protocol", tier: "legate", acm: 182, mm: 92, formationCapable: true, active: true, formationProject: "Protocol council", tags: ["protocol", "security", "research"] },
+  { id: "Raamara", name: "Raamara", role: "Consul · Economics", chamber: "economics", tier: "consul", acm: 168, mm: 80, formationCapable: true, active: true, formationProject: "Treasury ops", tags: ["treasury", "formation", "community"] },
+  { id: "Nyx", name: "Nyx", role: "Ecclesiast · Security", chamber: "security", tier: "ecclesiast", acm: 155, mm: 78, formationCapable: false, active: false, formationProject: "Security audits", tags: ["security", "infra", "audits"] },
+  { id: "Nana", name: "Nana", role: "Consul · Community & Treasury", chamber: "economics", tier: "consul", acm: 161, mm: 84, formationCapable: true, active: true, formationProject: "Community treasury", tags: ["treasury", "community", "formation"] },
+  { id: "Victor", name: "Victor", role: "Legate · Research Ops", chamber: "research", tier: "legate", acm: 149, mm: 76, formationCapable: false, active: true, formationProject: "Research guild", tags: ["research", "protocol", "infra"] },
+  { id: "Tony", name: "Tony", role: "Ecclesiast · Social", chamber: "social", tier: "ecclesiast", acm: 138, mm: 70, formationCapable: true, active: false, formationProject: "Community outreach", tags: ["social", "community", "formation"] },
+  { id: "Dima", name: "Dima", role: "Nominee · Security Apprentice", chamber: "security", tier: "nominee", acm: 122, mm: 62, formationCapable: false, active: true, formationProject: "Audit rotation", tags: ["security", "audits"] },
+  { id: "Shannon", name: "Shannon", role: "Consul · Formation Logistics", chamber: "formation", tier: "consul", acm: 171, mm: 88, formationCapable: true, active: true, formationProject: "Formation logistics", tags: ["formation", "operations", "logistics"] },
 ];
 
 const HumanNodes: React.FC = () => {
@@ -122,6 +129,7 @@ const HumanNodes: React.FC = () => {
                     exclusive
                     size="small"
                     onChange={(_, val) => val && setView(val)}
+                    sx={{ "& .MuiToggleButton-root": { flex: 1, minWidth: 96 } }}
                   >
                     <ToggleButton value="cards">Cards</ToggleButton>
                     <ToggleButton value="list">List</ToggleButton>
@@ -131,34 +139,77 @@ const HumanNodes: React.FC = () => {
 
               <Stack spacing={2}>
                 {filtered.map((node) => (
-                  <Card key={node.id} variant="outlined">
-                    <CardContent sx={{ pb: 0 }}>
-                      <Grid container spacing={1} sx={{ alignItems: view === "list" ? "center" : "flex-start" }}>
-                        <Grid size={{ xs: 12, md: view === "list" ? 6 : 12 }}>
-                          <Typography variant="h6">{node.name}</Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {node.role}
-                          </Typography>
-                        </Grid>
-                        <Grid size={{ xs: 12, md: view === "list" ? 6 : 12 }}>
+                  view === "cards" ? (
+                    <Card key={node.id} variant="outlined">
+                      <CardContent sx={{ pb: 0 }}>
+                        <Stack spacing={1.5}>
+                          <Box>
+                            <Typography variant="h6">{node.name}</Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {node.role}
+                            </Typography>
+                          </Box>
                           <Stack direction="row" spacing={1} flexWrap="wrap">
                             <Chip label={`ACM: ${node.acm}`} variant="outlined" />
                             <Chip label={`MM: ${node.mm}`} variant="outlined" />
+                            <Chip label={`Tier: ${node.tier}`} variant="outlined" />
+                            <Chip label={node.active ? "Active governor" : "Not active"} color={node.active ? "success" : "default"} variant="outlined" />
                           </Stack>
+                          <Grid container spacing={1}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="body2">Main chamber: {node.chamber}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="body2">Formation member: {node.formationCapable ? "Yes" : "No"}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="body2">Main formation project: {node.formationProject ?? "—"}</Typography>
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                              <Typography variant="body2">Status: {node.active ? "Active" : "Not active"}</Typography>
+                            </Grid>
+                          </Grid>
+                          <Stack direction="row" spacing={1} flexWrap="wrap">
+                            {node.tags.map((tag) => (
+                              <Chip key={tag} label={tag} variant="outlined" />
+                            ))}
+                          </Stack>
+                        </Stack>
+                      </CardContent>
+                      <CardActions sx={{ px: 2, pb: 2 }}>
+                        <Button component={Link} to={`/human-nodes/${node.id}`} size="small" variant="contained">
+                          Open profile
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  ) : (
+                    <Card key={node.id} variant="outlined">
+                      <CardContent sx={{ pb: 1.5 }}>
+                        <Grid container spacing={1} sx={{ alignItems: "center" }}>
+                          <Grid size={{ xs: 12, md: 5 }}>
+                            <Typography variant="subtitle1">{node.name}</Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {node.role}
+                            </Typography>
+                          </Grid>
+                          <Grid size={{ xs: 12, md: 4 }}>
+                            <Stack direction="row" spacing={1} flexWrap="wrap">
+                              <Chip label={`ACM: ${node.acm}`} variant="outlined" size="small" />
+                              <Chip label={`MM: ${node.mm}`} variant="outlined" size="small" />
+                              {node.formationCapable && <Chip label="Formation" color="primary" variant="outlined" size="small" />}
+                            </Stack>
+                          </Grid>
+                          <Grid size={{ xs: 12, md: 3 }}>
+                            <Stack direction="row" spacing={1} justifyContent={{ xs: "flex-start", md: "flex-end" }}>
+                              <Button component={Link} to={`/human-nodes/${node.id}`} size="small" variant="contained">
+                                Open
+                              </Button>
+                            </Stack>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                      <Stack direction="row" spacing={1} flexWrap="wrap" mt={view === "list" ? 0.5 : 1.5}>
-                        {node.tags.map((tag) => (
-                          <Chip key={tag} label={tag} variant="outlined" />
-                        ))}
-                      </Stack>
-                    </CardContent>
-                    <CardActions sx={{ px: 2, pb: 2 }}>
-                      <Button component={Link} to={`/human-nodes/${node.id}`} size="small" variant="contained">
-                        Open profile
-                      </Button>
-                    </CardActions>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  )
                 ))}
               </Stack>
             </CardContent>
@@ -239,7 +290,7 @@ const HumanNodes: React.FC = () => {
                 <Grid size={12}>
                   <FormControlLabel
                     control={<Switch checked={formationOnly} onChange={(e) => setFormationOnly(e.target.checked)} />}
-                    label="Formation-capable only"
+                    label="Formation members only"
                   />
                 </Grid>
               </Grid>
