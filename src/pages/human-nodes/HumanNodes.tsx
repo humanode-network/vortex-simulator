@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
-import Grid from "@mui/material/PigmentGrid";
+import Grid from "@mui/material/Grid";
 import {
   Box,
   Button,
@@ -93,8 +93,8 @@ const HumanNodes: React.FC = () => {
         }}
       />
 
-      <Grid container spacing={2} sx={{ alignItems: "stretch" }}>
-        <Grid size={{ xs: 12, md: 8 }} sx={{ display: "flex" }}>
+      <Grid container spacing={2} columns={12} sx={{ alignItems: "stretch" }}>
+        <Grid size={{ xs: 12, md: 9 }} sx={{ display: "flex" }}>
           <Card sx={{ width: "100%" }}>
             <CardContent>
               <Typography className="eyebrow" component="p" mb={1.5}>
@@ -165,7 +165,7 @@ const HumanNodes: React.FC = () => {
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, md: 4 }} sx={{ display: "flex" }}>
+        <Grid size={{ xs: 12, md: 3 }} sx={{ display: "flex" }}>
           <Card sx={{ width: "100%" }}>
             <CardContent>
               <Typography className="eyebrow" component="p">
