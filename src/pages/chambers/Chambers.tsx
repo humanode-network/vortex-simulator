@@ -79,16 +79,15 @@ const chambers: Chamber[] = [
 const Chambers: React.FC = () => {
   return (
     <div className="app-page flex flex-col gap-6">
-      <div>
+      <header>
         <h1 className="text-xl font-semibold text-(--text)">Chambers</h1>
-        <p className="text-sm text-muted">Live view of governance chambers, their multipliers, and current pipelines.</p>
-      </div>
+      </header>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {metricCards.map((metric) => (
           <div
             key={metric.label}
-            className="rounded-2xl border border-border bg-panel-alt px-4 py-5 shadow-sm"
+            className="rounded-2xl border border-border bg-panel-alt px-4 py-5 text-center shadow-sm"
           >
             <p className="text-sm text-muted">{metric.label}</p>
             <p className="text-2xl font-semibold text-(--text)">{metric.value}</p>
@@ -99,13 +98,13 @@ const Chambers: React.FC = () => {
       <section aria-live="polite" className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {chambers.map((chamber) => (
           <Card key={chamber.id} className="h-full border border-border bg-panel">
-            <CardHeader className="flex flex-row items-center justify-between pb-0">
-              <div>
-                <CardTitle>{chamber.name}</CardTitle>
+            <CardHeader className="pb-2">
+              <div className="flex min-h-16 items-start justify-between gap-2">
+                <CardTitle className="max-w-[70%]">{chamber.name}</CardTitle>
+                <Badge className="whitespace-nowrap text-center text-xs font-semibold uppercase" variant="outline">
+                  M × {chamber.multiplier.replace("×", "").trim()}
+                </Badge>
               </div>
-              <Badge className="text-xs font-semibold uppercase" variant="outline">
-                Multiplier {chamber.multiplier}
-              </Badge>
             </CardHeader>
             <CardContent className="space-y-4">
               <dl className="grid grid-cols-3 gap-3 text-sm text-(--text)">

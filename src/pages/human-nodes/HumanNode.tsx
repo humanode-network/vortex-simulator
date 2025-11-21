@@ -111,8 +111,8 @@ const HumanNode: React.FC = () => {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {heroStats.map((stat) => (
-          <Card key={stat.label} className="h-full">
-            <CardContent className="space-y-1 p-4">
+          <Card key={stat.label} className="h-full text-center">
+            <CardContent className="space-y-1 p-4 text-center">
               <p className="text-xs uppercase tracking-wide text-muted">{stat.label}</p>
               <p className="text-2xl font-semibold text-text">{stat.value}</p>
             </CardContent>
@@ -141,7 +141,7 @@ const HumanNode: React.FC = () => {
             <CardContent>
               <div className="grid max-h-72 grid-cols-1 gap-3 overflow-y-scroll pr-2 sm:grid-cols-2 xl:grid-cols-3">
                 {governanceActions.map((action) => (
-                  <div key={action.title} className="rounded-xl border border-border bg-panel-alt px-3 py-3 text-left space-y-1">
+                  <div key={action.title} className="rounded-xl border border-border bg-panel-alt px-3 py-3 text-center space-y-1">
                     <p className="text-sm font-semibold text-text line-clamp-1">{action.title}</p>
                     <p className="text-xs uppercase tracking-wide text-primary line-clamp-1">{action.action}</p>
                     <p className="text-xs text-muted line-clamp-1">{action.context}</p>
@@ -184,9 +184,9 @@ const HumanNode: React.FC = () => {
             <CardContent className="space-y-4">
               <div className="grid gap-3 text-center sm:grid-cols-2">
                 {quickDetails.map((detail) => (
-                  <div key={detail.label} className="flex h-20 flex-col items-center justify-between rounded-xl border border-border px-3 py-3">
-                    <p className="text-xs uppercase tracking-wide text-muted">{detail.label}</p>
-                    <p className="text-base font-semibold text-text">{detail.value}</p>
+                  <div key={detail.label} className="flex h-20 flex-col items-center justify-between rounded-xl border border-border px-3 py-3 text-center">
+                    <p className="text-xs uppercase tracking-wide text-muted text-center">{detail.label}</p>
+                    <p className="text-base font-semibold text-text text-center">{detail.value}</p>
                   </div>
                 ))}
               </div>
@@ -218,8 +218,8 @@ const HumanNode: React.FC = () => {
                   <div className="grid gap-3 text-sm text-text sm:grid-cols-2">
                     {proofSections[activeProof].items.map((item) => (
                       <div key={item.label} className="flex h-20 flex-col items-center justify-between rounded-xl border border-border px-3 py-2 text-center">
-                        <p className="text-xs uppercase tracking-wide text-muted leading-tight min-h-6">{item.label}</p>
-                        <p className="text-sm font-semibold text-text min-h-5">{item.value}</p>
+                        <p className="text-xs uppercase tracking-wide text-muted leading-tight min-h-6 text-center">{item.label}</p>
+                        <p className="text-sm font-semibold text-text min-h-5 text-center">{item.value}</p>
                       </div>
                     ))}
                   </div>
