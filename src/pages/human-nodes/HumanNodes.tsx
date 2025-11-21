@@ -34,6 +34,14 @@ const sampleNodes: Node[] = [
   { id: "Tony", name: "Tony", role: "Ecclesiast · Social", chamber: "social", tier: "ecclesiast", acm: 138, mm: 70, formationCapable: true, active: false, formationProject: "Community outreach", tags: ["social", "community", "formation"] },
   { id: "Dima", name: "Dima", role: "Nominee · Security Apprentice", chamber: "security", tier: "nominee", acm: 122, mm: 62, formationCapable: false, active: true, formationProject: "Audit rotation", tags: ["security", "audits"] },
   { id: "Shannon", name: "Shannon", role: "Consul · Formation Logistics", chamber: "formation", tier: "consul", acm: 171, mm: 88, formationCapable: true, active: true, formationProject: "Formation logistics", tags: ["formation", "operations", "logistics"] },
+  { id: "Sasha", name: "Sasha", role: "Citizen · Constitutional Observer", chamber: "protocol", tier: "citizen", acm: 118, mm: 60, formationCapable: false, active: true, formationProject: "Audit trail", tags: ["research", "protocol"] },
+  { id: "VictorM", name: "Victor M", role: "Legate · Mesh Ops", chamber: "protocol", tier: "legate", acm: 165, mm: 85, formationCapable: true, active: true, formationProject: "Mesh redundancy", tags: ["protocol", "infra", "formation"] },
+  { id: "Cass", name: "Cass", role: "Ecclesiast · Treasury Ops", chamber: "economics", tier: "ecclesiast", acm: 147, mm: 74, formationCapable: true, active: true, formationProject: "Treasury dashboard", tags: ["treasury", "community"] },
+  { id: "Lena", name: "Lena", role: "Consul · Social Impact", chamber: "social", tier: "consul", acm: 158, mm: 83, formationCapable: true, active: true, formationProject: "Impact guild", tags: ["social", "community"] },
+  { id: "Artem", name: "Artem", role: "Legate · Security Infra", chamber: "security", tier: "legate", acm: 166, mm: 89, formationCapable: true, active: true, formationProject: "Deterrence drills", tags: ["security", "infra"] },
+  { id: "Juno", name: "Juno", role: "Nominee · Research Fellow", chamber: "research", tier: "nominee", acm: 119, mm: 64, formationCapable: false, active: true, formationProject: "Research fellowship", tags: ["research", "protocol"] },
+  { id: "Iris", name: "Iris", role: "Ecclesiast · Community Ops", chamber: "social", tier: "ecclesiast", acm: 140, mm: 72, formationCapable: true, active: false, formationProject: "Care outreach", tags: ["social", "community", "formation"] },
+  { id: "Taro", name: "Taro", role: "Consul · Formation Logistics", chamber: "formation", tier: "consul", acm: 172, mm: 87, formationCapable: true, active: true, formationProject: "Formation supply", tags: ["formation", "operations"] },
 ];
 
 const HumanNodes: React.FC = () => {
