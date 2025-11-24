@@ -12,9 +12,9 @@ const heroStats = [
 
 const quickDetails = [
   { label: "Tier", value: "Legate" },
-  { label: "Faction", value: "Protocol Vanguard" },
+  { label: "Faction", value: "Anonymous" },
   { label: "Delegation share", value: "113 · 3.4%" },
-  { label: "Quorum participation", value: "91% · 12 epochs" },
+  { label: "Proposals created", value: "28" },
 ];
 
 const proofSections = {
@@ -42,15 +42,21 @@ const proofSections = {
 };
 
 const governanceActions = [
-  { title: "Reddit brand proposal", action: "Upvoted", context: "Marketing proposal pool" },
-  { title: "Update runtime proposal", action: "Casted vote", context: "Protocol chamber" },
-  { title: "The Smurf project", action: "Left project", context: "Formation" },
-  { title: "Fee telemetry upgrade #225", action: "Authored proposal", context: "Protocol chamber" },
-  { title: "Treasury split adjustment #883", action: "Presented motion", context: "Economic chamber" },
-  { title: "Protocol SSC quorum drill", action: "Coordinated drill", context: "Protocol chamber" },
-  { title: "Mesh sequencer redundancy", action: "Reviewed implementation", context: "Formation" },
-  { title: "Budget oversight motion", action: "Co-authored memo", context: "Governance proposal pool" },
-  { title: "Telemetry SDK handoff", action: "Mentored team", context: "Faction task force" },
+  { title: "Reddit brand proposal", action: "Upvoted", context: "Marketing proposal pool", detail: "Flagged key talking points for community roll-out and nudged pool momentum." },
+  { title: "Update runtime proposal", action: "Casted vote", context: "Protocol chamber", detail: "Left implementation notes on validator staggered restarts." },
+  { title: "The Smurf project", action: "Left project", context: "Formation", detail: "Transitioned responsibilities to Nana after hand-off retro." },
+  { title: "Fee telemetry upgrade #225", action: "Authored proposal", context: "Protocol chamber", detail: "Outlined dual-path telemetry for biometric proofs and mesh fees." },
+  { title: "Treasury split adjustment #883", action: "Presented motion", context: "Economic chamber", detail: "Arbitrated between Formation and Treasury subcommittees." },
+  { title: "Protocol SSC quorum drill", action: "Coordinated drill", context: "Protocol chamber", detail: "Simulated night shift quorum loss and documented timings." },
+  { title: "Mesh sequencer redundancy", action: "Reviewed implementation", context: "Formation", detail: "Signed off on milestone 3 safety checklist for redundant sequencers." },
+  { title: "Budget oversight motion", action: "Co-authored memo", context: "Governance proposal pool", detail: "Drafted memo summarizing risk thresholds for fiscal year." },
+  { title: "Telemetry SDK handoff", action: "Mentored team", context: "Faction task force", detail: "Recorded screencasts for SDK setup and alert configuration." },
+  { title: "Chamber audit sync", action: "Hosted session", context: "Security chamber", detail: "Walked through previous incidents and matched to audit trails." },
+  { title: "Formation handover 12", action: "Signed off", context: "Formation", detail: "Validated milestone artifacts and updated ops board." },
+  { title: "Governor onboarding brief", action: "Led workshop", context: "Protocol chamber", detail: "Gave quickstart checklist for new governors joining mesh topics." },
+  { title: "Network health retro", action: "Published report", context: "Protocol council", detail: "Shared dashboard snapshots and postmortem experiments." },
+  { title: "Mesh redundancy QA", action: "Completed review", context: "Formation logistics", detail: "Filed follow-ups for two flaky sensors before sign-off." },
+  { title: "Deterrence sim drill", action: "Activated standby", context: "Security & infra", detail: "Ran pager playbook and escalated to infra for acknowledgement." },
 ];
 
 const projects = [
@@ -65,6 +71,30 @@ const projects = [
     status: "Research · Upcoming",
     summary: "Threat modeling track focused on biometric verification attacks and countermeasures.",
     chips: ["Budget: 45k HMND", "Milestones: 0 / 5", "Team slots: 3 open"],
+  },
+  {
+    title: "Mesh Telemetry Board",
+    status: "Formation Logistics · Live",
+    summary: "Realtime visualization board for mesh telemetry anomalies and biometric lag spikes.",
+    chips: ["Budget: 52k HMND", "Milestones: 3 / 5", "Team slots: 1 open"],
+  },
+  {
+    title: "Guardian Mentorship Cohort",
+    status: "Social Impact · Live",
+    summary: "Mentorship rotation pairing experienced governors with nominating cohort.",
+    chips: ["Budget: 36k HMND", "Milestones: 4 / 6", "Team slots: 0 open"],
+  },
+  {
+    title: "Formation Guild Ops Stack",
+    status: "Formation Logistics · Upcoming",
+    summary: "Comprehensive ops, payroll, and reporting stack for Formation guild leads.",
+    chips: ["Budget: 90k HMND", "Milestones: 1 / 8", "Team slots: 4 open"],
+  },
+  {
+    title: "Governor Sync Relay",
+    status: "Research · Completed",
+    summary: "Async sync relay specifications for cross-faction governor collaboration.",
+    chips: ["Budget: 28k HMND", "Milestones: 5 / 5", "Team slots: 0 open"],
   },
 ];
 
@@ -141,10 +171,17 @@ const HumanNode: React.FC = () => {
             <CardContent>
               <div className="grid max-h-72 grid-cols-1 gap-3 overflow-y-scroll pr-2 sm:grid-cols-2 xl:grid-cols-3">
                 {governanceActions.map((action) => (
-                  <div key={action.title} className="rounded-xl border border-border bg-panel-alt px-3 py-3 text-center space-y-1">
-                    <p className="text-sm font-semibold text-text line-clamp-1">{action.title}</p>
-                    <p className="text-xs uppercase tracking-wide text-primary line-clamp-1">{action.action}</p>
-                    <p className="text-xs text-muted line-clamp-1">{action.context}</p>
+                  <div key={action.title} className="group relative">
+                    <div className="rounded-xl border border-border bg-panel-alt px-3 py-3 text-center space-y-1">
+                      <p className="text-sm font-semibold text-text line-clamp-1">{action.title}</p>
+                      <p className="text-xs uppercase tracking-wide text-primary line-clamp-1">{action.action}</p>
+                      <p className="text-xs text-muted line-clamp-1">{action.context}</p>
+                    </div>
+                    <div className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 w-64 -translate-x-1/2 rounded-xl border border-border bg-[color:var(--panel)] p-3 text-left text-xs text-text opacity-0 shadow-lg transition group-hover:opacity-100">
+                      <p className="font-semibold">{action.title}</p>
+                      <p className="text-muted">{action.context}</p>
+                      <p className="mt-1 leading-snug">{action.detail}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -155,7 +192,7 @@ const HumanNode: React.FC = () => {
             <CardHeader className="pb-2">
               <CardTitle>Formation projects</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 max-h-96 overflow-y-auto pr-1">
               {projects.map((project) => (
                 <div key={project.title} className="rounded-xl border border-border px-4 py-3">
                   <div className="flex flex-col gap-1">
