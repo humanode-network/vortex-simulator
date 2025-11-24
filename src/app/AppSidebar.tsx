@@ -14,7 +14,7 @@ const AppSidebar: React.FC<React.PropsWithChildren> = ({ children }) => {
       </div>
       <nav className="sidebar__nav" aria-label="Primary">
         <NavLink className={navClass} to="/profile">
-          Profile
+          My profile
         </NavLink>
         <NavLink className={navClass} to="/factions">
           Factions
