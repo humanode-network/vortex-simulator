@@ -97,7 +97,7 @@ const Chambers: React.FC = () => {
 
       <section aria-live="polite" className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {chambers.map((chamber) => (
-          <Card key={chamber.id} className="h-full border border-border bg-panel">
+            <Card key={chamber.id} className="h-full border border-border bg-panel">
             <CardHeader className="pb-2">
               <div className="flex min-h-16 items-start justify-between gap-2">
                 <CardTitle className="max-w-[70%]">{chamber.name}</CardTitle>
@@ -107,17 +107,19 @@ const Chambers: React.FC = () => {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <dl className="grid grid-cols-3 gap-3 text-sm text-(--text)">
-                <div className="rounded-xl border border-border bg-panel-alt px-3 py-2 text-center">
-                  <dt className="text-xs uppercase tracking-wide text-muted">Governors</dt>
+              <dl className="grid grid-cols-3 gap-3 text-center text-sm text-(--text)">
+                <div className="flex flex-col items-center rounded-xl border border-border bg-panel-alt px-3 py-2 text-center">
+                  <dt className="text-center text-[0.65rem] uppercase tracking-wide text-muted whitespace-nowrap leading-tight">
+                    Governors
+                  </dt>
                   <dd className="text-lg font-semibold">{chamber.stats.governors}</dd>
                 </div>
-                <div className="rounded-xl border border-border bg-panel-alt px-3 py-2 text-center">
-                  <dt className="text-xs uppercase tracking-wide text-muted">MCM</dt>
+                <div className="flex flex-col items-center rounded-xl border border-border bg-panel-alt px-3 py-2 text-center">
+                  <dt className="text-[0.65rem] uppercase tracking-wide text-muted whitespace-nowrap leading-tight">MCM</dt>
                   <dd className="text-lg font-semibold">{chamber.stats.mcm}</dd>
                 </div>
-                <div className="rounded-xl border border-border bg-panel-alt px-3 py-2 text-center">
-                  <dt className="text-xs uppercase tracking-wide text-muted">LCM</dt>
+                <div className="flex flex-col items-center rounded-xl border border-border bg-panel-alt px-3 py-2 text-center">
+                  <dt className="text-[0.65rem] uppercase tracking-wide text-muted whitespace-nowrap leading-tight">LCM</dt>
                   <dd className="text-lg font-semibold">{chamber.stats.lcm}</dd>
                 </div>
               </dl>
