@@ -53,12 +53,36 @@ const ProposalPP: React.FC = () => {
   const upvoteFloorPercent = Math.round((proposal.upvoteFloor / proposal.activeGovernors) * 100);
   const upvoteCurrentPercent = Math.round((proposal.upvotes / proposal.activeGovernors) * 100);
 
+  const renderStageBar = (current: "draft" | "pool" | "chamber" | "formation") => {
+    const stages = [
+      { key: "draft", label: "Draft", color: "bg-slate-300 text-slate-800" },
+      { key: "pool", label: "Proposal pool", color: "bg-blue-500 text-white" },
+      { key: "chamber", label: "Chamber vote", color: "bg-emerald-500 text-white" },
+      { key: "formation", label: "Formation", color: "bg-orange-500 text-white" },
+    ] as const;
+    return (
+      <div className="flex gap-2">
+        {stages.map((stage) => (
+          <div
+            key={stage.key}
+            className={`flex-1 rounded-full px-3 py-2 text-center text-xs font-semibold ${
+              current === stage.key ? stage.color : "bg-slate-200 text-muted"
+            }`}
+          >
+            {stage.label}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className="app-page flex flex-col gap-6">
       <section className="rounded-2xl border border-border bg-panel p-6">
         <div className="grid items-start gap-4">
           <div className="space-y-4">
             <h1 className="text-center text-2xl font-semibold text-(--text)">{proposal.title}</h1>
+            {renderStageBar("pool")}
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl border border-border bg-panel-alt px-4 py-4 text-center">
                 <p className="text-[0.8rem] uppercase tracking-wide text-muted">Chamber</p>
