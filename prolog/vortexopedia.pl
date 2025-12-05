@@ -499,5 +499,467 @@ vortex_term(
   "2025-12-04"
 ).
 
+vortex_term(
+  26,
+  "cognitocratic_measure",
+  "Cognitocratic Measure (CM)",
+  governance,
+  "Subjective numeric score received when a proposal is accepted; voters input a score (e.g., 1–10) that averages into CM.",
+  [
+    "Assigned to a cognitocrat when a chamber accepts their proposal.",
+    "Voters supply a numeric score; the average becomes the CM for that proposal.",
+    "Intended to signal perceived contribution size; does not directly grant mandate power."
+  ],
+  [cm, score, contribution, governance],
+  ["cognitocratic_measure_multiplier", "lcm", "mcm", "acm"],
+  ["A proposal passes with an average score of 8 → proposer receives CM=8."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  27,
+  "cognitocratic_measure_multiplier",
+  "Cognitocratic Measure multiplier",
+  governance,
+  "Chamber-specific multiplier to normalize CM across specializations; set collectively by cognitocrats outside that chamber.",
+  [
+    "Each chamber has a multiplier to weight CM from that specialization.",
+    "Average multiplier is set by all cognitocrats who have not received LCM in that chamber.",
+    "Prevents direct comparison of raw CM across differing fields."
+  ],
+  [cm, multiplier, chamber, weighting],
+  ["cognitocratic_measure", "lcm", "mcm", "acm"],
+  ["Philosophy chamber multiplier 3 vs Finance chamber multiplier 5; same CM scales differently."],
+  [cm],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  28,
+  "lcm",
+  "Local Cognitocratic Measure (LCM)",
+  governance,
+  "CM accrued within a specific chamber before applying that chamber’s multiplier.",
+  [
+    "Represents contribution within a single chamber.",
+    "Used as input to calculate MCM and ACM."
+  ],
+  [cm, lcm, chamber],
+  ["mcm", "acm", "cognitocratic_measure_multiplier"],
+  ["5 LCM in Philosophy and 10 LCM in Finance before weighting."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  29,
+  "mcm",
+  "Multiplied Cognitocratic Measure (MCM)",
+  governance,
+  "LCM multiplied by its chamber’s multiplier.",
+  [
+    "Adjusts LCM by the chamber’s multiplier to reflect specialization value.",
+    "Feeds into ACM."
+  ],
+  [cm, mcm, chamber, multiplier],
+  ["lcm", "acm", "cognitocratic_measure_multiplier"],
+  ["LCM 5 in Philosophy × multiplier 3 = 15 MCM."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  30,
+  "acm",
+  "Absolute Cognitocratic Measure (ACM)",
+  governance,
+  "Sum of all MCMs across chambers: ACM = Σ(LCM_chamber × Multiplier_chamber).",
+  [
+    "Aggregates contribution across all chambers after applying multipliers.",
+    "Used to compare overall perceived contribution of a cognitocrat."
+  ],
+  [cm, acm, aggregate, governance],
+  ["lcm", "mcm", "cognitocratic_measure_multiplier"],
+  ["Example: (3 LCM in Philosophy ×3) + (10 LCM in Finance ×5) = 65 ACM."],
+  [cm, chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  31,
+  "multiplier_setting",
+  "Multiplier setting process",
+  governance,
+  "Cognitocrats set a 1–100 multiplier for chambers where they have no LCM; the average becomes the chamber multiplier.",
+  [
+    "Each cognitocrat can vote a multiplier (1–100) for chambers in which they hold no LCM.",
+    "Average of submissions becomes the chamber’s multiplier.",
+    "If a cognitocrat holds LCM in multiple chambers, they are locked out from setting multipliers in those chambers."
+  ],
+  [process, cm, multiplier, chamber],
+  ["cognitocratic_measure_multiplier", "lcm", "acm"],
+  ["A cognitocrat without LCM in Finance submits 70; combined with others sets Finance’s multiplier."],
+  [cm],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  32,
+  "meritocratic_measure",
+  "Meritocratic Measure (MM)",
+  formation,
+  "Score awarded for participation and delivery in Formation projects; governors rate milestones and contributors.",
+  [
+    "Earned through contribution to Formation project milestones.",
+    "Rated by governors when milestones are delivered.",
+    "Signals execution merit separate from chamber governance CM."
+  ],
+  [mm, formation, merit, milestones, rating],
+  ["formation", "formation_project", "cognitocratic_measure"],
+  ["A contributor receives MM based on governor ratings after a milestone delivery."],
+  [formation],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Formation – Meritocratic Measure",
+  "2025-12-04"
+).
+
+vortex_term(
+  33,
+  "proposition_rights",
+  "Proposition rights",
+  governance,
+  "Tier-based rights to make/promote proposals; tiers derive from PoT, PoD, PoG and do not change voting power.",
+  [
+    "Tiers are based on Proof-of-Time, Proof-of-Devotion, and Proof-of-Governance.",
+    "Higher tiers unlock additional proposal types but do not add voting power."
+  ],
+  [proposals, tiers, rights, governance],
+  ["proof_of_time_pot", "proof_of_devotion_pod", "proof_of_governance_pog", "tier1_nominee", "tier2_ecclesiast", "tier3_legate", "tier4_consul", "tier5_citizen"],
+  ["Tier progression unlocks proposal types without changing vote weight."],
+  [chamber, pool],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights",
+  "2025-12-04"
+).
+
+vortex_term(
+  34,
+  "governing_era",
+  "Governing era",
+  governance,
+  "168-epoch (~1 month) period; a governor stays active by running a node 164/168 epochs and meeting action thresholds.",
+  [
+    "Era = 168 epochs; each epoch is ~4 hours.",
+    "Active if bioauthenticated and node ran 164/168 epochs and required actions met in previous era.",
+    "Required actions include voting/upvoting/downvoting proposals or chamber votes."
+  ],
+  [era, quorum, activity, governance],
+  ["governor", "proof_of_governance_pog"],
+  ["Passing era action threshold keeps a governor counted in quorums next era."],
+  [global],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights",
+  "2025-12-04"
+).
+
+vortex_term(
+  35,
+  "proof_of_time_pot",
+  "Proof-of-Time (PoT)",
+  governance,
+  "Longevity of being a human node and a governor; contributes to tier progression.",
+  [
+    "Tracks how long a human node and governor have been active.",
+    "Used for tier progression and proposal rights."
+  ],
+  [proof, time, longevity, tier],
+  ["proof_of_devotion_pod", "proof_of_governance_pog"],
+  ["Longer node/governor uptime supports higher tiers."],
+  [global],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Proof types",
+  "2025-12-04"
+).
+
+vortex_term(
+  36,
+  "proof_of_devotion_pod",
+  "Proof-of-Devotion (PoD)",
+  governance,
+  "Contribution via proposal approval in Vortex and participation in Formation projects.",
+  [
+    "Counts accepted proposals in Vortex.",
+    "Counts participation in Formation projects."
+  ],
+  [proof, devotion, proposals, formation, tier],
+  ["proof_of_time_pot", "proof_of_governance_pog"],
+  ["Accepted proposal + Formation participation advance PoD."],
+  [global, formation],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Proof types",
+  "2025-12-04"
+).
+
+vortex_term(
+  37,
+  "proof_of_governance_pog",
+  "Proof-of-Governance (PoG)",
+  governance,
+  "Measures active governing streak and era actions to stay counted in quorums.",
+  [
+    "Longevity of being an active governor.",
+    "Maintaining active governing status through required actions."
+  ],
+  [proof, governance, quorum, tier],
+  ["proof_of_time_pot", "proof_of_devotion_pod", "governing_era"],
+  ["Complete era action thresholds to retain active governor status."],
+  [global, chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Proof types",
+  "2025-12-04"
+).
+
+vortex_term(
+  38,
+  "tier1_nominee",
+  "Tier 1 · Nominee",
+  governance,
+  "Entry tier: human node seeking voting rights; can join Formation and propose most items except restricted categories.",
+  [
+    "Requirements: Run a node.",
+    "New actions: Make any proposal excluding fee distribution, monetary system, core infrastructure, administrative, DAO core; participate in Formation; start earning longevity as governor."
+  ],
+  [tier, nominee, governance],
+  ["proof_of_time_pot", "proof_of_devotion_pod"],
+  ["Nominee can propose general items and join Formation but has no vote yet."],
+  [pool, formation],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Tiers",
+  "2025-12-04"
+).
+
+vortex_term(
+  39,
+  "tier2_ecclesiast",
+  "Tier 2 · Ecclesiast",
+  governance,
+  "Unlocked when a nominee’s proposal is accepted; enables fee distribution and monetary modification proposals.",
+  [
+    "Requirements: Run a node; have a proposal accepted in Vortex.",
+    "New available proposal types: Fee distribution; Monetary modification."
+  ],
+  [tier, ecclesiast, governance],
+  ["proof_of_time_pot", "proof_of_devotion_pod"],
+  ["Ecclesiast can propose fee splits or monetary changes after first accepted proposal."],
+  [chamber, pool],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Tiers",
+  "2025-12-04"
+).
+
+vortex_term(
+  40,
+  "tier3_legate",
+  "Tier 3 · Legate",
+  governance,
+  "Requires 1 year node + active governor, accepted proposal, and Formation participation; unlocks core infrastructure changes.",
+  [
+    "Requirements: Run a node for 1 year; be an active governor for 1 year; have a proposal accepted; participate in Formation.",
+    "New available proposal types: Core infrastructure changes (e.g., cryptobiometrics, CVM control, delegation mechanics)."
+  ],
+  [tier, legate, governance],
+  ["proof_of_time_pot", "proof_of_devotion_pod", "proof_of_governance_pog"],
+  ["Legate can propose core infrastructure changes after sustained activity and Formation work."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Tiers",
+  "2025-12-04"
+).
+
+vortex_term(
+  41,
+  "tier4_consul",
+  "Tier 4 · Consul",
+  governance,
+  "Requires 2 years node + active governor, accepted proposal, Formation participation; unlocks administrative proposals.",
+  [
+    "Requirements: Run a node for 2 years; be an active governor for 2 years; have a proposal accepted; participate in Formation.",
+    "New available proposal types: Administrative (e.g., human node types, governor tiers, Formation procedures)."
+  ],
+  [tier, consul, governance],
+  ["proof_of_time_pot", "proof_of_devotion_pod", "proof_of_governance_pog"],
+  ["Consul can propose administrative changes after 2-year tenure and Formation work."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Tiers",
+  "2025-12-04"
+).
+
+vortex_term(
+  42,
+  "tier5_citizen",
+  "Tier 5 · Citizen",
+  governance,
+  "Highest tier with unrestricted proposition rights (DAO core); requires long tenure and active governance.",
+  [
+    "Requirements: Run a node for 4 years; be a governor for 4 years; be an active governor for 3 years; have a proposal accepted; participate in Formation.",
+    "New available proposal types: DAO core (e.g., proposal system values, voting protocol, human node/governor types)."
+  ],
+  [tier, citizen, governance],
+  ["proof_of_time_pot", "proof_of_devotion_pod", "proof_of_governance_pog"],
+  ["Citizen tier can propose DAO core changes after long-term tenure and activity."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Proposition rights – Tiers",
+  "2025-12-04"
+).
+
+vortex_term(
+  43,
+  "gradual_decentralization",
+  "Gradual decentralization",
+  governance,
+  "Humanode core designs and bootstraps Vortex/Formation, aiming for transparent, decentralized governance driven by active governors.",
+  [
+    "Core promotes transparency, builds decentralized governing processes, participates in community, and drafts proposals.",
+    "Governance stack combines proposal pools, chambers, and Formation with PoT/PoD/PoH safeguards."
+  ],
+  [decentralization, governance, transparency],
+  ["voter_apathy_mitigation", "professional_populist_balance"],
+  ["Core designs the stack but expects governors to drive decisions as decentralization grows."],
+  [global],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
+vortex_term(
+  44,
+  "voter_apathy_mitigation",
+  "Voter apathy mitigation",
+  governance,
+  "Mitigates apathy by auto-removing inactive governors and counting only active votes toward quorum.",
+  [
+    "Governors must meet monthly action thresholds or revert to non-governing.",
+    "Quorum (33%) counts only active governors; non-participants are excluded."
+  ],
+  [apathy, quorum, governance],
+  ["gradual_decentralization", "quorum_of_vote"],
+  ["Inactivity drops governor status; only active participants count for quorum."],
+  [chamber, pool],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
+vortex_term(
+  45,
+  "professional_populist_balance",
+  "Professional vs populist balance",
+  governance,
+  "Hybrid PoT/PoD/tiers aim to give proposal rights to proven contributors while keeping voting power equal, resisting pure populism.",
+  [
+    "Governors must have an accepted proposal (PoD) before voting rights, raising the quality bar.",
+    "Tiers unlock proposal rights but voting power stays 1 + delegations."
+  ],
+  [populism, professionalism, tiers, governance],
+  ["proof_of_devotion_pod", "proposition_rights", "cognitocracy"],
+  ["Accepted proposal acts as anti-populism barrier; rights grow with proof, not popularity."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
+vortex_term(
+  46,
+  "iron_law_of_oligarchy",
+  "Iron law of oligarchy",
+  governance,
+  "Any organization tends toward elite control; Vortex counters via equal vote power, intellectual barriers, and delegation transparency.",
+  [
+    "Acknowledges inevitability of leadership classes; seeks balance between efficiency and democratic involvement.",
+    "Combines equal voting power, intellectual barriers, and active quorum/delegation to limit oligarchic capture."
+  ],
+  [oligarchy, governance, deterrence],
+  ["plutocracy_risk", "cognitocratic_populism"],
+  ["Equal votes plus tiers/intellectual barriers aim to temper oligarchic drift."],
+  [global],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
+vortex_term(
+  47,
+  "plutocracy_risk",
+  "Plutocracy risk",
+  governance,
+  "Risk of capital holders influencing decisions; mitigated by no elections, equal vote power, and proposal merit barriers.",
+  [
+    "No elections or variable vote weights; all governors have equal vote power.",
+    "Proposals must be accepted on merit, reducing impact of pure capital/media influence."
+  ],
+  [plutocracy, governance, risk],
+  ["iron_law_of_oligarchy", "professional_populist_balance"],
+  ["Capital alone cannot buy vote weight; proposals need specialist acceptance."],
+  [global, chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
+vortex_term(
+  48,
+  "cognitocratic_populism",
+  "Cognitocratic populism",
+  governance,
+  "Populist influence is dampened by specialist voting and proof barriers; liquid delegation still allows crowd support.",
+  [
+    "Specialist-only voting and proposal acceptance reduce mass populist sway.",
+    "Delegation remains liquid, so popular governors can accumulate delegations."
+  ],
+  [populism, governance, delegation],
+  ["proof_of_devotion_pod", "professional_populist_balance"],
+  ["Populists must appeal to cognitocrats, not the mass public, to gain delegations."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
+vortex_term(
+  49,
+  "cognitocratic_drain",
+  "Cognitocratic drain",
+  governance,
+  "State where a chamber’s innovation slows, risking lowered admission barriers, impractical proposals, or cartelization.",
+  [
+    "Too much implemented innovation can raise barriers to new creative proposals.",
+    "Risks: lowered standards, non-practical proposals, or chamber cartelization.",
+    "Mitigation: dissolve or merge chambers if innovation throughput drops."
+  ],
+  [drain, chamber, innovation, governance],
+  ["specialization_chamber", "chamber_dissolution"],
+  ["Merge or dissolve an SC if it stagnates and lowers its admission quality."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Discussion",
+  "2025-12-04"
+).
+
 % ---
 % You can add a search helper later (e.g., search_terms/3) to return dicts/JSON.
