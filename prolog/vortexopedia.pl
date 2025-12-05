@@ -244,5 +244,260 @@ vortex_term(
   "2025-12-04"
 ).
 
+vortex_term(
+  13,
+  "technocracy",
+  "Technocracy",
+  governance,
+  "Decision-makers selected by technological knowledge; cognitocracy inherits innovation focus but rejects plutocratic traits.",
+  [
+    "Centers decision-making on technological expertise and innovation.",
+    "Criticized for elitism via capital control; cognitocracy keeps innovation focus but discards plutocratic concentration."
+  ],
+  [principle, governance, technology, innovation],
+  ["cognitocracy", "meritocracy"],
+  ["Cognitocracy borrows the innovation drive of technocracy without the plutocratic tilt."],
+  [global],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Principles",
+  "2025-12-04"
+).
+
+vortex_term(
+  14,
+  "intellectual_barrier",
+  "Intellectual barrier for voting rights",
+  governance,
+  "Voting rights granted through demonstrated expertise and deployable proposals, not formal diplomas.",
+  [
+    "Introduces on-the-spot proof of expertise via proposals instead of third-party credentials.",
+    "Aims to separate power from popularity and formal degrees."
+  ],
+  [principle, governance, qualification, expertise],
+  ["cognitocracy", "meritocracy"],
+  ["Governors earn voting rights by proving deployable innovation in their field."],
+  [global, chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Principles",
+  "2025-12-04"
+).
+
+vortex_term(
+  15,
+  "direct_democracy",
+  "Direct democracy",
+  governance,
+  "Cognitocrats vote directly on issues without intermediaries to keep decisions aligned with active participants.",
+  [
+    "Relies on direct participation of cognitocrats for decisions.",
+    "Keeps power with active governors rather than intermediaries."
+  ],
+  [principle, governance, democracy, delegation],
+  ["representative_democracy", "liquid_democracy", "cognitocracy"],
+  ["Cognitocrats vote directly in chambers to reflect active will."],
+  [global, chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Principles",
+  "2025-12-04"
+).
+
+vortex_term(
+  16,
+  "representative_democracy",
+  "Representative democracy",
+  governance,
+  "Delegation to representatives for flexibility; in cognitocracy, only cognitocrats may delegate to other cognitocrats.",
+  [
+    "Allows targeted delegation when direct participation is not feasible.",
+    "Seeks reduced polarization via issue-specific representation."
+  ],
+  [principle, governance, democracy, delegation],
+  ["direct_democracy", "liquid_democracy", "cognitocracy", "delegator"],
+  ["Cognitocrats may delegate votes per issue to stay responsive."],
+  [global, chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Principles",
+  "2025-12-04"
+).
+
+vortex_term(
+  17,
+  "liquid_democracy",
+  "Liquid democracy (cognitocracy)",
+  governance,
+  "Vote delegation among cognitocrats only, retractable at any time; no elections, voice stays dynamic.",
+  [
+    "Cognitocrats delegate only to other cognitocrats; delegation is retractable.",
+    "Reduces polarization by enabling issue-specific support; adapts to changing preferences."
+  ],
+  [principle, governance, delegation, liquid_democracy],
+  ["direct_democracy", "representative_democracy", "cognitocracy", "delegator"],
+  ["Delegated votes can be reclaimed at any moment, keeping representation aligned."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Principles",
+  "2025-12-04"
+).
+
+vortex_term(
+  18,
+  "specialization_chamber",
+  "Specialization Chamber (SC)",
+  governance,
+  "Chamber for a specific field; only specialists with accepted proposals in that field vote on related matters.",
+  [
+    "Admits governors who proved creative merit in the chamber’s field.",
+    "Shards legislation to maintain professionalism and efficiency.",
+    "Invariant: 1 governor-cognitocrat = 1 vote."
+  ],
+  [chamber, specialization, governance],
+  ["general_chamber", "vortex_structure"],
+  ["Programming chamber admits engineers whose proposals were accepted."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Chambers",
+  "2025-12-04"
+).
+
+vortex_term(
+  19,
+  "general_chamber",
+  "General Chamber (GC)",
+  governance,
+  "Chamber comprising all cognitocrats; its rulings supersede SCs and can force admittance of proposals.",
+  [
+    "Includes all cognitocrat-governors regardless of specialization.",
+    "Acts on system-wide proposals; can enforce acceptance of proposals declined in SCs.",
+    "Harder to reach quorum than SCs."
+  ],
+  [chamber, general, governance],
+  ["specialization_chamber"],
+  ["GC can override an SC by accepting a repeatedly declined proposal."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Chambers",
+  "2025-12-04"
+).
+
+vortex_term(
+  20,
+  "chamber_inception",
+  "Chamber inception",
+  governance,
+  "Process to create a Specialization Chamber: proposed and voted by existing cognitocrats; initial members nominated; CM approach chosen.",
+  [
+    "Only an established governor-cognitocrat can propose forming an SC.",
+    "Initial cognitocrats are nominated; Cognitocratic Measure approach is chosen at creation."
+  ],
+  [process, chamber, governance],
+  ["specialization_chamber", "cognitocratic_measure"],
+  ["Formation of a new SC requires a proposal, vote, nominations, and CM setup."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Chambers",
+  "2025-12-04"
+).
+
+vortex_term(
+  21,
+  "chamber_dissolution",
+  "Chamber dissolution",
+  governance,
+  "Ending an SC via SC or GC proposal; GC censure excludes targeted SC members from quorum.",
+  [
+    "Can be proposed inside the SC or in the GC.",
+    "GC vote of censure excludes members of the targeted SC from quorum and voting.",
+    "Penalties are contextual to the dissolution cause."
+  ],
+  [process, chamber, governance],
+  ["specialization_chamber", "general_chamber"],
+  ["GC censure dissolves a corrupt SC; targeted members don’t count toward quorum."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Basis of Vortex – Chambers",
+  "2025-12-04"
+).
+
+vortex_term(
+  22,
+  "quorum_of_attention",
+  "Quorum of attention",
+  governance,
+  "Proposal-pool quorum: 22% of active governors engaged AND at least 10% upvotes to advance to a chamber.",
+  [
+    "Applied in every proposal pool.",
+    "Proposal advances when ≥22% of active governors engage and ≥10% of them upvote.",
+    "Delegated votes do NOT count in proposal pools."
+  ],
+  [quorum, pool, governance, attention],
+  ["proposal_pools", "quorum_of_vote", "delegation_policy"],
+  ["A pool item with 24% engagement and 14% upvotes moves to chamber voting."],
+  [pool],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  23,
+  "quorum_of_vote",
+  "Quorum of vote",
+  governance,
+  "Chamber quorum: 33.3% participation; passing rule 66.6% + 1 yes within the quorum (≈22% of all active governors).",
+  [
+    "Chamber quorum is reached at 33.3% of active governors voting.",
+    "Passing rule: 66.6% + 1 yes within the quorum (≈22% of active governors).",
+    "Non-governing human nodes are not counted in quorum.",
+    "Pulled-from-pool proposals get one week to be voted in chamber."
+  ],
+  [quorum, chamber, governance, voting],
+  ["quorum_of_attention", "delegation_policy", "veto_rights"],
+  ["A chamber vote with 35% turnout passes if 67% yes within that turnout."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  24,
+  "delegation_policy",
+  "Delegation and quorum policy",
+  governance,
+  "Counts only active governors for quorum, while allowing non-active cognitocrats to delegate to active ones in the same chamber.",
+  [
+    "Only active governors count toward quorum.",
+    "Non-active cognitocrats may delegate to an active cognitocrat in the same chamber.",
+    "Balances elitism of active-only voting with broader delegated input."
+  ],
+  [delegation, quorum, governance],
+  ["quorum_of_vote", "quorum_of_attention", "liquid_democracy"],
+  ["Non-active members delegate to active ones; delegated votes count in chamber stage, not in pools."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
+vortex_term(
+  25,
+  "veto_rights",
+  "Veto rights",
+  governance,
+  "Temporary, breakable veto held by Citizens; 66.6% + 1 veto sends a proposal back for two weeks (max twice).",
+  [
+    "Veto power is distributed to all Citizens.",
+    "If 66.6% + 1 veto, the proposal returns for 2 weeks; can be vetoed twice; third approval cannot be vetoed.",
+    "Acts as deterrence against majority mistakes or attacks."
+  ],
+  [veto, governance, deterrence, lcm],
+  ["quorum_of_vote", "constant_deterrence"],
+  ["If vetoed twice, a third approval is final with no further veto allowed."],
+  [chamber],
+  [link{label:"Docs", url:"https://gitbook.humanode.io/vortex-1.0"}],
+  "Voting, Delegation and Quorum",
+  "2025-12-04"
+).
+
 % ---
 % You can add a search helper later (e.g., search_terms/3) to return dicts/JSON.
