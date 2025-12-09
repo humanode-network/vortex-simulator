@@ -1064,6 +1064,29 @@ export const vortexopediaTerms: VortexopediaTerm[] = [
     updated: "2025-12-04",
   },
   {
+    ref: 48,
+    id: "cognitocratic_drain",
+    name: "Cognitocratic drain",
+    category: "governance",
+    short:
+      "Chamber stagnation where innovation slows, risking lowered admission barriers, impractical proposals, or cartelization.",
+    long: [
+      "Too much implemented innovation can raise barriers to new creative proposals.",
+      "Risks: lowered standards, non-practical proposals, or chamber cartelization.",
+      "Mitigation: dissolve or merge chambers if innovation throughput drops.",
+    ],
+    tags: ["drain", "chamber", "innovation", "governance"],
+    related: ["specialization_chamber", "chamber_dissolution"],
+    examples: [
+      "Merge or dissolve an SC if it stagnates and lowers its admission quality.",
+    ],
+    stages: ["chamber"],
+    links: [{ label: "Docs", url: "https://gitbook.humanode.io/vortex-1.0" }],
+    source: "Discussion",
+    updated: "2025-12-04",
+  },
+
+  {
     ref: 49,
     id: "chamber_vote",
     name: "Chamber vote",
@@ -1088,28 +1111,6 @@ export const vortexopediaTerms: VortexopediaTerm[] = [
     stages: ["chamber"],
     links: [{ label: "Docs", url: "https://gitbook.humanode.io/vortex-1.0" }],
     source: "Voting, Delegation and Quorum",
-    updated: "2025-12-04",
-  },
-  {
-    ref: 48,
-    id: "cognitocratic_drain",
-    name: "Cognitocratic drain",
-    category: "governance",
-    short:
-      "Chamber stagnation where innovation slows, risking lowered admission barriers, impractical proposals, or cartelization.",
-    long: [
-      "Too much implemented innovation can raise barriers to new creative proposals.",
-      "Risks: lowered standards, non-practical proposals, or chamber cartelization.",
-      "Mitigation: dissolve or merge chambers if innovation throughput drops.",
-    ],
-    tags: ["drain", "chamber", "innovation", "governance"],
-    related: ["specialization_chamber", "chamber_dissolution"],
-    examples: [
-      "Merge or dissolve an SC if it stagnates and lowers its admission quality.",
-    ],
-    stages: ["chamber"],
-    links: [{ label: "Docs", url: "https://gitbook.humanode.io/vortex-1.0" }],
-    source: "Discussion",
     updated: "2025-12-04",
   },
 ];
