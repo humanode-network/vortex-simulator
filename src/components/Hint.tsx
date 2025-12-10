@@ -6,82 +6,153 @@ import { cn } from "@/lib/utils";
 import { getVortexopediaTerm } from "@/data/vortexopediaLookup";
 import "./Hint.css";
 
+type OverlayPosition = { x: number; y: number };
+
+// Headless hover logic: track position, visibility, and “stable” state after dwell.
+const useHoverOverlay = (dwellMs: number) => {
+  const [visible, setVisible] = useState(false);
+  const [stable, setStable] = useState(false);
+  const [position, setPosition] = useState<OverlayPosition>({ x: 0, y: 0 });
+  const hoverTimer = useRef<number | null>(null);
+  const hideTimer = useRef<number | null>(null);
+  const hoveringRef = useRef(false);
+
+  const clearTimers = () => {
+    if (hoverTimer.current) {
+      window.clearTimeout(hoverTimer.current);
+      hoverTimer.current = null;
+    }
+    if (hideTimer.current) {
+      window.clearTimeout(hideTimer.current);
+      hideTimer.current = null;
+    }
+  };
+
+  const showAt = (pos: OverlayPosition) => {
+    setPosition(pos);
+    setVisible(true);
+    setStable(false);
+    clearTimers();
+    hoverTimer.current = window.setTimeout(() => setStable(true), dwellMs);
+  };
+
+  const hide = (force = false) => {
+    if (!stable || force) {
+      clearTimers();
+      setVisible(false);
+      setStable(false);
+      return;
+    }
+    hideTimer.current = window.setTimeout(() => {
+      if (!hoveringRef.current) {
+        setVisible(false);
+        setStable(false);
+      }
+    }, 180);
+  };
+
+  useEffect(() => () => clearTimers(), []);
+
+  return {
+    visible,
+    stable,
+    position,
+    setHovering: (on: boolean) => {
+      hoveringRef.current = on;
+      if (!on && stable) {
+        hide();
+      }
+    },
+    showAt,
+    hide,
+  };
+};
+
+type OverlayPortalProps = {
+  visible: boolean;
+  position: OverlayPosition;
+  children: React.ReactNode;
+};
+
+// Thin portal that positions content near the cursor.
+const OverlayPortal: React.FC<OverlayPortalProps> = ({
+  visible,
+  position,
+  children,
+}) => {
+  if (!visible) return null;
+  return (
+    <div
+      className="fixed z-50 max-w-[360px] min-w-[260px] animate-in zoom-in-95 fade-in"
+      style={{
+        top: Math.min(position.y + 12, window.innerHeight - 240),
+        left: Math.min(position.x + 12, window.innerWidth - 360),
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+type HintSurfaceProps = {
+  title: string;
+  description: string;
+  stable: boolean;
+  onNavigate?: () => void;
+};
+
+// UI surface: renders the styled card for any hint content.
+const HintSurface: React.FC<HintSurfaceProps> = ({
+  title,
+  description,
+  stable,
+  onNavigate,
+}) => {
+  return (
+    <Card className={cn("hint-card", stable && "stable")}>
+      <CardHeader className="px-4 pt-3 pb-2">
+        <CardTitle className="text-sm font-semibold text-(--text)">
+          {title}
+        </CardTitle>
+        <p className="hint-desc text-sm leading-relaxed text-muted">
+          {description}
+        </p>
+      </CardHeader>
+      <CardContent className="hint-actions flex justify-center px-4 pt-1 pb-3">
+        <Button
+          size="sm"
+          variant="primary"
+          className="text-xs text-white"
+          onClick={onNavigate}
+        >
+          Vortexopedia
+        </Button>
+      </CardContent>
+    </Card>
+  );
+};
+
 type HintProps = {
   termId: string;
   children: React.ReactNode;
   dwellMs?: number;
   noUnderline?: boolean;
-  placement?: "top" | "bottom" | "left" | "right";
 };
 
 /**
  * Hint wraps inline text with an underlined hover-triggered tooltip that pulls
- * definitions from the Vortexopedia data set. After a dwell period the tooltip
- * becomes “stable” so users can hover onto it without it disappearing.
+ * definitions from the Vortexopedia data set. It uses a headless hover hook,
+ * a styled surface, and a data-binding layer for clarity.
  */
 export const Hint: React.FC<HintProps> = ({
   termId,
   dwellMs = 2200,
   children,
   noUnderline,
-  placement = "bottom",
 }) => {
   const term = useMemo(() => getVortexopediaTerm(termId), [termId]);
-  const [visible, setVisible] = useState(false);
-  const [stable, setStable] = useState(false);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-  const dwellStartRef = useRef(0);
-  const timerRef = useRef<number | null>(null);
-  const hideTimerRef = useRef<number | null>(null);
-  const hoveringPopupRef = useRef(false);
   const navigate = useNavigate();
-
-  const clearTimers = () => {
-    if (timerRef.current) {
-      window.clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    if (hideTimerRef.current) {
-      window.clearTimeout(hideTimerRef.current);
-      hideTimerRef.current = null;
-    }
-  };
-
-  const startHover = (clientX: number, clientY: number) => {
-    if (!term) return;
-    setMousePos({ x: clientX + 12, y: clientY + 12 });
-    setVisible(true);
-    setStable(false);
-    dwellStartRef.current = performance.now();
-    timerRef.current = window.setTimeout(() => {
-      setStable(true);
-    }, dwellMs);
-  };
-
-  const hide = () => {
-    setVisible(false);
-    setStable(false);
-    clearTimers();
-  };
-
-  const scheduleHideIfNeeded = () => {
-    if (!stable) {
-      hide();
-      return;
-    }
-    hideTimerRef.current = window.setTimeout(() => {
-      if (!hoveringPopupRef.current) {
-        hide();
-      }
-    }, 200);
-  };
-
-  useEffect(() => {
-    return () => clearTimers();
-  }, []);
+  const overlay = useHoverOverlay(dwellMs);
 
   if (!term) {
     return <span>{children}</span>;
@@ -94,54 +165,26 @@ export const Hint: React.FC<HintProps> = ({
           "hint-trigger tracking-normal whitespace-pre-wrap normal-case",
           noUnderline && "no-underline",
         )}
-        onMouseEnter={(e) => {
-          startHover(e.clientX, e.clientY);
-        }}
-        onMouseLeave={scheduleHideIfNeeded}
+        onMouseEnter={(e) =>
+          overlay.showAt({ x: e.clientX ?? 0, y: e.clientY ?? 0 })
+        }
+        onMouseLeave={() => overlay.hide()}
       >
         {children}
       </span>
-      {visible && (
+      <OverlayPortal visible={overlay.visible} position={overlay.position}>
         <div
-          className={cn(
-            "fixed z-50 max-w-[360px] min-w-[260px]",
-            "animate-in zoom-in-95 fade-in",
-          )}
-          style={{
-            top: Math.min(mousePos.y + 12, window.innerHeight - 220),
-            left: Math.min(mousePos.x + 12, window.innerWidth - 340),
-          }}
-          onMouseEnter={() => {
-            hoveringPopupRef.current = true;
-            setVisible(true);
-          }}
-          onMouseLeave={() => {
-            hoveringPopupRef.current = false;
-            hide();
-          }}
+          onMouseEnter={() => overlay.setHovering(true)}
+          onMouseLeave={() => overlay.hide()}
         >
-          <Card className={cn("hint-card", stable && "stable")}>
-            <CardHeader className="px-4 pt-3 pb-2">
-              <CardTitle className="text-sm font-semibold text-(--text)">
-                {term.name}
-              </CardTitle>
-              <p className="hint-desc text-sm leading-relaxed text-muted">
-                {term.short}
-              </p>
-            </CardHeader>
-            <CardContent className="hint-actions flex justify-center px-4 pt-1 pb-3">
-              <Button
-                size="sm"
-                variant="default"
-                className="bg-primary text-xs text-white hover:bg-primary/90"
-                onClick={() => navigate(`/vortexopedia?term=${term.id}`)}
-              >
-                Vortexopedia
-              </Button>
-            </CardContent>
-          </Card>
+          <HintSurface
+            title={term.name}
+            description={term.short}
+            stable={overlay.stable}
+            onNavigate={() => navigate(`/vortexopedia?term=${term.id}`)}
+          />
         </div>
-      )}
+      </OverlayPortal>
     </span>
   );
 };
