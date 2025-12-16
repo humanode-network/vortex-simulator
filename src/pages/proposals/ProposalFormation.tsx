@@ -6,67 +6,13 @@ import { Surface } from "@/components/Surface";
 import { StatTile } from "@/components/StatTile";
 import { AppPage } from "@/components/AppPage";
 import { Kicker } from "@/components/Kicker";
+import { AttachmentList } from "@/components/AttachmentList";
+import { TitledSurface } from "@/components/TitledSurface";
+import { getFormationProposalPage } from "@/data/mock/proposalPages";
 
 const ProposalFormation: React.FC = () => {
-  useParams();
-  const project = {
-    title: "Deterrence Sim Lab",
-    chamber: "Research",
-    proposer: "Research Lab",
-    proposerId: "john-doe",
-    budget: "180k HMND",
-    impact: "High",
-    timeLeft: "12d",
-    teamSlots: "3 / 6",
-    milestones: "2 / 3",
-    progress: "68%",
-    stageData: [
-      { title: "Budget allocated", description: "HMND", value: "180k" },
-      { title: "Team slots", description: "Taken / Total", value: "3 / 6" },
-      {
-        title: "Deployment progress",
-        description: "Reported completion",
-        value: "68%",
-      },
-    ],
-    stats: [
-      { label: "Lead chamber", value: "Research" },
-      { label: "Next check-in", value: "Epoch 186" },
-    ],
-    lockedTeam: [
-      { name: "John Doe", role: "Lead · Research" },
-      { name: "Nyx", role: "Telemetry & Ops" },
-      { name: "Raamara", role: "QA" },
-    ],
-    openSlots: [
-      {
-        title: "SRE / Reliability",
-        desc: "Own rollout stability and failover drills.",
-      },
-      {
-        title: "QA engineer",
-        desc: "Validate milestones and regression suite.",
-      },
-      {
-        title: "Tech writer",
-        desc: "Document runbooks and Formation reports.",
-      },
-    ],
-    milestonesDetail: [
-      {
-        title: "Pilot deploy",
-        desc: "Shadow checkpoints on 2 clusters; collect liveness baselines.",
-      },
-      {
-        title: "Global rollout",
-        desc: "Stage to remaining clusters with rollback gates on regressions.",
-      },
-      {
-        title: "Handoff & docs",
-        desc: "Finalize dashboards, runbooks, and training for chamber ops.",
-      },
-    ],
-  };
+  const { id } = useParams();
+  const project = getFormationProposalPage(id);
 
   const renderStageBar = (
     current: "draft" | "pool" | "chamber" | "formation",
@@ -195,16 +141,14 @@ const ProposalFormation: React.FC = () => {
             ))}
           </div>
           <div className="space-y-4 text-text">
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Project overview</p>
+            <TitledSurface title="Project overview">
               <p className="text-sm leading-relaxed text-muted">
                 Simulation and tooling for deterrence drills; centers on
                 redundancy and rollback gates. Ties into Research chamber
                 oversight and Formation delivery.
               </p>
-            </Surface>
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Execution plan</p>
+            </TitledSurface>
+            <TitledSurface title="Execution plan">
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
                 <li>
                   Pilot milestones on two clusters; capture baselines and
@@ -219,43 +163,14 @@ const ProposalFormation: React.FC = () => {
                   PM.
                 </li>
               </ul>
-            </Surface>
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Budget & scope</p>
+            </TitledSurface>
+            <TitledSurface title="Budget & scope">
               <p className="text-sm text-muted">
                 180k HMND covering simulation infra, telemetry, and
                 documentation. Includes QA, ops, and writer roles.
               </p>
-            </Surface>
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Attachments</p>
-              <ul className="space-y-2 text-sm text-muted">
-                <Surface
-                  as="li"
-                  variant="panel"
-                  radius="xl"
-                  shadow="control"
-                  className="flex items-center justify-between px-3 py-2"
-                >
-                  <span>Simulation playbook (PDF)</span>
-                  <button className="text-sm font-semibold text-primary">
-                    View
-                  </button>
-                </Surface>
-                <Surface
-                  as="li"
-                  variant="panel"
-                  radius="xl"
-                  shadow="control"
-                  className="flex items-center justify-between px-3 py-2"
-                >
-                  <span>Milestone breakdown (XLS)</span>
-                  <button className="text-sm font-semibold text-primary">
-                    View
-                  </button>
-                </Surface>
-              </ul>
-            </Surface>
+            </TitledSurface>
+            <AttachmentList items={project.attachments} />
           </div>
         </CardContent>
       </Card>
