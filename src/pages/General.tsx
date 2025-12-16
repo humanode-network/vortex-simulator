@@ -9,7 +9,7 @@ const General: React.FC = () => {
         title="General"
         description="Global preferences and account options."
       />
-      <Card className="border border-border bg-panel">
+      <Card>
         <CardHeader className="pb-2">
           <CardTitle>Preferences</CardTitle>
         </CardHeader>

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Surface } from "@/components/Surface";
+import { Kicker } from "@/components/Kicker";
 
 type StatTileProps = {
   label: React.ReactNode;
@@ -35,14 +36,12 @@ export const StatTile: React.FC<StatTileProps> = ({
       shadow="tile"
       className={cn("px-3 py-3", alignClasses, className)}
     >
-      <p
-        className={cn(
-          "text-[0.7rem] tracking-wide text-muted uppercase",
-          labelClassName,
-        )}
+      <Kicker
+        align={align === "left" ? "left" : "center"}
+        className={cn("text-[0.7rem]", labelClassName)}
       >
         {label}
-      </p>
+      </Kicker>
       <p className={cn("text-base font-semibold text-text", valueClassName)}>
         {value}
       </p>

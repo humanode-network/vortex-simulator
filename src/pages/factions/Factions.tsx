@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { HintLabel } from "@/components/Hint";
-import { factions } from "./factionData";
+import { factions } from "@/data/mock/factions";
 import { SearchBar } from "@/components/SearchBar";
 import { MetricTile } from "@/components/MetricTile";
 import { StatTile } from "@/components/StatTile";
@@ -115,10 +115,7 @@ const Factions: React.FC = () => {
             aria-live="polite"
           >
             {factions.map((faction) => (
-              <Card
-                key={faction.id}
-                className="h-full border border-border bg-panel"
-              >
+              <Card key={faction.id} className="h-full">
                 <CardHeader className="pb-2">
                   <CardTitle>{faction.name}</CardTitle>
                   <p className="line-clamp-2 min-h-10 text-sm text-muted">
@@ -159,12 +156,12 @@ const Factions: React.FC = () => {
       {showResultsOnly && (
         <section className="space-y-3" aria-live="polite">
           {filtered.length === 0 && (
-            <Card className="border border-dashed border-border bg-panel px-4 py-6 text-center text-sm text-muted">
+            <Card className="border-dashed px-4 py-6 text-center text-sm text-muted">
               No factions match this search.
             </Card>
           )}
           {filtered.map((faction) => (
-            <Card key={faction.id} className="border border-border bg-panel">
+            <Card key={faction.id}>
               <CardContent className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm font-semibold text-text">

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { Surface } from "@/components/Surface";
+import { Kicker } from "@/components/Kicker";
 
 type SearchBarProps = {
   value: string;
@@ -51,9 +52,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       <div className="space-y-3">
         {filtersConfig.map((field) => (
           <div key={field.key} className="space-y-1">
-            <p className="text-xs tracking-wide text-muted uppercase">
-              {field.label}
-            </p>
+            <Kicker>{field.label}</Kicker>
             <Select
               className="w-full"
               value={filtersState?.[field.key] ?? field.options[0]?.value ?? ""}

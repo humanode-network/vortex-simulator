@@ -1,6 +1,7 @@
 import React from "react";
 import { HintLabel } from "@/components/Hint";
 import { Surface } from "@/components/Surface";
+import { Kicker } from "@/components/Kicker";
 
 type StatItem = {
   label: React.ReactNode;
@@ -33,9 +34,13 @@ export const StatGrid: React.FC<StatGridProps> = ({ items }) => {
                     : "var(--card-grad)",
           }}
         >
-          <dt className="text-center text-[0.65rem] leading-tight tracking-wide whitespace-nowrap text-muted uppercase">
+          <Kicker
+            as="dt"
+            align="center"
+            className="text-[0.65rem] leading-tight whitespace-nowrap"
+          >
             {item.label}
-          </dt>
+          </Kicker>
           <dd className="text-lg font-semibold">{item.value}</dd>
         </Surface>
       ))}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SearchBar } from "@/components/SearchBar";
 import { AppPage } from "@/components/AppPage";
+import { Kicker } from "@/components/Kicker";
 
 type Draft = {
   id: string;
@@ -116,12 +117,10 @@ const ProposalDrafts: React.FC = () => {
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((draft) => (
-          <Card key={draft.id} className="border border-border bg-panel p-4">
+          <Card key={draft.id} className="p-4">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs tracking-wide text-muted uppercase">
-                  Draft · {draft.updated}
-                </p>
+                <Kicker>Draft · {draft.updated}</Kicker>
                 <h2 className="text-lg font-semibold text-text">
                   {draft.title}
                 </h2>

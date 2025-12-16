@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Surface } from "@/components/Surface";
+import { Kicker } from "@/components/Kicker";
 
 type StatusPillProps = {
   label: string;
@@ -28,9 +29,7 @@ export const StatusPill: React.FC<StatusPillProps> = ({
         className,
       )}
     >
-      <span className="text-xs tracking-wide text-muted uppercase">
-        {label}
-      </span>
+      <Kicker as="span">{label}</Kicker>
       <span
         className={cn(
           "font-semibold",

@@ -25,7 +25,7 @@ const ProposalCreation: React.FC = () => {
 
   return (
     <AppPage pageId="proposals">
-      <Card className="border border-border bg-panel">
+      <Card>
         <CardHeader className="pb-2">
           <CardTitle>Edit proposal</CardTitle>
         </CardHeader>
