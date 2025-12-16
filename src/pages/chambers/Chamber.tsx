@@ -16,8 +16,8 @@ import {
   chamberGovernors as governors,
   chamberThreads as threads,
   chamberChatLog as chatLog,
-  type ProposalStage,
 } from "@/data/mock/chamberDetail";
+import type { ProposalStage } from "@/data/mock/types";
 
 const Chamber: React.FC = () => {
   const { id } = useParams();

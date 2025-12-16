@@ -7,7 +7,8 @@ import { Link } from "react-router";
 import { AppPage } from "@/components/AppPage";
 import { MetricTile } from "@/components/MetricTile";
 import { Kicker } from "@/components/Kicker";
-import { courtCases, type CourtCase } from "@/data/mock/courts";
+import { courtCases } from "@/data/mock/courts";
+import type { CourtCase } from "@/data/mock/types";
 
 const statusStyles: Record<CourtCase["status"], string> = {
   jury: "bg-[color:var(--accent)]/15 text-[var(--accent)]",
@@ -17,10 +18,11 @@ const statusStyles: Record<CourtCase["status"], string> = {
 
 const Courts: React.FC = () => {
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<CourtCase["status"] | "any">(
-    "any",
-  );
-  const [sortBy, setSortBy] = useState<"recent" | "reports">("recent");
+  const [filters, setFilters] = useState<{
+    statusFilter: CourtCase["status"] | "any";
+    sortBy: "recent" | "reports";
+  }>({ statusFilter: "any", sortBy: "recent" });
+  const { statusFilter, sortBy } = filters;
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
     return [...courtCases]
@@ -86,12 +88,8 @@ const Courts: React.FC = () => {
             ],
           },
         ]}
-        filtersState={{ statusFilter, sortBy }}
-        onFiltersChange={(next) => {
-          if (next.statusFilter)
-            setStatusFilter(next.statusFilter as CourtCase["status"] | "any");
-          if (next.sortBy) setSortBy(next.sortBy as "recent" | "reports");
-        }}
+        filtersState={filters}
+        onFiltersChange={setFilters}
       />
 
       <Card>

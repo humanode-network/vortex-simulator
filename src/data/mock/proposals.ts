@@ -19,7 +19,6 @@ export type ProposalListItem = {
   title: string;
   meta: string;
   stage: ProposalStage;
-  stageLabel: string;
   summaryPill: string;
   summary: string;
   stageData: ProposalStageDatum[];
@@ -44,7 +43,6 @@ export const proposals: ProposalListItem[] = [
     title: "Orbital Mesh Sequencer Upgrade",
     meta: "Protocol Engineering · Legate tier",
     stage: "pool",
-    stageLabel: "Proposal pool",
     summaryPill: "Protocol Engineering chamber",
     summary:
       "Introduce redundant biometric sequencer nodes to lower latency in the verification flow and enable inter-era checkpoints.",
@@ -94,7 +92,6 @@ export const proposals: ProposalListItem[] = [
     title: "Adaptive Fee Shaping",
     meta: "Economics & Treasury · Consul",
     stage: "vote",
-    stageLabel: "Chamber vote",
     summaryPill: "Economics chamber",
     summary:
       "Dynamic fee split that feeds Formation, treasury, and biometric maintenance based on network stress and quorum activity.",
@@ -139,7 +136,6 @@ export const proposals: ProposalListItem[] = [
     title: "SybilGuard L2 Mirror",
     meta: "Security & Infra · Legate",
     stage: "build",
-    stageLabel: "Formation",
     summaryPill: "Milestone 2 / 4",
     summary:
       "Mirror anti-Sybil heuristics onto an auxiliary rollup so partner DAOs can consume attestations via trust minimised bridges.",
@@ -181,7 +177,6 @@ export const proposals: ProposalListItem[] = [
     title: "Mesh Talent Onboarding Fund",
     meta: "Formation Guild · Tribune tier",
     stage: "pool",
-    stageLabel: "Proposal pool",
     summaryPill: "Formation committee",
     summary:
       "Create a rolling grant for onboarding biometric researchers and UX engineers into the Mesh program with rapid stipends.",
@@ -220,7 +215,6 @@ export const proposals: ProposalListItem[] = [
     title: "Liveness Sentinel Retrofit",
     meta: "Security · Legate",
     stage: "vote",
-    stageLabel: "Chamber vote",
     summaryPill: "Security chamber",
     summary:
       "Retrofit legacy sentinel nodes with the new liveness circuit breaker to prevent cascading biometric outages across shards.",
@@ -257,7 +251,6 @@ export const proposals: ProposalListItem[] = [
     title: "Delegation Transparency Ledger",
     meta: "Constitutional · Citizen",
     stage: "archived",
-    stageLabel: "Archived",
     summaryPill: "Cycle 407",
     summary:
       "Immutable public feed of delegation shifts and vote reroutes with zk-SNARK concealed identities for observers.",

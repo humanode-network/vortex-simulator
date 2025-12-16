@@ -25,8 +25,11 @@ const stageLabel: Record<Stage, string> = {
 
 const Formation: React.FC = () => {
   const [search, setSearch] = useState("");
-  const [stageFilter, setStageFilter] = useState<Stage | "any">("any");
-  const [categoryFilter, setCategoryFilter] = useState<Category | "all">("all");
+  const [filters, setFilters] = useState<{
+    stageFilter: Stage | "any";
+    categoryFilter: Category | "all";
+  }>({ stageFilter: "any", categoryFilter: "all" });
+  const { stageFilter, categoryFilter } = filters;
 
   const filteredProjects = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -97,13 +100,8 @@ const Formation: React.FC = () => {
               ],
             },
           ]}
-          filtersState={{ stageFilter, categoryFilter }}
-          onFiltersChange={(next) => {
-            if (next.stageFilter)
-              setStageFilter(next.stageFilter as Stage | "any");
-            if (next.categoryFilter)
-              setCategoryFilter(next.categoryFilter as Category | "all");
-          }}
+          filtersState={filters}
+          onFiltersChange={setFilters}
         />
       </section>
 

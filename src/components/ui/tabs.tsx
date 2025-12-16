@@ -4,13 +4,17 @@ import { cn } from "@/lib/utils";
 export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
   onValueChange: (value: string) => void;
-  options: { value: string; label: string }[];
+  options: { value: string; label: React.ReactNode }[];
+  allowDeselect?: boolean;
+  emptyValue?: string;
 }
 
 export function Tabs({
   value,
   onValueChange,
   options,
+  allowDeselect = false,
+  emptyValue = "",
   className,
   ...props
 }: TabsProps) {
@@ -28,7 +32,12 @@ export function Tabs({
           <button
             key={opt.value}
             type="button"
-            onClick={() => onValueChange(opt.value)}
+            aria-pressed={active}
+            onClick={() =>
+              onValueChange(
+                allowDeselect && active ? emptyValue : String(opt.value),
+              )
+            }
             className={cn(
               "min-w-[90px] rounded-full px-3 py-1.5 text-sm font-semibold transition",
               active

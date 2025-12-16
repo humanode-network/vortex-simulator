@@ -10,18 +10,6 @@ import { StageChip } from "@/components/StageChip";
 import { StageDataTile } from "@/components/StageDataTile";
 import { feedItems } from "@/data/mock/feed";
 
-type Stage = (typeof feedItems)[number]["stage"];
-
-const stageToChipKind: Record<Stage, Parameters<typeof StageChip>[0]["kind"]> =
-  {
-    pool: "proposal_pool",
-    vote: "chamber_vote",
-    build: "formation",
-    thread: "thread",
-    courts: "courts",
-    faction: "faction",
-  };
-
 const formatDate = (iso: string) => {
   const d = new Date(iso);
   const day = String(d.getDate()).padStart(2, "0");
@@ -56,9 +44,7 @@ const Feed: React.FC = () => {
             title={item.title}
             right={
               <>
-                <StageChip kind={stageToChipKind[item.stage]}>
-                  {item.stageLabel}
-                </StageChip>
+                <StageChip stage={item.stage} />
                 <Badge
                   variant="outline"
                   size="sm"

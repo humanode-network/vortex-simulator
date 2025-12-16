@@ -10,23 +10,28 @@ import {
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Tabs } from "@/components/ui/tabs";
 import { HintLabel } from "@/components/Hint";
 import { SearchBar } from "@/components/SearchBar";
 import { AppPage } from "@/components/AppPage";
 import { StatTile } from "@/components/StatTile";
 import { Kicker } from "@/components/Kicker";
 import { TierLabel } from "@/components/TierLabel";
+import { ToggleGroup } from "@/components/ToggleGroup";
 import { humanNodes as sampleNodes } from "@/data/mock/humanNodes";
 
 const HumanNodes: React.FC = () => {
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState<
-    "acm-desc" | "acm-asc" | "tier" | "name"
-  >("acm-desc");
-  const [tierFilter, setTierFilter] = useState<
-    "all" | "nominee" | "ecclesiast" | "legate" | "consul" | "citizen"
-  >("all");
+  const [filters, setFilters] = useState<{
+    sortBy: "acm-desc" | "acm-asc" | "tier" | "name";
+    tierFilter:
+      | "all"
+      | "nominee"
+      | "ecclesiast"
+      | "legate"
+      | "consul"
+      | "citizen";
+  }>({ sortBy: "acm-desc", tierFilter: "all" });
+  const { sortBy, tierFilter } = filters;
   const [view, setView] = useState<"cards" | "list">("cards");
 
   const filtered = useMemo(() => {
@@ -49,7 +54,7 @@ const HumanNodes: React.FC = () => {
         const order = ["nominee", "ecclesiast", "legate", "consul", "citizen"];
         return order.indexOf(a.tier) - order.indexOf(b.tier);
       });
-  }, [search, sortBy]);
+  }, [search, sortBy, tierFilter]);
 
   return (
     <AppPage pageId="human-nodes" variant="stack6">
@@ -82,21 +87,8 @@ const HumanNodes: React.FC = () => {
             ],
           },
         ]}
-        filtersState={{ sortBy, tierFilter }}
-        onFiltersChange={(next) => {
-          if (next.sortBy)
-            setSortBy(next.sortBy as "acm-desc" | "acm-asc" | "tier" | "name");
-          if (next.tierFilter)
-            setTierFilter(
-              next.tierFilter as
-                | "all"
-                | "nominee"
-                | "ecclesiast"
-                | "legate"
-                | "consul"
-                | "citizen",
-            );
-        }}
+        filtersState={filters}
+        onFiltersChange={setFilters}
       />
 
       <Card className="w-full">
@@ -113,7 +105,12 @@ const HumanNodes: React.FC = () => {
                 id="sort"
                 className="h-10 min-w-[180px]"
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+                onChange={(e) =>
+                  setFilters((curr) => ({
+                    ...curr,
+                    sortBy: e.target.value as typeof sortBy,
+                  }))
+                }
               >
                 <option value="acm-desc">ACM (desc)</option>
                 <option value="acm-asc">ACM (asc)</option>
@@ -121,7 +118,7 @@ const HumanNodes: React.FC = () => {
                 <option value="name">Name</option>
               </Select>
             </div>
-            <Tabs
+            <ToggleGroup
               className="ml-auto"
               value={view}
               onValueChange={(val) => setView(val as "cards" | "list")}
