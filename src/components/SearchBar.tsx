@@ -1,4 +1,9 @@
-import type { ChangeEventHandler, ReactNode } from "react";
+import type {
+  ChangeEventHandler,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
@@ -7,7 +12,13 @@ import { Select } from "@/components/ui/select";
 import { Surface } from "@/components/Surface";
 import { Kicker } from "@/components/Kicker";
 
-type SearchBarProps = {
+type FiltersConfigField<TFilters extends Record<string, string>> = {
+  key: keyof TFilters & string;
+  label: string;
+  options: { value: string; label: string }[];
+};
+
+type SearchBarProps<TFilters extends Record<string, string>> = {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder: string;
@@ -16,13 +27,9 @@ type SearchBarProps = {
   className?: string;
   inputClassName?: string;
   filtersContent?: ReactNode;
-  filtersConfig?: {
-    key: string;
-    label: string;
-    options: { value: string; label: string }[];
-  }[];
-  filtersState?: Record<string, string>;
-  onFiltersChange?: (next: Record<string, string>) => void;
+  filtersConfig?: FiltersConfigField<TFilters>[];
+  filtersState?: TFilters;
+  onFiltersChange?: Dispatch<SetStateAction<TFilters>>;
   onApplyFilters?: () => void;
 };
 
@@ -31,7 +38,9 @@ type SearchBarProps = {
  * Keeps the layout consistent across pages and allows optional right-side content
  * (page hints, buttons, etc.).
  */
-export const SearchBar: React.FC<SearchBarProps> = ({
+export function SearchBar<
+  TFilters extends Record<string, string> = Record<string, string>,
+>({
   value,
   onChange,
   placeholder,
@@ -44,7 +53,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   filtersState,
   onFiltersChange,
   onApplyFilters,
-}) => {
+}: SearchBarProps<TFilters>) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const content =
     filtersContent ||
@@ -57,10 +66,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               className="w-full"
               value={filtersState?.[field.key] ?? field.options[0]?.value ?? ""}
               onChange={(e) => {
+                const current = (filtersState ?? {}) as TFilters;
                 const next = {
-                  ...filtersState,
+                  ...current,
                   [field.key]: e.target.value,
-                };
+                } as TFilters;
                 onFiltersChange?.(next);
               }}
             >
@@ -132,6 +142,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       ) : null}
     </div>
   );
-};
+}
 
 export default SearchBar;

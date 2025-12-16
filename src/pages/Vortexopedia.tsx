@@ -11,8 +11,11 @@ import { Kicker } from "@/components/Kicker";
 const Vortexopedia: React.FC = () => {
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [category, setCategory] = useState<string>("any");
-  const [sortBy, setSortBy] = useState<"name" | "updated">("name");
+  const [filters, setFilters] = useState<{
+    category: string;
+    sortBy: "name" | "updated";
+  }>({ category: "any", sortBy: "name" });
+  const { category, sortBy } = filters;
 
   const categories = useMemo(
     () => Array.from(new Set(vortexopediaTerms.map((t) => t.category))),
@@ -98,11 +101,8 @@ const Vortexopedia: React.FC = () => {
                 ],
               },
             ]}
-            filtersState={{ category, sortBy }}
-            onFiltersChange={(next) => {
-              if (next.category) setCategory(next.category);
-              if (next.sortBy) setSortBy(next.sortBy as "name" | "updated");
-            }}
+            filtersState={filters}
+            onFiltersChange={setFilters}
           />
 
           <div className="text-xs text-muted">

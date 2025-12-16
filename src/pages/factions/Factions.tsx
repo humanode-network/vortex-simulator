@@ -12,8 +12,11 @@ import { AppPage } from "@/components/AppPage";
 
 const Factions: React.FC = () => {
   const [query, setQuery] = useState("");
-  const [focusFilter, setFocusFilter] = useState<string>("any");
-  const [sortBy, setSortBy] = useState<"members" | "votes" | "acm">("members");
+  const [filters, setFilters] = useState<{
+    focusFilter: string;
+    sortBy: "members" | "votes" | "acm";
+  }>({ focusFilter: "any", sortBy: "members" });
+  const { focusFilter, sortBy } = filters;
 
   const totals = useMemo(() => {
     const totalMembers = factions.reduce((sum, f) => sum + f.members, 0);
@@ -102,12 +105,8 @@ const Factions: React.FC = () => {
                 ],
               },
             ]}
-            filtersState={{ focusFilter, sortBy }}
-            onFiltersChange={(next) => {
-              if (next.focusFilter) setFocusFilter(next.focusFilter);
-              if (next.sortBy)
-                setSortBy(next.sortBy as "members" | "votes" | "acm");
-            }}
+            filtersState={filters}
+            onFiltersChange={setFilters}
           />
 
           <section

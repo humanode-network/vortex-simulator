@@ -9,6 +9,7 @@ import { StatusPill } from "@/components/StatusPill";
 import { AppPage } from "@/components/AppPage";
 import { Kicker } from "@/components/Kicker";
 import { TierLabel } from "@/components/TierLabel";
+import { ToggleGroup } from "@/components/ToggleGroup";
 import {
   myProfile,
   proofToggleOptions,
@@ -32,6 +33,19 @@ const Profile: React.FC = () => {
   const activeSection: ProofSection | null = activeProof
     ? proofSections[activeProof]
     : null;
+  const proofOptions = proofToggleOptions.map((option) => ({
+    value: option.key,
+    label:
+      option.label === "PoT" ? (
+        <HintLabel termId="proof_of_time_pot">{option.label}</HintLabel>
+      ) : option.label === "PoD" ? (
+        <HintLabel termId="proof_of_devotion_pod">{option.label}</HintLabel>
+      ) : option.label === "PoG" ? (
+        <HintLabel termId="proof_of_governance_pog">{option.label}</HintLabel>
+      ) : (
+        option.label
+      ),
+  }));
 
   return (
     <AppPage pageId="profile">
@@ -204,44 +218,12 @@ const Profile: React.FC = () => {
                 ))}
               </div>
               <div className="space-y-3 text-center">
-                <div className="inline-flex rounded-full border border-border bg-panel p-1">
-                  {proofToggleOptions.map((option) => {
-                    const isActive = activeProof === option.key;
-                    return (
-                      <button
-                        key={option.key}
-                        type="button"
-                        onClick={() =>
-                          setActiveProof((prev) =>
-                            prev === option.key ? "" : option.key,
-                          )
-                        }
-                        className={[
-                          "min-w-20 rounded-full px-3 py-1.5 text-sm font-semibold transition",
-                          isActive
-                            ? "bg-primary text-[var(--primary-foreground)] shadow-[var(--shadow-tile)]"
-                            : "bg-transparent text-text hover:bg-panel-alt",
-                        ].join(" ")}
-                      >
-                        {option.label === "PoT" ? (
-                          <HintLabel termId="proof_of_time_pot">
-                            {option.label}
-                          </HintLabel>
-                        ) : option.label === "PoD" ? (
-                          <HintLabel termId="proof_of_devotion_pod">
-                            {option.label}
-                          </HintLabel>
-                        ) : option.label === "PoG" ? (
-                          <HintLabel termId="proof_of_governance_pog">
-                            {option.label}
-                          </HintLabel>
-                        ) : (
-                          option.label
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+                <ToggleGroup
+                  value={activeProof}
+                  onValueChange={(val) => setActiveProof(val as ProofKey | "")}
+                  options={proofOptions}
+                  allowDeselect
+                />
                 {activeSection ? (
                   <div className="grid gap-3 text-sm text-text sm:grid-cols-2">
                     {(activeSection.items ?? []).map(
