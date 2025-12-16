@@ -4,21 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useParams } from "react-router";
 import { Surface } from "@/components/Surface";
 import { AppPage } from "@/components/AppPage";
-
-const jury = [
-  "John Doe",
-  "Raamara",
-  "Nyx",
-  "Nana",
-  "Victor",
-  "Tony",
-  "Dima",
-  "Shannon",
-  "Artem",
-  "Lena",
-  "Cass",
-  "Victor M",
-];
+import { Kicker } from "@/components/Kicker";
+import { courtroomJury as jury } from "@/data/mock/courtroom";
 
 const Courtroom: React.FC = () => {
   const { id } = useParams();
@@ -46,9 +33,7 @@ const Courtroom: React.FC = () => {
               shadow="tile"
               className="p-3"
             >
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Subject
-              </p>
+              <Kicker>Subject</Kicker>
               <p className="text-sm font-semibold text-text">
                 Delegation dispute on Protocol Keepers
               </p>
@@ -59,9 +44,7 @@ const Courtroom: React.FC = () => {
               shadow="tile"
               className="p-3"
             >
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Trigger
-              </p>
+              <Kicker>Trigger</Kicker>
               <p className="text-sm font-semibold text-text">
                 18 reports · Delegation shift
               </p>
@@ -100,7 +83,7 @@ const Courtroom: React.FC = () => {
             shadow="tile"
             className="px-3 py-2"
           >
-            <p className="text-xs tracking-wide text-muted uppercase">Claim</p>
+            <Kicker>Claim</Kicker>
             <p>
               Delegation was rerouted without consent; requester asks for
               reversal and audit.
@@ -112,9 +95,7 @@ const Courtroom: React.FC = () => {
             shadow="tile"
             className="px-3 py-2"
           >
-            <p className="text-xs tracking-wide text-muted uppercase">
-              Evidence
-            </p>
+            <Kicker>Evidence</Kicker>
             <ul className="list-disc pl-4">
               <li>Delegation log entries · epoch 220-221</li>
               <li>Screenshots from faction portal</li>
@@ -126,9 +107,7 @@ const Courtroom: React.FC = () => {
             shadow="tile"
             className="px-3 py-2"
           >
-            <p className="text-xs tracking-wide text-muted uppercase">
-              Next steps
-            </p>
+            <Kicker>Next steps</Kicker>
             <ul className="list-disc pl-4">
               <li>Collect jury statements</li>
               <li>Schedule deliberation</li>

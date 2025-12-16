@@ -6,54 +6,20 @@ import { Button } from "@/components/ui/button";
 import { HintLabel } from "@/components/Hint";
 import { Surface } from "@/components/Surface";
 import { AppPage } from "@/components/AppPage";
+import { chambers as chamberDirectory } from "@/data/mock/chambers";
 
 const CMPanel: React.FC = () => {
-  const initialChambers = [
-    {
-      id: "protocol",
-      name: "Protocol Engineering",
-      current: 1.5,
-      suggested: 1.5,
-      member: true,
-    },
-    {
-      id: "research",
-      name: "Research & Cryptobiometrics",
-      current: 1.8,
-      suggested: 1.8,
-      member: false,
-    },
-    {
-      id: "treasury",
-      name: "Treasury & Economics",
-      current: 1.3,
-      suggested: 1.3,
-      member: false,
-    },
-    {
-      id: "formation",
-      name: "Formation Logistics",
-      current: 1.2,
-      suggested: 1.2,
-      member: false,
-    },
-    {
-      id: "social",
-      name: "Social Outreach",
-      current: 1.1,
-      suggested: 1.1,
-      member: false,
-    },
-    {
-      id: "security",
-      name: "Security Council",
-      current: 1.7,
-      suggested: 1.7,
-      member: true,
-    },
-  ];
-
-  const [chambers, setChambers] = useState(initialChambers);
+  const [chambers, setChambers] = useState(
+    chamberDirectory.map((chamber) => ({
+      id: chamber.id,
+      name: chamber.name,
+      current: chamber.multiplier,
+      suggested: chamber.multiplier,
+      member:
+        chamber.id === "protocol-engineering" ||
+        chamber.id === "security-council",
+    })),
+  );
 
   const updateSuggestion = (id: string, value: number) => {
     setChambers((prev) =>

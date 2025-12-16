@@ -6,50 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router";
 import { AppPage } from "@/components/AppPage";
 import { MetricTile } from "@/components/MetricTile";
-
-type CourtCase = {
-  id: string;
-  title: string;
-  subject: string;
-  triggeredBy: string;
-  status: "jury" | "deliberating" | "closed";
-  reports: number;
-  juryCount: number;
-  opened: string;
-};
-
-const cases: CourtCase[] = [
-  {
-    id: "delegation-44",
-    title: "Delegation Dispute #44",
-    subject: "Faction · Protocol Keepers",
-    triggeredBy: "18 reports · Delegation shift",
-    status: "jury",
-    reports: 18,
-    juryCount: 12,
-    opened: "02/04/2025",
-  },
-  {
-    id: "treasury-audit-12",
-    title: "Treasury Audit #12",
-    subject: "Chamber · Economics & Treasury",
-    triggeredBy: "12 reports · Budget anomaly",
-    status: "deliberating",
-    reports: 12,
-    juryCount: 12,
-    opened: "29/03/2025",
-  },
-  {
-    id: "proposal-appeal-883",
-    title: "Proposal Appeal #883",
-    subject: "Proposal · Adaptive fee shaping",
-    triggeredBy: "9 reports · Procedural appeal",
-    status: "closed",
-    reports: 9,
-    juryCount: 12,
-    opened: "21/03/2025",
-  },
-];
+import { Kicker } from "@/components/Kicker";
+import { courtCases, type CourtCase } from "@/data/mock/courts";
 
 const statusStyles: Record<CourtCase["status"], string> = {
   jury: "bg-[color:var(--accent)]/15 text-[var(--accent)]",
@@ -65,7 +23,7 @@ const Courts: React.FC = () => {
   const [sortBy, setSortBy] = useState<"recent" | "reports">("recent");
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return [...cases]
+    return [...courtCases]
       .filter((c) => {
         const matchesTerm = [c.title, c.subject, c.triggeredBy].some((field) =>
           field.toLowerCase().includes(term),
@@ -88,7 +46,7 @@ const Courts: React.FC = () => {
         {[
           {
             label: "Open cases",
-            value: cases.filter((c) => c.status !== "closed").length,
+            value: courtCases.filter((c) => c.status !== "closed").length,
           },
           { label: "Jury panels", value: "12 seats / case" },
           { label: "New reports", value: "27 this week" },
@@ -136,22 +94,17 @@ const Courts: React.FC = () => {
         }}
       />
 
-      <Card className="border border-border bg-panel">
+      <Card>
         <CardHeader className="pb-2">
           <CardTitle>Active courtrooms</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           {filtered.map((courtCase) => (
-            <Card
-              key={courtCase.id}
-              className="border border-border bg-panel-alt"
-            >
+            <Card key={courtCase.id} className="bg-panel-alt">
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-xs tracking-wide text-muted uppercase">
-                      {courtCase.subject}
-                    </p>
+                    <Kicker>{courtCase.subject}</Kicker>
                     <p className="text-lg font-semibold text-foreground">
                       {courtCase.title}
                     </p>

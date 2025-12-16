@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
+import { Kicker } from "@/components/Kicker";
 
 type PageHeaderProps = {
   eyebrow?: ReactNode;
@@ -33,14 +34,9 @@ export function PageHeader({
     <div className={cn("flex items-start justify-between gap-3", className)}>
       <div className={cn("flex flex-col gap-1", blockAlign, alignClasses)}>
         {eyebrow ? (
-          <p
-            className={cn(
-              "text-xs tracking-wide text-muted uppercase",
-              eyebrowClassName,
-            )}
-          >
+          <Kicker align={align} className={cn(eyebrowClassName)}>
             {eyebrow}
-          </p>
+          </Kicker>
         ) : null}
         <h1 className={cn("text-xl font-semibold text-text", titleClassName)}>
           {title}

@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Surface } from "@/components/Surface";
+import { StatTile } from "@/components/StatTile";
 
 type MetricTileProps = {
   label: React.ReactNode;
@@ -14,15 +14,15 @@ export const MetricTile: React.FC<MetricTileProps> = ({
   className,
 }) => {
   return (
-    <Surface
-      variant="panelAlt"
+    <StatTile
+      label={label}
+      value={value}
       radius="2xl"
-      shadow="tile"
-      className={cn("px-4 py-5 text-center", className)}
-    >
-      <p className="text-xs tracking-wide text-muted uppercase">{label}</p>
-      <p className="text-2xl font-semibold text-text">{value}</p>
-    </Surface>
+      align="center"
+      variant="panelAlt"
+      className={cn("px-4 py-5", className)}
+      valueClassName="text-2xl"
+    />
   );
 };
 

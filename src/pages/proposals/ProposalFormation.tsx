@@ -1,11 +1,11 @@
-import { useParams } from "react-router";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ProposalStageBar from "@/components/ProposalStageBar";
 import { Surface } from "@/components/Surface";
 import { StatTile } from "@/components/StatTile";
 import { AppPage } from "@/components/AppPage";
+import { Kicker } from "@/components/Kicker";
 
 const ProposalFormation: React.FC = () => {
   useParams();
@@ -118,9 +118,9 @@ const ProposalFormation: React.FC = () => {
                 shadow="control"
                 className="flex h-full min-h-24 flex-col items-center justify-center gap-1 px-3 py-4 text-center"
               >
-                <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                <Kicker align="center" className="text-[0.7rem]">
                   Budget allocated
-                </p>
+                </Kicker>
                 <p className="text-2xl font-semibold whitespace-nowrap">
                   {project.budget}
                 </p>
@@ -131,9 +131,9 @@ const ProposalFormation: React.FC = () => {
                 shadow="control"
                 className="flex h-full min-h-24 flex-col items-center justify-center gap-1 px-3 py-4 text-center"
               >
-                <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                <Kicker align="center" className="text-[0.7rem]">
                   Team slots
-                </p>
+                </Kicker>
                 <p className="text-2xl font-semibold whitespace-nowrap">
                   {project.teamSlots}
                 </p>
@@ -144,9 +144,9 @@ const ProposalFormation: React.FC = () => {
                 shadow="control"
                 className="flex h-full min-h-24 flex-col items-center justify-center gap-1 px-3 py-4 text-center"
               >
-                <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                <Kicker align="center" className="text-[0.7rem]">
                   Milestones
-                </p>
+                </Kicker>
                 <p className="text-2xl font-semibold whitespace-nowrap">
                   {project.milestones}
                 </p>
@@ -157,9 +157,9 @@ const ProposalFormation: React.FC = () => {
                 shadow="control"
                 className="flex h-full min-h-24 flex-col items-center justify-center gap-1 px-3 py-4 text-center"
               >
-                <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                <Kicker align="center" className="text-[0.7rem]">
                   Progress
-                </p>
+                </Kicker>
                 <p className="text-2xl font-semibold whitespace-nowrap">
                   {project.progress}
                 </p>

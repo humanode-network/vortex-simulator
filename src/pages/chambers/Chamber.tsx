@@ -5,137 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { HintLabel } from "@/components/Hint";
+import { Kicker } from "@/components/Kicker";
 import { Surface } from "@/components/Surface";
 import { AppPage } from "@/components/AppPage";
 import { PageHeader } from "@/components/PageHeader";
-
-type ProposalStage = "upcoming" | "live" | "ended";
-
-type ChamberProposal = {
-  id: string;
-  title: string;
-  meta: string;
-  summary: string;
-  lead: string;
-  nextStep: string;
-  timing: string;
-  stage: ProposalStage;
-};
-
-type Governor = {
-  id: string;
-  name: string;
-  tier: string;
-  focus: string;
-};
-
-type Thread = {
-  id: string;
-  title: string;
-  author: string;
-  replies: number;
-  updated: string;
-};
-
-type ChatMessage = {
-  id: string;
-  author: string;
-  message: string;
-};
-
-const proposalStageOptions: { value: ProposalStage; label: string }[] = [
-  { value: "upcoming", label: "Upcoming" },
-  { value: "live", label: "Live" },
-  { value: "ended", label: "Ended" },
-];
-
-const proposals: ChamberProposal[] = [
-  {
-    id: "sequencer-upgrade",
-    title: "Sequencer redundancy rollout",
-    meta: "Legate · Protocol Engineering",
-    summary:
-      "Enable redundant biometric sequencers to lower failover time and unlock epoch double commits.",
-    lead: "JohnDoe",
-    nextStep: "Awaiting quorum scheduling",
-    timing: "Scheduled · 02d 14h",
-    stage: "upcoming",
-  },
-  {
-    id: "vm-benchmarks",
-    title: "VM verifier benchmarks",
-    meta: "Consul · Protocol Engineering",
-    summary:
-      "Establish baseline performance telemetry for new WASM verifier prior to production slot.",
-    lead: "Victor",
-    nextStep: "Vote closes in",
-    timing: "Live · 05h 42m",
-    stage: "live",
-  },
-  {
-    id: "formation-slot-requests",
-    title: "Formation slot requests",
-    meta: "Legate · Formation Logistics",
-    summary:
-      "Allocate three additional slot pools for biometrics research squads.",
-    lead: "Sesh",
-    nextStep: "Archived outcome",
-    timing: "Ended · Passed",
-    stage: "ended",
-  },
-];
-
-const governors: Governor[] = [
-  { id: "johndoe", name: "JohnDoe", tier: "Legate", focus: "Protocol" },
-  { id: "victor", name: "Victor", tier: "Consul", focus: "Economics" },
-  { id: "sesh", name: "Sesh", tier: "Legate", focus: "Security" },
-  { id: "nyx", name: "Nyx", tier: "Ecclesiast", focus: "Infra" },
-  { id: "nana", name: "Nana", tier: "Consul", focus: "Formation" },
-  { id: "raamara", name: "Raamara", tier: "Consul", focus: "Treasury" },
-];
-
-const threads: Thread[] = [
-  {
-    id: "thread-1",
-    title: "Sequencer redundancy rollout",
-    author: "JohnDoe",
-    replies: 4,
-    updated: "1h ago",
-  },
-  {
-    id: "thread-2",
-    title: "VM verifier benchmarks",
-    author: "Victor",
-    replies: 11,
-    updated: "3h ago",
-  },
-  {
-    id: "thread-3",
-    title: "Formation slot requests",
-    author: "Sesh",
-    replies: 6,
-    updated: "6h ago",
-  },
-];
-
-const chatLog: ChatMessage[] = [
-  {
-    id: "chat-1",
-    author: "JohnDoe",
-    message: "Milestone 2 patch deployed, please verify.",
-  },
-  {
-    id: "chat-2",
-    author: "Victor",
-    message: "Treasury hook live, watching KPIs.",
-  },
-  {
-    id: "chat-3",
-    author: "Sesh",
-    message: "Need 2 reviewers for the new biometrics spec.",
-  },
-];
+import { TierLabel } from "@/components/TierLabel";
+import {
+  proposalStageOptions,
+  chamberProposals as proposals,
+  chamberGovernors as governors,
+  chamberThreads as threads,
+  chamberChatLog as chatLog,
+  type ProposalStage,
+} from "@/data/mock/chamberDetail";
 
 const Chamber: React.FC = () => {
   const { id } = useParams();
@@ -174,12 +56,10 @@ const Chamber: React.FC = () => {
       />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
-        <Card className="border border-border bg-panel">
+        <Card>
           <CardHeader className="flex flex-col gap-4 pb-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Chamber vote
-              </p>
+              <Kicker>Chamber vote</Kicker>
               <CardTitle>Proposal status</CardTitle>
             </div>
             <div
@@ -217,9 +97,7 @@ const Chamber: React.FC = () => {
                 <Surface key={proposal.id} variant="panelAlt" className="p-4">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs tracking-wide text-muted uppercase">
-                        {proposal.meta}
-                      </p>
+                      <Kicker>{proposal.meta}</Kicker>
                       <h3 className="text-lg font-semibold text-text">
                         {proposal.title}
                       </h3>
@@ -240,9 +118,7 @@ const Chamber: React.FC = () => {
                       shadow="control"
                       className="px-3 py-2"
                     >
-                      <p className="text-xs tracking-wide uppercase">
-                        Next step
-                      </p>
+                      <Kicker className="text-text">Next step</Kicker>
                       <p className="text-sm font-semibold text-text">
                         {proposal.nextStep}
                       </p>
@@ -253,7 +129,7 @@ const Chamber: React.FC = () => {
                       shadow="control"
                       className="px-3 py-2"
                     >
-                      <p className="text-xs tracking-wide uppercase">Timing</p>
+                      <Kicker className="text-text">Timing</Kicker>
                       <p className="text-sm font-semibold text-text">
                         {proposal.timing}
                       </p>
@@ -265,12 +141,10 @@ const Chamber: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="border border-border bg-panel">
+        <Card>
           <CardHeader className="flex items-center justify-between pb-3">
             <div>
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Governors
-              </p>
+              <Kicker>Governors</Kicker>
               <CardTitle>Chamber roster</CardTitle>
             </div>
             <span className="rounded-full border border-border bg-panel-alt px-3 py-1 text-sm font-semibold">
@@ -296,22 +170,7 @@ const Chamber: React.FC = () => {
                   <div>
                     <p className="font-semibold">{gov.name}</p>
                     <p className="text-xs text-muted">
-                      <HintLabel
-                        termId={
-                          gov.tier === "Nominee"
-                            ? "tier1_nominee"
-                            : gov.tier === "Ecclesiast"
-                              ? "tier2_ecclesiast"
-                              : gov.tier === "Legate"
-                                ? "tier3_legate"
-                                : gov.tier === "Consul"
-                                  ? "tier4_consul"
-                                  : "tier5_citizen"
-                        }
-                      >
-                        {gov.tier}
-                      </HintLabel>{" "}
-                      · {gov.focus}
+                      <TierLabel tier={gov.tier} /> · {gov.focus}
                     </p>
                   </div>
                   <Button asChild size="sm" variant="ghost">
@@ -344,9 +203,7 @@ const Chamber: React.FC = () => {
       >
         <header className="mb-4 flex flex-col gap-3 border-b border-border pb-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-xs tracking-wide text-muted uppercase">
-              Chamber forum
-            </p>
+            <Kicker>Chamber forum</Kicker>
             <h2 className="text-lg font-semibold text-text">Threads & chat</h2>
           </div>
           <Button variant="ghost" size="sm">
