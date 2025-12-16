@@ -7,23 +7,14 @@ import ProposalStageBar from "@/components/ProposalStageBar";
 import { Surface } from "@/components/Surface";
 import { StatTile } from "@/components/StatTile";
 import { AppPage } from "@/components/AppPage";
+import { AttachmentList } from "@/components/AttachmentList";
+import { VoteButton } from "@/components/VoteButton";
+import { TitledSurface } from "@/components/TitledSurface";
+import { getChamberProposalPage } from "@/data/mock/proposalPages";
 
 const ProposalChamber: React.FC = () => {
   const { id } = useParams();
-  const proposal = {
-    title: "Adaptive Fee Shaping",
-    proposer: "Victor",
-    proposerId: "Victor",
-    chamber: "Economics & Treasury",
-    budget: "210k HMND",
-    impact: "Medium",
-    timeLeft: "05h 15m",
-    votes: { yes: 34, no: 18, abstain: 3 },
-    attentionQuorum: 0.33,
-    passingRule: "≥66.6% + 1 yes within quorum",
-    engagedGovernors: 55,
-    activeGovernors: 100,
-  };
+  const proposal = getChamberProposalPage(id);
 
   const yesTotal = proposal.votes.yes;
   const noTotal = proposal.votes.no;
@@ -74,15 +65,9 @@ const ProposalChamber: React.FC = () => {
               />
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <button className="min-w-[140px] rounded-full border-2 border-[var(--accent)] px-6 py-2 text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]">
-                Vote yes
-              </button>
-              <button className="min-w-[140px] rounded-full border-2 border-[var(--destructive)] px-6 py-2 text-sm font-semibold text-[var(--destructive)] transition-colors hover:bg-[var(--destructive)] hover:text-[var(--destructive-foreground)]">
-                Vote no
-              </button>
-              <button className="min-w-[140px] rounded-full border-2 border-border px-6 py-2 text-sm font-semibold text-muted transition-colors hover:bg-panel hover:text-text">
-                Abstain
-              </button>
+              <VoteButton tone="accent" label="Vote yes" />
+              <VoteButton tone="destructive" label="Vote no" />
+              <VoteButton tone="neutral" label="Abstain" />
             </div>
           </div>
 
@@ -159,16 +144,14 @@ const ProposalChamber: React.FC = () => {
             ))}
           </div>
           <div className="space-y-4 text-text">
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Proposal overview</p>
+            <TitledSurface title="Proposal overview">
               <p className="text-sm leading-relaxed text-muted">
                 Adjusts fee splits dynamically to balance treasury, Formation,
                 and biometric maintenance. Aims to align incentives with network
                 stress signals.
               </p>
-            </Surface>
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Execution plan</p>
+            </TitledSurface>
+            <TitledSurface title="Execution plan">
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
                 <li>
                   Pilot dynamic split on low-traffic hours; observe treasury
@@ -183,44 +166,15 @@ const ProposalChamber: React.FC = () => {
                   thresholds.
                 </li>
               </ul>
-            </Surface>
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Budget & scope</p>
+            </TitledSurface>
+            <TitledSurface title="Budget & scope">
               <p className="text-sm text-muted">
                 210k HMND covering telemetry work, contract changes, and
                 validation. Focused on Economics chamber with cross-chamber
                 reporting.
               </p>
-            </Surface>
-            <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-              <p className="text-sm font-semibold">Attachments</p>
-              <ul className="space-y-2 text-sm text-muted">
-                <Surface
-                  as="li"
-                  variant="panel"
-                  radius="xl"
-                  shadow="control"
-                  className="flex items-center justify-between px-3 py-2"
-                >
-                  <span>Fee split design (PDF)</span>
-                  <button className="text-sm font-semibold text-primary">
-                    View
-                  </button>
-                </Surface>
-                <Surface
-                  as="li"
-                  variant="panel"
-                  radius="xl"
-                  shadow="control"
-                  className="flex items-center justify-between px-3 py-2"
-                >
-                  <span>Telemetry checklist (DOC)</span>
-                  <button className="text-sm font-semibold text-primary">
-                    View
-                  </button>
-                </Surface>
-              </ul>
-            </Surface>
+            </TitledSurface>
+            <AttachmentList items={proposal.attachments} />
           </div>
         </CardContent>
       </Card>

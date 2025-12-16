@@ -8,6 +8,8 @@ import { StatTile } from "@/components/StatTile";
 import { AppPage } from "@/components/AppPage";
 import { proposalDraftDetails as draftDetails } from "@/data/mock/proposalDraft";
 import { TierLabel } from "@/components/TierLabel";
+import { AttachmentList } from "@/components/AttachmentList";
+import { TitledSurface } from "@/components/TitledSurface";
 
 const ProposalDraft: React.FC = () => {
   const [filledSlots, totalSlots] = draftDetails.teamSlots
@@ -96,13 +98,13 @@ const ProposalDraft: React.FC = () => {
                 {draftDetails.summary}
               </p>
             </div>
-            <Surface
+            <TitledSurface
               variant="panel"
               radius="xl"
               shadow="control"
+              title="Proposal overview"
               className="space-y-2 px-3 py-3"
             >
-              <p className="text-sm font-semibold">Proposal overview</p>
               <p className="text-sm leading-relaxed text-muted">
                 Redundant sequencers across clusters with cross-epoch
                 checkpointing to keep biometric validation live during
@@ -110,14 +112,14 @@ const ProposalDraft: React.FC = () => {
                 rollback gates tied to liveness SLOs. Targets neutral failover
                 without privileging any validator set.
               </p>
-            </Surface>
-            <Surface
+            </TitledSurface>
+            <TitledSurface
               variant="panel"
               radius="xl"
               shadow="control"
+              title="Execution plan"
               className="space-y-2 px-3 py-3"
             >
-              <p className="text-sm font-semibold">Execution plan</p>
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
                 <li>
                   Pilot (2 weeks): 2 clusters, shadow checkpoints, watch
@@ -135,21 +137,21 @@ const ProposalDraft: React.FC = () => {
                   Post-rollout: document runbooks and handoff to chamber ops.
                 </li>
               </ul>
-            </Surface>
-            <Surface
+            </TitledSurface>
+            <TitledSurface
               variant="panel"
               radius="xl"
               shadow="control"
+              title="Budget &amp; scope"
               className="space-y-2 px-3 py-3"
             >
-              <p className="text-sm font-semibold">Budget &amp; scope</p>
               <p className="text-sm text-muted">
                 210k HMND covering hardware, telemetry integration, and rollout
                 validation. Team: {draftDetails.teamSlots} with milestone target
                 of {draftDetails.milestones.length}; includes QA, ops, and
                 telemetry owners.
               </p>
-            </Surface>
+            </TitledSurface>
           </Surface>
 
           <div className="grid gap-3 lg:grid-cols-2">
@@ -212,26 +214,12 @@ const ProposalDraft: React.FC = () => {
             </ul>
           </Surface>
 
-          <Surface variant="panelAlt" className="space-y-2 px-4 py-3">
-            <p className="text-sm font-semibold">Attachments</p>
-            <ul className="space-y-2 text-sm text-muted">
-              {draftDetails.attachments.map((file) => (
-                <Surface
-                  key={file.title}
-                  as="li"
-                  variant="panel"
-                  radius="xl"
-                  shadow="control"
-                  className="flex items-center justify-between px-3 py-2"
-                >
-                  <span>{file.title}</span>
-                  <button className="text-sm font-semibold text-primary">
-                    View
-                  </button>
-                </Surface>
-              ))}
-            </ul>
-          </Surface>
+          <AttachmentList
+            items={draftDetails.attachments.map((file) => ({
+              id: file.title,
+              title: file.title,
+            }))}
+          />
         </CardContent>
       </Card>
 

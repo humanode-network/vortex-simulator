@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/SearchBar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,12 +8,7 @@ import { MetricTile } from "@/components/MetricTile";
 import { Kicker } from "@/components/Kicker";
 import { courtCases } from "@/data/mock/courts";
 import type { CourtCase } from "@/data/mock/types";
-
-const statusStyles: Record<CourtCase["status"], string> = {
-  jury: "bg-[color:var(--accent)]/15 text-[var(--accent)]",
-  deliberating: "bg-[color:var(--accent-warm)]/15 text-[var(--accent-warm)]",
-  closed: "bg-panel-alt text-muted",
-};
+import { CourtStatusBadge } from "@/components/CourtStatusBadge";
 
 const Courts: React.FC = () => {
   const [search, setSearch] = useState("");
@@ -111,16 +105,7 @@ const Courts: React.FC = () => {
                     </p>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <Badge
-                      className={statusStyles[courtCase.status]}
-                      variant="outline"
-                    >
-                      {courtCase.status === "jury"
-                        ? "Jury forming"
-                        : courtCase.status === "deliberating"
-                          ? "Deliberating"
-                          : "Closed"}
-                    </Badge>
+                    <CourtStatusBadge status={courtCase.status} />
                     <p className="text-xs text-muted">
                       Opened {courtCase.opened}
                     </p>
