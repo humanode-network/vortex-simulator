@@ -29,3 +29,8 @@ export type {
   ProposalStageDatum,
   ProposalStat,
 } from "./proposals";
+export type {
+  ChamberProposalPage,
+  FormationProposalPage,
+  PoolProposalPage,
+} from "./proposalPages";
