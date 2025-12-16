@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AppPage } from "@/components/AppPage";
 import { PageHeader } from "@/components/PageHeader";
+import { Kicker } from "@/components/Kicker";
 import { Link, useParams } from "react-router";
 
 type HistoryItem = {
@@ -118,9 +119,7 @@ const FullHistory: React.FC = () => {
                   <p className="text-sm font-semibold text-foreground">
                     {item.title}
                   </p>
-                  <p className="text-xs tracking-wide text-primary uppercase">
-                    {item.action}
-                  </p>
+                  <Kicker className="text-primary">{item.action}</Kicker>
                 </div>
                 <p className="text-xs text-muted">{item.date}</p>
               </div>

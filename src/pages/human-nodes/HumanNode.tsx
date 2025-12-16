@@ -7,204 +7,25 @@ import { Surface } from "@/components/Surface";
 import { AvatarPlaceholder } from "@/components/AvatarPlaceholder";
 import { StatusPill } from "@/components/StatusPill";
 import { AppPage } from "@/components/AppPage";
-
-const heroStats = [
-  { label: "ACM", value: "182" },
-  { label: "MM", value: "92" },
-  { label: "Invision score", value: "82 / 100" },
-  { label: "Member since", value: "11.06.2021" },
-];
-
-const quickDetails = [
-  {
-    label: "Tier",
-    value: <HintLabel termId="tier3_legate">Legate</HintLabel>,
-  },
-  { label: "Faction", value: "Anonymous" },
-  { label: "Delegation share", value: "113 · 3.4%" },
-  { label: "Proposals created", value: "28" },
-];
-
-type ProofSection = {
-  title: string;
-  items: { label: string; value: string }[];
-};
-
-type ProofKey = "time" | "devotion" | "governance";
-
-const proofSections: Record<ProofKey, ProofSection> = {
-  time: {
-    title: "Proof-of-Time",
-    items: [
-      { label: "Human node for", value: "3 Y · 4 M" },
-      { label: "Governor for", value: "2 Y · 2 M" },
-    ],
-  },
-  devotion: {
-    title: "Proof-of-Devotion",
-    items: [
-      { label: "Proposal accepted?", value: "Yes" },
-      { label: "Participated in formation?", value: "Yes" },
-    ],
-  },
-  governance: {
-    title: "Proof-of-Governance",
-    items: [
-      { label: "Actively governed", value: "2 Y · 1 M" },
-      { label: "Active governor?", value: "Yes" },
-    ],
-  },
-};
-
-const governanceActions = [
-  {
-    title: "Reddit brand proposal",
-    action: "Upvoted",
-    context: "Marketing proposal pool",
-    detail:
-      "Flagged key talking points for community roll-out and nudged pool momentum.",
-  },
-  {
-    title: "Update runtime proposal",
-    action: "Casted vote",
-    context: "Protocol chamber",
-    detail: "Left implementation notes on validator staggered restarts.",
-  },
-  {
-    title: "The Smurf project",
-    action: "Left project",
-    context: "Formation",
-    detail: "Transitioned responsibilities to Nana after hand-off retro.",
-  },
-  {
-    title: "Fee telemetry upgrade #225",
-    action: "Authored proposal",
-    context: "Protocol chamber",
-    detail: "Outlined dual-path telemetry for biometric proofs and mesh fees.",
-  },
-  {
-    title: "Treasury split adjustment #883",
-    action: "Presented motion",
-    context: "Economic chamber",
-    detail: "Arbitrated between Formation and Treasury subcommittees.",
-  },
-  {
-    title: "Protocol SSC quorum drill",
-    action: "Coordinated drill",
-    context: "Protocol chamber",
-    detail: "Simulated night shift quorum loss and documented timings.",
-  },
-  {
-    title: "Mesh sequencer redundancy",
-    action: "Reviewed implementation",
-    context: "Formation",
-    detail:
-      "Signed off on milestone 3 safety checklist for redundant sequencers.",
-  },
-  {
-    title: "Budget oversight motion",
-    action: "Co-authored memo",
-    context: "Governance proposal pool",
-    detail: "Drafted memo summarizing risk thresholds for fiscal year.",
-  },
-  {
-    title: "Telemetry SDK handoff",
-    action: "Mentored team",
-    context: "Faction task force",
-    detail: "Recorded screencasts for SDK setup and alert configuration.",
-  },
-  {
-    title: "Chamber audit sync",
-    action: "Hosted session",
-    context: "Security chamber",
-    detail: "Walked through previous incidents and matched to audit trails.",
-  },
-  {
-    title: "Formation handover 12",
-    action: "Signed off",
-    context: "Formation",
-    detail: "Validated milestone artifacts and updated ops board.",
-  },
-  {
-    title: "Governor onboarding brief",
-    action: "Led workshop",
-    context: "Protocol chamber",
-    detail: "Gave quickstart checklist for new governors joining mesh topics.",
-  },
-  {
-    title: "Network health retro",
-    action: "Published report",
-    context: "Protocol council",
-    detail: "Shared dashboard snapshots and postmortem experiments.",
-  },
-  {
-    title: "Mesh redundancy QA",
-    action: "Completed review",
-    context: "Formation logistics",
-    detail: "Filed follow-ups for two flaky sensors before sign-off.",
-  },
-  {
-    title: "Deterrence sim drill",
-    action: "Activated standby",
-    context: "Security & infra",
-    detail: "Ran pager playbook and escalated to infra for acknowledgement.",
-  },
-];
-
-const projects = [
-  {
-    title: "Node Health Kit",
-    status: "Formation Logistics · Live",
-    summary:
-      "Automation bundle for validator diagnostics, recovery, and escalation workflows for operators.",
-    chips: ["Budget: 80k HMND", "Milestones: 6 / 9", "Team slots: 2 open"],
-  },
-  {
-    title: "Identity Risk Lab",
-    status: "Research · Upcoming",
-    summary:
-      "Threat modeling track focused on biometric verification attacks and countermeasures.",
-    chips: ["Budget: 45k HMND", "Milestones: 0 / 5", "Team slots: 3 open"],
-  },
-  {
-    title: "Mesh Telemetry Board",
-    status: "Formation Logistics · Live",
-    summary:
-      "Realtime visualization board for mesh telemetry anomalies and biometric lag spikes.",
-    chips: ["Budget: 52k HMND", "Milestones: 3 / 5", "Team slots: 1 open"],
-  },
-  {
-    title: "Guardian Mentorship Cohort",
-    status: "Social Impact · Live",
-    summary:
-      "Mentorship rotation pairing experienced governors with nominating cohort.",
-    chips: ["Budget: 36k HMND", "Milestones: 4 / 6", "Team slots: 0 open"],
-  },
-  {
-    title: "Formation Guild Ops Stack",
-    status: "Formation Logistics · Upcoming",
-    summary:
-      "Comprehensive ops, payroll, and reporting stack for Formation guild leads.",
-    chips: ["Budget: 90k HMND", "Milestones: 1 / 8", "Team slots: 4 open"],
-  },
-  {
-    title: "Governor Sync Relay",
-    status: "Research · Completed",
-    summary:
-      "Async sync relay specifications for cross-faction governor collaboration.",
-    chips: ["Budget: 28k HMND", "Milestones: 5 / 5", "Team slots: 0 open"],
-  },
-];
-
-const proofToggleOptions: { key: ProofKey; label: string }[] = [
-  { key: "time", label: "PoT" },
-  { key: "devotion", label: "PoD" },
-  { key: "governance", label: "PoG" },
-];
+import { Kicker } from "@/components/Kicker";
+import { TierLabel } from "@/components/TierLabel";
+import {
+  humanNodeProfile,
+  proofToggleOptions,
+  type ProofKey,
+  type ProofSection,
+} from "@/data/mock/humanNodeProfiles";
 
 const HumanNode: React.FC = () => {
   const { id } = useParams();
   const [activeProof, setActiveProof] = useState<ProofKey | "">("");
+  const {
+    heroStats,
+    quickDetails,
+    proofSections,
+    governanceActions,
+    projects,
+  } = humanNodeProfile;
   const name = id ?? "Unknown";
   const governorActive = true;
   const humanNodeActive = true;
@@ -250,7 +71,7 @@ const HumanNode: React.FC = () => {
         {heroStats.map((stat) => (
           <Card key={stat.label} className="h-full text-center">
             <CardContent className="space-y-1 p-4 text-center">
-              <p className="text-xs tracking-wide text-muted uppercase">
+              <Kicker align="center">
                 {stat.label.startsWith("ACM") ? (
                   <HintLabel termId="acm">{stat.label}</HintLabel>
                 ) : stat.label.startsWith("MM") ? (
@@ -260,7 +81,7 @@ const HumanNode: React.FC = () => {
                 ) : (
                   stat.label
                 )}
-              </p>
+              </Kicker>
               <p className="text-2xl font-semibold text-text">{stat.value}</p>
             </CardContent>
           </Card>
@@ -279,11 +100,13 @@ const HumanNode: React.FC = () => {
                   key={detail.label}
                   className="flex h-20 flex-col items-center justify-between rounded-xl border border-border px-3 py-3 text-center"
                 >
-                  <p className="text-center text-xs tracking-wide text-muted uppercase">
-                    {detail.label}
-                  </p>
+                  <Kicker align="center">{detail.label}</Kicker>
                   <p className="text-center text-base font-semibold text-text">
-                    {detail.value}
+                    {detail.label === "Tier" ? (
+                      <TierLabel tier={detail.value} />
+                    ) : (
+                      detail.value
+                    )}
                   </p>
                 </div>
               ))}
@@ -335,9 +158,12 @@ const HumanNode: React.FC = () => {
                         key={item.label}
                         className="flex h-20 flex-col items-center justify-between rounded-xl border border-border px-3 py-2 text-center"
                       >
-                        <p className="min-h-6 text-center text-xs leading-tight tracking-wide text-muted uppercase">
+                        <Kicker
+                          align="center"
+                          className="min-h-6 leading-tight"
+                        >
                           {item.label}
-                        </p>
+                        </Kicker>
                         <p className="text-base font-semibold">{item.value}</p>
                       </div>
                     ),
@@ -393,9 +219,12 @@ const HumanNode: React.FC = () => {
                     <p className="line-clamp-1 text-sm font-semibold text-text">
                       {action.title}
                     </p>
-                    <p className="line-clamp-1 text-xs tracking-wide text-primary uppercase">
+                    <Kicker
+                      align="center"
+                      className="line-clamp-1 text-primary"
+                    >
                       {action.action}
-                    </p>
+                    </Kicker>
                     <p className="line-clamp-1 text-xs text-muted">
                       {action.context}
                     </p>
@@ -430,9 +259,7 @@ const HumanNode: React.FC = () => {
                   <p className="text-sm font-semibold text-text">
                     {project.title}
                   </p>
-                  <p className="text-xs tracking-wide text-muted uppercase">
-                    {project.status}
-                  </p>
+                  <Kicker>{project.status}</Kicker>
                 </div>
                 <p className="text-sm text-muted">{project.summary}</p>
                 <div className="flex flex-wrap gap-2 pt-2">

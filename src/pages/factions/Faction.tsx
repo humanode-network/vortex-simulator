@@ -3,11 +3,12 @@ import { Link, useParams } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { factions } from "./factionData";
+import { factions } from "@/data/mock/factions";
 import { HintLabel } from "@/components/Hint";
 import { Surface } from "@/components/Surface";
 import { AvatarPlaceholder } from "@/components/AvatarPlaceholder";
 import { AppPage } from "@/components/AppPage";
+import { Kicker } from "@/components/Kicker";
 
 const Faction: React.FC = () => {
   const { id } = useParams();
@@ -136,13 +137,13 @@ const Faction: React.FC = () => {
         ].map((stat) => (
           <Card key={stat.label} className="h-full text-center">
             <CardContent className="space-y-1 p-4">
-              <p className="text-xs tracking-wide text-muted uppercase">
+              <Kicker align="center">
                 {stat.label === "ACM" ? (
                   <HintLabel termId="acm">{stat.label}</HintLabel>
                 ) : (
                   stat.label
                 )}
-              </p>
+              </Kicker>
               <p className="text-2xl font-semibold text-text">{stat.value}</p>
             </CardContent>
           </Card>
@@ -254,9 +255,9 @@ const Faction: React.FC = () => {
               className="px-3 py-3 text-center"
             >
               <p className="line-clamp-1 text-sm font-semibold">{item.title}</p>
-              <p className="line-clamp-1 text-xs tracking-wide text-primary uppercase">
+              <Kicker align="center" className="line-clamp-1 text-primary">
                 {item.action}
-              </p>
+              </Kicker>
               <p className="line-clamp-1 text-xs text-muted">{item.location}</p>
             </Surface>
           ))}

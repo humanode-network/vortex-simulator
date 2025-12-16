@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { Kicker } from "@/components/Kicker";
 import { cn } from "@/lib/utils";
 
 type ExpandableCardProps = {
@@ -35,7 +36,7 @@ export function ExpandableCard({
         onClick={onToggle}
       >
         <div className="space-y-1">
-          <p className="text-xs tracking-wide text-muted uppercase">{meta}</p>
+          <Kicker>{meta}</Kicker>
           <p className="text-lg font-semibold text-text">{title}</p>
         </div>
         <div className="flex flex-col gap-2 text-right sm:flex-row sm:items-center sm:gap-3">

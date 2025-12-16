@@ -6,6 +6,7 @@ import { vortexopediaTerms } from "@/data/vortexopedia";
 import { cn } from "@/lib/utils";
 import { Pill } from "@/components/Pill";
 import { AppPage } from "@/components/AppPage";
+import { Kicker } from "@/components/Kicker";
 
 const Vortexopedia: React.FC = () => {
   const [search, setSearch] = useState("");
@@ -65,7 +66,7 @@ const Vortexopedia: React.FC = () => {
 
   return (
     <AppPage>
-      <Card className="border border-border bg-panel">
+      <Card>
         <CardHeader className="pb-2">
           <CardTitle>Vortexopedia</CardTitle>
           <p className="text-xs text-muted">
@@ -126,9 +127,9 @@ const Vortexopedia: React.FC = () => {
                   <CardHeader className="pb-2">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex flex-col">
-                        <p className="text-[0.75rem] tracking-wide text-muted uppercase">
+                        <Kicker className="text-[0.75rem]">
                           Ref {item.ref} · {item.category}
-                        </p>
+                        </Kicker>
                         <CardTitle className="text-lg">{item.name}</CardTitle>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted">

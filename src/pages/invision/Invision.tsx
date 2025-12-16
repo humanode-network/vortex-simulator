@@ -4,100 +4,14 @@ import { HintLabel } from "@/components/Hint";
 import { SearchBar } from "@/components/SearchBar";
 import { Surface } from "@/components/Surface";
 import { AppPage } from "@/components/AppPage";
-
-const governanceState = {
-  label: "Egalitarian Republic",
-  metrics: [
-    { label: "Legitimacy", value: "78%" },
-    { label: "Stability", value: "72%" },
-    { label: "Centralization", value: "44%" },
-  ],
-};
-
-const factions = [
-  {
-    name: "Protocol Keepers",
-    members: 61,
-    votes: "28",
-    acm: "6,850",
-    stance: "Pushes for harder liveness guarantees and validator neutrality.",
-  },
-  {
-    name: "Formation Guild",
-    members: 54,
-    votes: "21",
-    acm: "5,120",
-    stance:
-      "Wants Formation to own more budget and streamline squad approvals.",
-  },
-  {
-    name: "Mesh Vanguard",
-    members: 48,
-    votes: "19",
-    acm: "4,930",
-    stance: "Advocates anonymous identities and stronger mesh privacy.",
-  },
-];
-
-const economicIndicators = [
-  {
-    label: "Treasury reserves",
-    value: "412M HMND",
-    detail: "52 weeks of runway",
-  },
-  { label: "Burn rate", value: "7.8M HMND / epoch", detail: "Up 4% vs prior" },
-  {
-    label: "Civic budget",
-    value: "112M HMND",
-    detail: "Infrastructure & grants",
-  },
-  {
-    label: "Trade routes",
-    value: "9 active",
-    detail: "Formation & faction deals",
-  },
-];
-
-const riskSignals = [
-  {
-    title: "Faction cohesion",
-    status: "Low risk",
-    detail: "Blocs aligned on governance reforms",
-  },
-  {
-    title: "External deterrence",
-    status: "Moderate risk",
-    detail: "Neighboring factions probing markets",
-  },
-  {
-    title: "Treasury liquidity",
-    status: "Low risk",
-    detail: "Healthy reserves & inflows",
-  },
-  {
-    title: "Formation morale",
-    status: "Watch",
-    detail: "Two squads reported burnout",
-  },
-];
-
-const chamberProposals = [
-  {
-    title: "Protocol Upgrade Rollout",
-    effect: "Sequencer redundancy patch ready for council vote",
-    sponsors: "Protocol Guard · Mesh Vanguard",
-  },
-  {
-    title: "Treasury Split Adjustment",
-    effect: "Rebalance civic vs operations disbursements",
-    sponsors: "Arcadian Treasury · Civic Union",
-  },
-  {
-    title: "Formation Tooling Bundle",
-    effect: "Approve guild ops stack for logistics squads",
-    sponsors: "Formation League · Guardian Circle",
-  },
-];
+import { factions as allFactions } from "@/data/mock/factions";
+import { Kicker } from "@/components/Kicker";
+import {
+  invisionChamberProposals as chamberProposals,
+  invisionEconomicIndicators as economicIndicators,
+  invisionGovernanceState as governanceState,
+  invisionRiskSignals as riskSignals,
+} from "@/data/mock/invision";
 
 const Invision: React.FC = () => {
   const [search, setSearch] = useState("");
@@ -106,12 +20,12 @@ const Invision: React.FC = () => {
   );
   const filteredFactions = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return [...factions]
+    return [...allFactions]
       .filter(
         (f) =>
           term.length === 0 ||
           f.name.toLowerCase().includes(term) ||
-          f.stance.toLowerCase().includes(term),
+          f.description.toLowerCase().includes(term),
       )
       .sort((a, b) => {
         if (factionSort === "members") return b.members - a.members;
@@ -131,9 +45,7 @@ const Invision: React.FC = () => {
           variant="panelAlt"
           className="px-6 py-5 text-center sm:col-span-2 lg:col-span-3"
         >
-          <p className="text-xs tracking-wide text-muted uppercase">
-            Governance model
-          </p>
+          <Kicker align="center">Governance model</Kicker>
           <h1 className="text-2xl font-semibold text-text">
             {governanceState.label}
           </h1>
@@ -144,9 +56,7 @@ const Invision: React.FC = () => {
             variant="panel"
             className="px-3 py-3 text-center"
           >
-            <p className="text-xs tracking-wide text-muted uppercase">
-              {metric.label}
-            </p>
+            <Kicker align="center">{metric.label}</Kicker>
             <p className="text-2xl font-semibold text-text">{metric.value}</p>
           </Surface>
         ))}
@@ -187,9 +97,9 @@ const Invision: React.FC = () => {
                   <p className="text-lg font-semibold text-text">
                     {faction.name}
                   </p>
-                  <p className="text-xs tracking-wide text-primary uppercase">
-                    {faction.stance}
-                  </p>
+                  <Kicker className="text-primary">
+                    {faction.description}
+                  </Kicker>
                   <div className="mt-3 grid grid-cols-3 gap-2 text-center">
                     <Surface
                       variant="panel"
@@ -197,9 +107,9 @@ const Invision: React.FC = () => {
                       shadow="control"
                       className="px-2 py-2"
                     >
-                      <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                      <Kicker align="center" className="text-[0.7rem]">
                         Members
-                      </p>
+                      </Kicker>
                       <p className="text-lg font-semibold">{faction.members}</p>
                     </Surface>
                     <Surface
@@ -208,9 +118,9 @@ const Invision: React.FC = () => {
                       shadow="control"
                       className="px-2 py-2"
                     >
-                      <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                      <Kicker align="center" className="text-[0.7rem]">
                         Votes, %
-                      </p>
+                      </Kicker>
                       <p className="text-lg font-semibold">{faction.votes}</p>
                     </Surface>
                     <Surface
@@ -219,9 +129,9 @@ const Invision: React.FC = () => {
                       shadow="control"
                       className="px-2 py-2"
                     >
-                      <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                      <Kicker align="center" className="text-[0.7rem]">
                         <HintLabel termId="acm">ACM</HintLabel>
-                      </p>
+                      </Kicker>
                       <p className="text-lg font-semibold capitalize">
                         {faction.acm}
                       </p>
@@ -243,9 +153,7 @@ const Invision: React.FC = () => {
                 key={indicator.label}
                 className="rounded-xl border border-border px-3 py-2"
               >
-                <p className="text-xs tracking-wide text-muted uppercase">
-                  {indicator.label}
-                </p>
+                <Kicker>{indicator.label}</Kicker>
                 <p className="text-lg font-semibold text-text">
                   {indicator.value}
                 </p>
@@ -267,9 +175,7 @@ const Invision: React.FC = () => {
                 key={signal.title}
                 className="rounded-xl border border-border px-3 py-3"
               >
-                <p className="text-xs tracking-wide text-muted uppercase">
-                  {signal.title}
-                </p>
+                <Kicker>{signal.title}</Kicker>
                 <p className="text-base font-semibold text-primary">
                   {signal.status}
                 </p>
@@ -292,9 +198,7 @@ const Invision: React.FC = () => {
                 <p className="text-base font-semibold text-text">
                   {proposal.title}
                 </p>
-                <p className="text-xs tracking-wide text-primary uppercase">
-                  {proposal.effect}
-                </p>
+                <Kicker className="text-primary">{proposal.effect}</Kicker>
                 <p className="text-xs text-muted">{proposal.sponsors}</p>
               </div>
             ))}

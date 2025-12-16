@@ -11,236 +11,13 @@ import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Tabs } from "@/components/ui/tabs";
-import "./HumanNodes.css";
 import { HintLabel } from "@/components/Hint";
 import { SearchBar } from "@/components/SearchBar";
 import { AppPage } from "@/components/AppPage";
-
-// Data types and sample data
-type Node = {
-  id: string;
-  name: string;
-  role: string;
-  chamber: string;
-  tier: string;
-  acm: number;
-  mm: number;
-  formationCapable?: boolean;
-  active: boolean;
-  formationProject?: string;
-  tags: string[];
-};
-
-const sampleNodes: Node[] = [
-  {
-    id: "JohnDoe",
-    name: "JohnDoe",
-    role: "Legate · Protocol Engineering",
-    chamber: "protocol",
-    tier: "legate",
-    acm: 182,
-    mm: 92,
-    formationCapable: true,
-    active: true,
-    formationProject: "Protocol council",
-    tags: ["protocol", "security", "research"],
-  },
-  {
-    id: "Raamara",
-    name: "Raamara",
-    role: "Consul · Economics",
-    chamber: "economics",
-    tier: "consul",
-    acm: 168,
-    mm: 80,
-    formationCapable: true,
-    active: true,
-    formationProject: "Treasury ops",
-    tags: ["treasury", "formation", "community"],
-  },
-  {
-    id: "Nyx",
-    name: "Nyx",
-    role: "Ecclesiast · Security",
-    chamber: "security",
-    tier: "ecclesiast",
-    acm: 155,
-    mm: 78,
-    formationCapable: false,
-    active: false,
-    formationProject: "Security audits",
-    tags: ["security", "infra", "audits"],
-  },
-  {
-    id: "Nana",
-    name: "Nana",
-    role: "Consul · Community & Treasury",
-    chamber: "economics",
-    tier: "consul",
-    acm: 161,
-    mm: 84,
-    formationCapable: true,
-    active: true,
-    formationProject: "Community treasury",
-    tags: ["treasury", "community", "formation"],
-  },
-  {
-    id: "Victor",
-    name: "Victor",
-    role: "Legate · Research Ops",
-    chamber: "research",
-    tier: "legate",
-    acm: 149,
-    mm: 76,
-    formationCapable: false,
-    active: true,
-    formationProject: "Research guild",
-    tags: ["research", "protocol", "infra"],
-  },
-  {
-    id: "Tony",
-    name: "Tony",
-    role: "Ecclesiast · Social",
-    chamber: "social",
-    tier: "ecclesiast",
-    acm: 138,
-    mm: 70,
-    formationCapable: true,
-    active: false,
-    formationProject: "Community outreach",
-    tags: ["social", "community", "formation"],
-  },
-  {
-    id: "Dima",
-    name: "Dima",
-    role: "Nominee · Security Apprentice",
-    chamber: "security",
-    tier: "nominee",
-    acm: 122,
-    mm: 62,
-    formationCapable: false,
-    active: true,
-    formationProject: "Audit rotation",
-    tags: ["security", "audits"],
-  },
-  {
-    id: "Shannon",
-    name: "Shannon",
-    role: "Consul · Formation Logistics",
-    chamber: "formation",
-    tier: "consul",
-    acm: 171,
-    mm: 88,
-    formationCapable: true,
-    active: true,
-    formationProject: "Formation logistics",
-    tags: ["formation", "operations", "logistics"],
-  },
-  {
-    id: "Sasha",
-    name: "Sasha",
-    role: "Citizen · Constitutional Observer",
-    chamber: "protocol",
-    tier: "citizen",
-    acm: 118,
-    mm: 60,
-    formationCapable: false,
-    active: true,
-    formationProject: "Audit trail",
-    tags: ["research", "protocol"],
-  },
-  {
-    id: "VictorM",
-    name: "Victor M",
-    role: "Legate · Mesh Ops",
-    chamber: "protocol",
-    tier: "legate",
-    acm: 165,
-    mm: 85,
-    formationCapable: true,
-    active: true,
-    formationProject: "Mesh redundancy",
-    tags: ["protocol", "infra", "formation"],
-  },
-  {
-    id: "Cass",
-    name: "Cass",
-    role: "Ecclesiast · Treasury Ops",
-    chamber: "economics",
-    tier: "ecclesiast",
-    acm: 147,
-    mm: 74,
-    formationCapable: true,
-    active: true,
-    formationProject: "Treasury dashboard",
-    tags: ["treasury", "community"],
-  },
-  {
-    id: "Lena",
-    name: "Lena",
-    role: "Consul · Social Impact",
-    chamber: "social",
-    tier: "consul",
-    acm: 158,
-    mm: 83,
-    formationCapable: true,
-    active: true,
-    formationProject: "Impact guild",
-    tags: ["social", "community"],
-  },
-  {
-    id: "Artem",
-    name: "Artem",
-    role: "Legate · Security Infra",
-    chamber: "security",
-    tier: "legate",
-    acm: 166,
-    mm: 89,
-    formationCapable: true,
-    active: true,
-    formationProject: "Deterrence drills",
-    tags: ["security", "infra"],
-  },
-  {
-    id: "Juno",
-    name: "Juno",
-    role: "Nominee · Research Fellow",
-    chamber: "research",
-    tier: "nominee",
-    acm: 119,
-    mm: 64,
-    formationCapable: false,
-    active: true,
-    formationProject: "Research fellowship",
-    tags: ["research", "protocol"],
-  },
-  {
-    id: "Iris",
-    name: "Iris",
-    role: "Ecclesiast · Community Ops",
-    chamber: "social",
-    tier: "ecclesiast",
-    acm: 140,
-    mm: 72,
-    formationCapable: true,
-    active: false,
-    formationProject: "Care outreach",
-    tags: ["social", "community", "formation"],
-  },
-  {
-    id: "Taro",
-    name: "Taro",
-    role: "Consul · Formation Logistics",
-    chamber: "formation",
-    tier: "consul",
-    acm: 172,
-    mm: 87,
-    formationCapable: true,
-    active: true,
-    formationProject: "Formation supply",
-    tags: ["formation", "operations"],
-  },
-];
+import { StatTile } from "@/components/StatTile";
+import { Kicker } from "@/components/Kicker";
+import { TierLabel } from "@/components/TierLabel";
+import { humanNodes as sampleNodes } from "@/data/mock/humanNodes";
 
 const HumanNodes: React.FC = () => {
   const [search, setSearch] = useState("");
@@ -275,7 +52,7 @@ const HumanNodes: React.FC = () => {
   }, [search, sortBy]);
 
   return (
-    <AppPage pageId="human-nodes" variant="custom" className="human-nodes-page">
+    <AppPage pageId="human-nodes" variant="stack6">
       <SearchBar
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -324,19 +101,17 @@ const HumanNodes: React.FC = () => {
 
       <Card className="w-full">
         <CardHeader className="pb-2">
-          <p className="text-xs tracking-wide text-muted uppercase">
-            Results ({filtered.length})
-          </p>
+          <Kicker>Results ({filtered.length})</Kicker>
         </CardHeader>
         <CardContent className="space-y-3 pt-0">
-          <div className="human-nodes-toolbar">
-            <div className="human-nodes-sort">
-              <Label htmlFor="sort" className="human-nodes-sort-label">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <Label htmlFor="sort" className="font-semibold whitespace-nowrap">
                 Sort by
               </Label>
               <Select
                 id="sort"
-                className="human-nodes-sort-select"
+                className="h-10 min-w-[180px]"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
               >
@@ -347,7 +122,7 @@ const HumanNodes: React.FC = () => {
               </Select>
             </div>
             <Tabs
-              className="human-nodes-view-tabs"
+              className="ml-auto"
               value={view}
               onValueChange={(val) => setView(val as "cards" | "list")}
               options={[
@@ -358,7 +133,7 @@ const HumanNodes: React.FC = () => {
           </div>
 
           {view === "cards" ? (
-            <div className="human-nodes-card-grid">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {filtered.map((node) => {
                 const sinceDates: Record<string, string> = {
                   JohnDoe: "11.06.2021",
@@ -376,21 +151,9 @@ const HumanNodes: React.FC = () => {
                   {
                     label: "Tier",
                     value: (
-                      <HintLabel
-                        termId={
-                          node.tier === "nominee"
-                            ? "tier1_nominee"
-                            : node.tier === "ecclesiast"
-                              ? "tier2_ecclesiast"
-                              : node.tier === "legate"
-                                ? "tier3_legate"
-                                : node.tier === "consul"
-                                  ? "tier4_consul"
-                                  : "tier5_citizen"
-                        }
-                      >
+                      <TierLabel tier={node.tier}>
                         {node.tier.charAt(0).toUpperCase() + node.tier.slice(1)}
-                      </HintLabel>
+                      </TierLabel>
                     ),
                   },
                   {
@@ -418,37 +181,38 @@ const HumanNodes: React.FC = () => {
                   },
                 ];
                 return (
-                  <Card key={node.id} className="human-node-card border-border">
-                    <CardContent className="human-node-card__content pt-4">
+                  <Card key={node.id}>
+                    <CardContent className="flex flex-col gap-4 pt-4">
                       <div>
                         <h3 className="text-lg font-semibold">{node.name}</h3>
                         <p className="text-sm text-muted">{node.role}</p>
                       </div>
-                      <div className="human-node-card__tiles">
+                      <div className="grid auto-rows-fr grid-cols-2 gap-3">
                         {tileItems.map((item) => (
-                          <div
+                          <StatTile
                             key={item.label}
-                            className="human-node-card__tile"
-                          >
-                            <span className="human-node-card__tile-label">
-                              {item.label === "ACM" ? (
-                                <HintLabel termId="acm">{item.label}</HintLabel>
+                            label={
+                              item.label === "ACM" ? (
+                                <HintLabel termId="acm">ACM</HintLabel>
                               ) : item.label === "MM" ? (
                                 <HintLabel termId="meritocratic_measure">
-                                  {item.label}
+                                  MM
                                 </HintLabel>
                               ) : (
                                 item.label
-                              )}
-                            </span>
-                            <span className="human-node-card__tile-value">
-                              {item.value}
-                            </span>
-                          </div>
+                              )
+                            }
+                            value={item.value}
+                            radius="xl"
+                            variant="panelAlt"
+                            className="px-4 py-3"
+                            labelClassName="text-[0.65rem]"
+                            valueClassName="text-base"
+                          />
                         ))}
                       </div>
                     </CardContent>
-                    <CardFooter className="human-node-card__footer justify-end gap-2 pt-0">
+                    <CardFooter className="justify-end gap-2 pt-0">
                       <Button asChild size="sm">
                         <Link to={`/human-nodes/${node.id}`}>Open profile</Link>
                       </Button>
@@ -458,16 +222,16 @@ const HumanNodes: React.FC = () => {
               })}
             </div>
           ) : (
-            <div className="human-nodes-list">
+            <div className="flex flex-col gap-4">
               {filtered.map((node) => (
-                <Card key={node.id} className="border-border">
+                <Card key={node.id}>
                   <CardContent className="pt-4 pb-3">
-                    <div className="human-node-row">
-                      <div className="human-node-row__details">
+                    <div className="flex flex-wrap items-center gap-4">
+                      <div className="min-w-[200px] flex-1">
                         <h4 className="text-base font-semibold">{node.name}</h4>
                         <p className="text-sm text-muted">{node.role}</p>
                       </div>
-                      <div className="human-node-row__stats">
+                      <div className="flex flex-wrap gap-2">
                         <Badge size="sm">
                           <HintLabel termId="acm" className="mr-1">
                             ACM
@@ -489,7 +253,7 @@ const HumanNodes: React.FC = () => {
                           </Badge>
                         )}
                       </div>
-                      <div className="human-node-row__action">
+                      <div className="ml-auto">
                         <Button asChild size="sm">
                           <Link to={`/human-nodes/${node.id}`}>Open</Link>
                         </Button>

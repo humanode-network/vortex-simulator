@@ -9,96 +9,19 @@ import { MetricTile } from "@/components/MetricTile";
 import { Surface } from "@/components/Surface";
 import { AppPage } from "@/components/AppPage";
 import { PageHeader } from "@/components/PageHeader";
-
-type Category = "all" | "research" | "development" | "social";
-type Stage = "live" | "gathering" | "completed";
-
-type FormationMetric = {
-  label: string;
-  value: string;
-  dataAttr: string;
-};
-
-type FormationProject = {
-  id: string;
-  title: string;
-  focus: string;
-  proposer: string;
-  summary: string;
-  category: Category;
-  stage: Stage;
-  budget: string;
-  milestones: string;
-  teamSlots: string;
-};
-
-const metrics: FormationMetric[] = [
-  { label: "Total funded HMND", value: "340k", dataAttr: "metric-hmnd" },
-  { label: "Active projects", value: "12", dataAttr: "metric-active" },
-  { label: "Open team slots", value: "9", dataAttr: "metric-slots" },
-  { label: "Milestones delivered", value: "46", dataAttr: "metric-milestones" },
-];
+import { Kicker } from "@/components/Kicker";
+import {
+  formationMetrics as metrics,
+  formationProjects as projects,
+  type FormationCategory as Category,
+  type FormationStage as Stage,
+} from "@/data/mock/formation";
 
 const stageLabel: Record<Stage, string> = {
   live: "Live",
   gathering: "Gathering team",
   completed: "Completed",
 };
-
-const projects: FormationProject[] = [
-  {
-    id: "node-health-kit",
-    title: "Node Health Kit",
-    focus: "Formation Logistics · Tooling",
-    proposer: "JohnDoe",
-    summary:
-      "Tooling bundle to automate node diagnostics and recovery workflows for operators.",
-    category: "development",
-    stage: "live",
-    budget: "80k HMND",
-    milestones: "6 / 9",
-    teamSlots: "2 open",
-  },
-  {
-    id: "identity-risk-lab",
-    title: "Identity Risk Lab",
-    focus: "Research · Upcoming cohort",
-    proposer: "Raamara",
-    summary:
-      "Exploratory track modeling biometric verification attacks and mitigation strategies.",
-    category: "research",
-    stage: "gathering",
-    budget: "45k HMND",
-    milestones: "0 / 5",
-    teamSlots: "3 open",
-  },
-  {
-    id: "community-field-unit",
-    title: "Community Field Unit",
-    focus: "Social Good · Outreach",
-    proposer: "Nana",
-    summary:
-      "Mobile mesh of community ambassadors for onboarding and support coverage.",
-    category: "social",
-    stage: "live",
-    budget: "65k HMND",
-    milestones: "4 / 6",
-    teamSlots: "1 open",
-  },
-  {
-    id: "deterrence-sim-lab",
-    title: "Deterrence Sim Lab",
-    focus: "Research · Security",
-    proposer: "Victor",
-    summary:
-      "Scenario simulator for deterrence drills and biometric failure rehearsals.",
-    category: "research",
-    stage: "completed",
-    budget: "50k HMND",
-    milestones: "6 / 6",
-    teamSlots: "0 open",
-  },
-];
 
 const Formation: React.FC = () => {
   const [search, setSearch] = useState("");
@@ -193,9 +116,7 @@ const Formation: React.FC = () => {
           <Card key={project.id}>
             <CardHeader className="flex items-center justify-between pb-2">
               <div>
-                <p className="text-xs tracking-wide text-muted uppercase">
-                  {project.focus}
-                </p>
+                <Kicker>{project.focus}</Kicker>
                 <h3 className="text-lg font-semibold text-text">
                   {project.title}
                 </h3>
@@ -213,9 +134,7 @@ const Formation: React.FC = () => {
                   shadow="control"
                   className="px-3 py-2"
                 >
-                  <p className="text-xs tracking-wide text-muted uppercase">
-                    Budget
-                  </p>
+                  <Kicker>Budget</Kicker>
                   <p className="font-semibold">{project.budget}</p>
                 </Surface>
                 <Surface
@@ -224,9 +143,7 @@ const Formation: React.FC = () => {
                   shadow="control"
                   className="px-3 py-2"
                 >
-                  <p className="text-xs tracking-wide text-muted uppercase">
-                    Milestones
-                  </p>
+                  <Kicker>Milestones</Kicker>
                   <p className="font-semibold">{project.milestones}</p>
                 </Surface>
                 <Surface
@@ -235,9 +152,7 @@ const Formation: React.FC = () => {
                   shadow="control"
                   className="px-3 py-2"
                 >
-                  <p className="text-xs tracking-wide text-muted uppercase">
-                    Team slots
-                  </p>
+                  <Kicker>Team slots</Kicker>
                   <p className="font-semibold">{project.teamSlots}</p>
                 </Surface>
               </div>

@@ -2,19 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HintLabel } from "@/components/Hint";
 import { Surface } from "@/components/Surface";
 import { AppPage } from "@/components/AppPage";
-
-const eraActivity = {
-  era: "142",
-  required: 18,
-  completed: 11,
-  actions: [
-    { label: "Pool votes", done: 5, required: 6 },
-    { label: "Chamber votes", done: 3, required: 6 },
-    { label: "Court actions", done: 1, required: 3 },
-    { label: "Proposals", done: 2, required: 3 },
-  ],
-  timeLeft: "22d 14h",
-};
+import { Kicker } from "@/components/Kicker";
+import { eraActivity } from "@/data/mock/myGovernance";
 
 const MyGovernance: React.FC = () => {
   return (
@@ -92,9 +81,9 @@ const MyGovernance: React.FC = () => {
                 shadow="tile"
                 className="flex h-full flex-col items-center justify-center px-3 py-3 text-center"
               >
-                <p className="text-[0.7rem] tracking-wide text-muted uppercase">
+                <Kicker align="center" className="text-[0.7rem]">
                   {act.label}
-                </p>
+                </Kicker>
                 <p className="text-base font-semibold text-text">
                   {act.done} / {act.required}
                 </p>
@@ -116,17 +105,13 @@ const MyGovernance: React.FC = () => {
               shadow="tile"
               className="p-4 text-center"
             >
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Current tier
-              </p>
+              <Kicker align="center">Current tier</Kicker>
               <p className="text-lg font-semibold text-text">
                 <HintLabel termId="tier3_legate">Legate</HintLabel>
               </p>
             </Surface>
             <div className="flex flex-col items-center justify-center gap-3 px-2">
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Progress
-              </p>
+              <Kicker align="center">Progress</Kicker>
               <div className="relative h-2 w-48 overflow-hidden rounded-full bg-muted/30">
                 <div
                   className="h-full rounded-full bg-primary"
@@ -141,9 +126,7 @@ const MyGovernance: React.FC = () => {
               shadow="tile"
               className="p-4 text-center"
             >
-              <p className="text-xs tracking-wide text-muted uppercase">
-                Next tier
-              </p>
+              <Kicker align="center">Next tier</Kicker>
               <p className="text-lg font-semibold text-text">
                 <HintLabel termId="tier4_consul">Consul</HintLabel>
               </p>

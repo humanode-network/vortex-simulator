@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { pageHints } from "@/data/pageHints";
 import { X, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Kicker } from "@/components/Kicker";
 
 type PageHintProps = {
   pageId: string;
@@ -56,9 +57,7 @@ export const PageHint: React.FC<PageHintProps> = ({ pageId, className }) => {
                 <p className="text-muted">{hint.intro}</p>
                 {hint.sections?.map((section) => (
                   <div key={section.heading} className="space-y-1">
-                    <p className="text-[0.7rem] tracking-wide text-muted uppercase">
-                      {section.heading}
-                    </p>
+                    <Kicker className="text-[0.7rem]">{section.heading}</Kicker>
                     <ul className="list-disc space-y-1 pl-5">
                       {section.items.map((item) => (
                         <li key={item} className="leading-relaxed">
@@ -70,9 +69,7 @@ export const PageHint: React.FC<PageHintProps> = ({ pageId, className }) => {
                 ))}
                 {hint.actions && hint.actions.length > 0 && (
                   <div className="space-y-1">
-                    <p className="text-[0.7rem] tracking-wide text-muted uppercase">
-                      Actions
-                    </p>
+                    <Kicker className="text-[0.7rem]">Actions</Kicker>
                     <ul className="list-disc space-y-1 pl-5">
                       {hint.actions.map((action) => (
                         <li key={action}>{action}</li>
