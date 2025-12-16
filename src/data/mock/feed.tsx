@@ -8,7 +8,6 @@ export type FeedItem = {
   title: string;
   meta: string;
   stage: FeedStage;
-  stageLabel: string;
   summaryPill: string;
   summary: ReactNode;
   stageData?: {
@@ -32,7 +31,6 @@ export const feedItems: FeedItem[] = [
     title: "Adaptive Fee Shaping",
     meta: "Economics & Treasury · Consul",
     stage: "vote",
-    stageLabel: "Chamber vote",
     summaryPill: "Economics chamber",
     summary:
       "Dynamic fee split feeding Formation, treasury, and biometrics based on stress.",
@@ -67,7 +65,6 @@ export const feedItems: FeedItem[] = [
     title: "Sequencer Redundancy Rollout",
     meta: "Protocol Engineering · Legate",
     stage: "pool",
-    stageLabel: "Proposal pool",
     summaryPill: "Protocol chamber",
     summary:
       "Redundant biometric sequencers with cross-epoch checkpoints to cut failover time.",
@@ -98,7 +95,6 @@ export const feedItems: FeedItem[] = [
     title: "Liveness Sentinel Retrofit",
     meta: "Security · Legate",
     stage: "vote",
-    stageLabel: "Chamber vote",
     summaryPill: "Security chamber",
     summary:
       "Retrofit sentinel nodes with liveness circuit breaker to prevent cascading outages.",
@@ -132,7 +128,6 @@ export const feedItems: FeedItem[] = [
     title: "Deterrence Sim Lab",
     meta: "Formation · Research",
     stage: "build",
-    stageLabel: "Formation",
     summaryPill: "Milestone 2 / 3",
     summary:
       "Simulation track for deterrence scenarios; SRE/QA/Writer slots open.",
@@ -161,7 +156,6 @@ export const feedItems: FeedItem[] = [
     title: "Courts: Delegation Dispute #44",
     meta: "Courts · Jury · Awaiting statement",
     stage: "courts",
-    stageLabel: "Courts",
     summaryPill: "Jury",
     summary: "Delegation dispute filed; statement requested before review.",
     stats: [
@@ -178,7 +172,6 @@ export const feedItems: FeedItem[] = [
     title: "Protocol Council Thread",
     meta: "Protocol chamber · Thread",
     stage: "thread",
-    stageLabel: "Thread",
     summaryPill: "Protocol chamber",
     summary: "Incident review for redundant checkpoints · new replies.",
     ctaPrimary: "Open thread",
@@ -191,7 +184,6 @@ export const feedItems: FeedItem[] = [
     title: "Protocol Keepers Thread",
     meta: "Faction · Protocol Keepers",
     stage: "thread",
-    stageLabel: "Thread",
     summaryPill: "Faction thread",
     summary: "Privacy sprint planning · new replies.",
     ctaPrimary: "Open thread",
@@ -204,7 +196,6 @@ export const feedItems: FeedItem[] = [
     title: "Formation Guild Update",
     meta: "Faction · Formation Guild",
     stage: "faction",
-    stageLabel: "Faction",
     summaryPill: "Slots open",
     summary: (
       <span>

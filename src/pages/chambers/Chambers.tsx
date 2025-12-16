@@ -26,10 +26,11 @@ const metricCards: Metric[] = [
 
 const Chambers: React.FC = () => {
   const [search, setSearch] = useState("");
-  const [pipelineFilter, setPipelineFilter] = useState<
-    "any" | "pool" | "vote" | "build"
-  >("any");
-  const [sortBy, setSortBy] = useState<"name" | "governors" | "acm">("name");
+  const [filters, setFilters] = useState<{
+    pipelineFilter: "any" | "pool" | "vote" | "build";
+    sortBy: "name" | "governors" | "acm";
+  }>({ pipelineFilter: "any", sortBy: "name" });
+  const { pipelineFilter, sortBy } = filters;
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
     return [...chambers]
@@ -107,15 +108,8 @@ const Chambers: React.FC = () => {
             ],
           },
         ]}
-        filtersState={{ pipelineFilter, sortBy }}
-        onFiltersChange={(next) => {
-          if (next.pipelineFilter)
-            setPipelineFilter(
-              next.pipelineFilter as "any" | "pool" | "vote" | "build",
-            );
-          if (next.sortBy)
-            setSortBy(next.sortBy as "name" | "governors" | "acm");
-        }}
+        filtersState={filters}
+        onFiltersChange={setFilters}
       />
 
       <section

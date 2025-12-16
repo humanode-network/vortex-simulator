@@ -45,8 +45,11 @@ const drafts: Draft[] = [
 
 const ProposalDrafts: React.FC = () => {
   const [query, setQuery] = useState("");
-  const [sortBy, setSortBy] = useState<"updated" | "chamber">("updated");
-  const [chamberFilter, setChamberFilter] = useState<string>("any");
+  const [filters, setFilters] = useState<{
+    sortBy: "updated" | "chamber";
+    chamberFilter: string;
+  }>({ sortBy: "updated", chamberFilter: "any" });
+  const { sortBy, chamberFilter } = filters;
   const chambers = useMemo(
     () => Array.from(new Set(drafts.map((d) => d.chamber))),
     [],
@@ -107,11 +110,8 @@ const ProposalDrafts: React.FC = () => {
               ],
             },
           ]}
-          filtersState={{ chamberFilter, sortBy }}
-          onFiltersChange={(next) => {
-            if (next.chamberFilter) setChamberFilter(next.chamberFilter);
-            if (next.sortBy) setSortBy(next.sortBy as "updated" | "chamber");
-          }}
+          filtersState={filters}
+          onFiltersChange={setFilters}
         />
       </div>
 

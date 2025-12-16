@@ -2,7 +2,12 @@ import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 import { HintLabel } from "@/components/Hint";
-import type { StageChipKind } from "@/types/stages";
+import {
+  stageChipKindForStage,
+  stageLabelForStage,
+  type Stage,
+  type StageChipKind,
+} from "@/types/stages";
 
 const chipClasses: Record<StageChipKind, string> = {
   proposal_pool: "bg-[color:var(--accent-warm)]/15 text-[var(--accent-warm)]",
@@ -22,13 +27,15 @@ const hintByKind: Partial<Record<StageChipKind, string>> = {
 };
 
 type StageChipProps = {
-  kind: StageChipKind;
-  children: ReactNode;
+  stage: Stage;
+  label?: ReactNode;
   className?: string;
 };
 
-export function StageChip({ kind, children, className }: StageChipProps) {
+export function StageChip({ stage, label, className }: StageChipProps) {
+  const kind: StageChipKind = stageChipKindForStage(stage);
   const termId = hintByKind[kind];
+  const content = label ?? stageLabelForStage(stage);
 
   return (
     <span
@@ -38,7 +45,7 @@ export function StageChip({ kind, children, className }: StageChipProps) {
         className,
       )}
     >
-      {termId ? <HintLabel termId={termId}>{children}</HintLabel> : children}
+      {termId ? <HintLabel termId={termId}>{content}</HintLabel> : content}
     </span>
   );
 }

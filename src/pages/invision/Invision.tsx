@@ -15,9 +15,10 @@ import {
 
 const Invision: React.FC = () => {
   const [search, setSearch] = useState("");
-  const [factionSort, setFactionSort] = useState<"members" | "votes" | "acm">(
-    "members",
-  );
+  const [filters, setFilters] = useState<{
+    factionSort: "members" | "votes" | "acm";
+  }>({ factionSort: "members" });
+  const { factionSort } = filters;
   const filteredFactions = useMemo(() => {
     const term = search.trim().toLowerCase();
     return [...allFactions]
@@ -78,11 +79,8 @@ const Invision: React.FC = () => {
             ],
           },
         ]}
-        filtersState={{ factionSort }}
-        onFiltersChange={(next) => {
-          if (next.factionSort)
-            setFactionSort(next.factionSort as "members" | "votes" | "acm");
-        }}
+        filtersState={filters}
+        onFiltersChange={setFilters}
       />
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">

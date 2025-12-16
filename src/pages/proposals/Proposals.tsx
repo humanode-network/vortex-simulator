@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select } from "@/components/ui/select";
 import { SearchBar } from "@/components/SearchBar";
 import { AppPage } from "@/components/AppPage";
 import { ExpandableCard } from "@/components/ExpandableCard";
@@ -13,28 +12,21 @@ import { DashedStatItem } from "@/components/DashedStatItem";
 import { StageChip } from "@/components/StageChip";
 import type { ProposalStage } from "@/types/stages";
 import { CardActionsRow } from "@/components/CardActionsRow";
-import { Kicker } from "@/components/Kicker";
 import { proposals as proposalData } from "@/data/mock/proposals";
-
-type Stage = ProposalStage;
-
-const stageToChipKind: Record<Stage, Parameters<typeof StageChip>[0]["kind"]> =
-  {
-    pool: "proposal_pool",
-    vote: "chamber_vote",
-    build: "formation",
-    final: "final",
-    archived: "archived",
-  };
 
 const Proposals: React.FC = () => {
   const [search, setSearch] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
-  const [stageFilter, setStageFilter] = useState<Stage | "any">("any");
-  const [chamberFilter, setChamberFilter] = useState("All chambers");
-  const [sortBy, setSortBy] = useState<
-    "Newest" | "Oldest" | "Activity" | "Votes"
-  >("Newest");
+  const [filters, setFilters] = useState<{
+    stageFilter: ProposalStage | "any";
+    chamberFilter: string;
+    sortBy: "Newest" | "Oldest" | "Activity" | "Votes";
+  }>({
+    stageFilter: "any",
+    chamberFilter: "All chambers",
+    sortBy: "Newest",
+  });
+  const { stageFilter, chamberFilter, sortBy } = filters;
 
   const filteredProposals = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -74,55 +66,6 @@ const Proposals: React.FC = () => {
       });
   }, [search, stageFilter, chamberFilter, sortBy]);
 
-  const filtersContent = (
-    <div className="space-y-3">
-      <div className="space-y-1">
-        <Kicker>Status</Kicker>
-        <Select
-          value={stageFilter}
-          onChange={(e) => setStageFilter(e.target.value as Stage | "any")}
-        >
-          <option value="any">Any</option>
-          <option value="pool">Proposal pool</option>
-          <option value="vote">Chamber vote</option>
-          <option value="build">Formation</option>
-          <option value="final">Final vote</option>
-          <option value="archived">Archived</option>
-        </Select>
-      </div>
-      <div className="space-y-1">
-        <Kicker>Chamber</Kicker>
-        <Select
-          value={chamberFilter}
-          onChange={(e) => setChamberFilter(e.target.value)}
-        >
-          <option value="All chambers">All chambers</option>
-          <option value="Protocol Engineering">Protocol Engineering</option>
-          <option value="Economics & Treasury">Economics & Treasury</option>
-          <option value="Security & Infra">Security & Infra</option>
-          <option value="Constitutional">Constitutional</option>
-          <option value="Social Impact">Social Impact</option>
-        </Select>
-      </div>
-      <div className="space-y-1">
-        <Kicker>Sort by</Kicker>
-        <Select
-          value={sortBy}
-          onChange={(e) =>
-            setSortBy(
-              e.target.value as "Newest" | "Oldest" | "Activity" | "Votes",
-            )
-          }
-        >
-          <option value="Newest">Newest</option>
-          <option value="Oldest">Oldest</option>
-          <option value="Activity">Activity</option>
-          <option value="Votes">Votes casted</option>
-        </Select>
-      </div>
-    </div>
-  );
-
   const toggleProposal = (id: string) => {
     setExpanded((current) => (current === id ? null : id));
   };
@@ -150,7 +93,44 @@ const Proposals: React.FC = () => {
         onChange={(event) => setSearch(event.target.value)}
         placeholder="Search proposals by title, hash, proposer…"
         ariaLabel="Search proposals"
-        filtersContent={filtersContent}
+        filtersConfig={[
+          {
+            key: "stageFilter",
+            label: "Status",
+            options: [
+              { value: "any", label: "Any" },
+              { value: "pool", label: "Proposal pool" },
+              { value: "vote", label: "Chamber vote" },
+              { value: "build", label: "Formation" },
+              { value: "final", label: "Final vote" },
+              { value: "archived", label: "Archived" },
+            ],
+          },
+          {
+            key: "chamberFilter",
+            label: "Chamber",
+            options: [
+              { value: "All chambers", label: "All chambers" },
+              { value: "Protocol Engineering", label: "Protocol Engineering" },
+              { value: "Economics & Treasury", label: "Economics & Treasury" },
+              { value: "Security & Infra", label: "Security & Infra" },
+              { value: "Constitutional", label: "Constitutional" },
+              { value: "Social Impact", label: "Social Impact" },
+            ],
+          },
+          {
+            key: "sortBy",
+            label: "Sort by",
+            options: [
+              { value: "Newest", label: "Newest" },
+              { value: "Oldest", label: "Oldest" },
+              { value: "Activity", label: "Activity" },
+              { value: "Votes", label: "Votes casted" },
+            ],
+          },
+        ]}
+        filtersState={filters}
+        onFiltersChange={setFilters}
       />
 
       <section aria-live="polite" className="flex flex-col gap-4">
@@ -169,9 +149,7 @@ const Proposals: React.FC = () => {
             title={proposal.title}
             right={
               <>
-                <StageChip kind={stageToChipKind[proposal.stage]}>
-                  {proposal.stageLabel}
-                </StageChip>
+                <StageChip stage={proposal.stage} />
                 <Badge
                   variant="outline"
                   size="sm"
