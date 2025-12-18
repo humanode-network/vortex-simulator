@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/primitives/card";
-import { PageHeader } from "@/components/PageHeader";
+import { Card, CardContent } from "@/components/primitives/card";
 import { ToggleGroup } from "@/components/ToggleGroup";
 import { getStoredTheme, setTheme, type Theme } from "@/lib/theme";
 
@@ -21,14 +15,7 @@ const General: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader
-        title="General"
-        description="Global preferences and account options."
-      />
       <Card>
-        <CardHeader className="pb-2">
-          <CardTitle>Preferences</CardTitle>
-        </CardHeader>
         <CardContent className="space-y-4 text-sm text-muted">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="space-y-1">

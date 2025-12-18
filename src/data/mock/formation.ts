@@ -21,64 +21,38 @@ export type FormationProject = {
 };
 
 export const formationMetrics: FormationMetric[] = [
-  { label: "Total funded HMND", value: "340k", dataAttr: "metric-hmnd" },
-  { label: "Active projects", value: "12", dataAttr: "metric-active" },
-  { label: "Open team slots", value: "9", dataAttr: "metric-slots" },
-  { label: "Milestones delivered", value: "46", dataAttr: "metric-milestones" },
+  { label: "Total funded HMND", value: "425k", dataAttr: "metric-hmnd" },
+  { label: "Active projects", value: "2", dataAttr: "metric-active" },
+  { label: "Open team slots", value: "4", dataAttr: "metric-slots" },
+  { label: "Milestones delivered", value: "3", dataAttr: "metric-milestones" },
 ];
 
 export const formationProjects: FormationProject[] = [
   {
-    id: "node-health-kit",
-    title: "Node Health Kit",
-    focus: "Formation Logistics · Tooling",
-    proposer: "JohnDoe",
+    id: "evm-dev-starter-kit",
+    title: "Humanode EVM Dev Starter Kit & Testing Sandbox",
+    focus: "Protocol chamber · Developer tooling",
+    proposer: "Jonas",
     summary:
-      "Tooling bundle to automate node diagnostics and recovery workflows for operators.",
+      "Starter kit + public sandbox so developers can deploy EVM dApps on Humanode in under 30 minutes.",
     category: "development",
     stage: "live",
-    budget: "80k HMND",
-    milestones: "6 / 9",
+    budget: "180k HMND",
+    milestones: "1 / 3",
     teamSlots: "2 open",
   },
   {
-    id: "identity-risk-lab",
-    title: "Identity Risk Lab",
-    focus: "Research · Upcoming cohort",
-    proposer: "Raamara",
+    id: "mev-safe-dex-v1-launch-sprint",
+    title: "Humanode MEV-Safe DEX v1 + Launch Sprint",
+    focus: "Engineering chamber · Protected swaps",
+    proposer: "defi-synth",
     summary:
-      "Exploratory track modeling biometric verification attacks and mitigation strategies.",
-    category: "research",
+      "MEV-protected DEX + Biostaker/getHMND integrations and fees to Human Nodes, with an audited mainnet launch.",
+    category: "development",
     stage: "gathering",
-    budget: "45k HMND",
-    milestones: "0 / 5",
-    teamSlots: "3 open",
-  },
-  {
-    id: "community-field-unit",
-    title: "Community Field Unit",
-    focus: "Social Good · Outreach",
-    proposer: "Nana",
-    summary:
-      "Mobile mesh of community ambassadors for onboarding and support coverage.",
-    category: "social",
-    stage: "live",
-    budget: "65k HMND",
-    milestones: "4 / 6",
-    teamSlots: "1 open",
-  },
-  {
-    id: "deterrence-sim-lab",
-    title: "Deterrence Sim Lab",
-    focus: "Research · Security",
-    proposer: "Victor",
-    summary:
-      "Scenario simulator for deterrence drills and biometric failure rehearsals.",
-    category: "research",
-    stage: "completed",
-    budget: "50k HMND",
-    milestones: "6 / 6",
-    teamSlots: "0 open",
+    budget: "245k HMND",
+    milestones: "2 / 4",
+    teamSlots: "2 open",
   },
 ];
 

@@ -1,63 +1,62 @@
 export const proposalDraftDetails = {
-  title: "Mesh Telemetry Upgrade",
-  proposer: "John Doe",
-  chamber: "Protocol Engineering",
-  focus: "Liveness & validators",
-  tier: "Legate",
-  budget: "210k HMND",
+  title: "Vortex Governance Hub UX Refresh & Design System v1",
+  proposer: "Nina",
+  chamber: "Product & UX chamber",
+  focus: "Clarity, hierarchy, and mobile UX",
+  tier: "Ecclesiast",
+  budget: "20k HMND",
   formationEligible: true,
-  teamSlots: "3 / 6",
-  milestonesPlanned: "2 planned · pilot + rollout",
+  teamSlots: "1 / 2",
+  milestonesPlanned: "3 milestones · 6 weeks",
   summary:
-    "Refine telemetry ingestion and alerting for sequencer failover playbooks with progressive rollout.",
+    "Audit Vortex UX, create a lightweight design system, redesign key flows, and deliver dev-ready Figma + basic design tokens.",
   rationale:
-    "Improve liveness detection by aggregating probes, tuning alerts, and aligning dashboards with chamber SLOs before chamber submission.",
+    "Vortex has strong concepts but feels dense and unclear for many users, especially on mobile. A coherent design system + clear hierarchy reduces confusion and makes governance usable for new humans.",
+  budgetScope:
+    "Covers the UX audit + flow mapping, Design System v1 (tokens + components), redesigned core screens (proposals/chambers/Invision/proposal creation), and a dev-ready handoff bundle. Out of scope: implementing the redesign in the frontend.",
+  invisionInsight: {
+    role: "Product & Web UX",
+    bullets: [
+      "Improves scanability of proposals, chambers, and Invision insights across devices.",
+      "Reduces onboarding confusion (“where do I vote?” / “where do I start?”) with clearer hierarchy and flows.",
+      "Delivers dev-ready Figma + token notes so implementation is predictable and consistent.",
+    ],
+  },
   checklist: [
-    "Define KPIs and failure domains.",
-    "Add staged alerting and on-call runbooks.",
-    "Align Formation playbooks for rollout.",
+    "Map current flows and pain points; produce a short problem map.",
+    "Deliver wireframes for proposal list/detail, creation flow, chambers, and Invision.",
+    "Build a lightweight design system (tokens + components) and apply to key screens.",
+    "Prepare dev handoff bundle with guidelines and token mapping notes.",
   ],
   milestones: [
-    "Pilot deploy on two clusters; collect baselines.",
-    "Global rollout with rollback gates.",
-    "Docs, dashboards, and operator training.",
+    "M1 — UX Flows & Wireframes",
+    "M2 — Design System & Key Screens",
+    "M3 — Handoff Ready",
   ],
-  teamLocked: [
-    { name: "John Doe", role: "Lead · Protocol" },
-    { name: "Raamara", role: "Ops & rollout" },
-    { name: "Nyx", role: "Telemetry" },
-  ],
+  teamLocked: [{ name: "Nina", role: "Lead product & UX designer" }],
   openSlotNeeds: [
     {
-      title: "SRE / Reliability",
-      desc: "Own failover playbooks and alert tuning during rollout.",
-    },
-    {
-      title: "QA engineer",
-      desc: "Validate checkpoints and regression-test liveness across clusters.",
-    },
-    {
-      title: "Tech writer",
-      desc: "Document runbooks and operator guides post-rollout.",
+      title: "Frontend dev (part-time, optional)",
+      desc: "Help translate the design system into tokens, review feasibility, and support the dev handoff.",
     },
   ],
   milestonesDetail: [
     {
-      title: "Pilot deploy",
-      desc: "Shadow checkpoints on 2 clusters; collect liveness/latency baselines.",
+      title: "M1 — UX Flows & Wireframes",
+      desc: "Desktop + mobile wireframes for main flows with one iteration cycle after review.",
     },
     {
-      title: "Global rollout",
-      desc: "Stage to remaining clusters with rollback gates on regressions.",
+      title: "M2 — Design System & Key Screens",
+      desc: "Tokens (colors/type/spacing/shadows) + key components, applied to proposal list/detail, creation flow, chambers, and Invision.",
     },
     {
-      title: "Handoff & docs",
-      desc: "Finalize dashboards, runbooks, and training for chamber ops.",
+      title: "M3 — Handoff Ready",
+      desc: "Polished Figma bundle + guidelines + token notes, plus optional walkthrough calls with devs.",
     },
   ],
   attachments: [
-    { title: "Rollout plan (PDF)", href: "#" },
-    { title: "Telemetry checklist (DOC)", href: "#" },
-    { title: "Budget breakdown (XLS)", href: "#" },
+    { title: "Portfolio: https://pixel-node.design", href: "#" },
+    { title: "UX audit + problem map (draft)", href: "#" },
+    { title: "Design system tokens (draft)", href: "#" },
   ],
 } as const;
