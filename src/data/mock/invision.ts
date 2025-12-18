@@ -51,18 +51,20 @@ export const invisionRiskSignals = [
 
 export const invisionChamberProposals = [
   {
-    title: "Protocol Upgrade Rollout",
-    effect: "Sequencer redundancy patch ready for council vote",
+    title: "Humanode EVM Dev Starter Kit & Testing Sandbox",
+    effect:
+      "Starter kit + sandbox to cut time-to-first-dApp to under 30 minutes",
     sponsors: "Protocol Guard · Mesh Vanguard",
   },
   {
-    title: "Treasury Split Adjustment",
-    effect: "Rebalance civic vs operations disbursements",
-    sponsors: "Arcadian Treasury · Civic Union",
+    title: "Voluntary Governor Commitment Staking",
+    effect:
+      "Optional commitment staking with opt-in self-slashing (no voting power impact)",
+    sponsors: "Civic Union · Governance Commons",
   },
   {
-    title: "Formation Tooling Bundle",
-    effect: "Approve guild ops stack for logistics squads",
-    sponsors: "Formation League · Guardian Circle",
+    title: "Biometric Account Recovery & Key Rotation Pallet",
+    effect: "Key rotation + recovery via biometric identity (audited pallet)",
+    sponsors: "Protocol Guard · Guardian Circle",
   },
 ] as const;

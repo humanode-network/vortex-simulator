@@ -181,11 +181,7 @@ const ProposalPP: React.FC = () => {
           <CardTitle>Summary</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-muted">
-          <p>
-            Introduce redundant biometric sequencers to reduce failover time and
-            enable double commits across epochs. Pool stage is collecting quorum
-            of attention before moving to a chamber vote.
-          </p>
+          <p>{proposal.summary}</p>
           <div className="grid gap-3 text-sm text-text sm:grid-cols-2 lg:grid-cols-4">
             {[
               { label: "Budget ask", value: proposal.budget },
@@ -199,7 +195,7 @@ const ProposalPP: React.FC = () => {
               },
               {
                 label: "Milestones",
-                value: `${proposal.milestones} planned · pilot + rollout`,
+                value: `${proposal.milestones} milestones planned`,
               },
             ].map((item) => (
               <StatTile
@@ -212,38 +208,18 @@ const ProposalPP: React.FC = () => {
           <div className="space-y-4 text-text">
             <TitledSurface title="Proposal overview">
               <p className="text-sm leading-relaxed text-muted">
-                Redundant sequencers across clusters with cross-epoch
-                checkpointing to keep biometric validation live during
-                failovers. Includes telemetry surfacing, alerting hooks, and
-                rollback gates tied to liveness SLOs. Targets neutral failover
-                without privileging any validator set.
+                {proposal.overview}
               </p>
             </TitledSurface>
             <TitledSurface title="Execution plan">
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
-                <li>
-                  Pilot (2 weeks): 2 clusters, shadow checkpoints, watch
-                  liveness/latency.
-                </li>
-                <li>
-                  Rollout (next 4 weeks): stage to remaining clusters with
-                  checkpoint cadence.
-                </li>
-                <li>
-                  Observability: dashboards, alerts on failover duration, revert
-                  on &gt;1% liveness regression for 2 epochs.
-                </li>
-                <li>
-                  Post-rollout: document runbooks and handoff to chamber ops.
-                </li>
+                {proposal.executionPlan.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </TitledSurface>
             <TitledSurface title="Budget & scope">
-              <p className="text-sm text-muted">
-                210k HMND covering hardware, telemetry integration, and rollout
-                validation. Team: {proposal.teamSlots} with milestone target of{" "}
-                {proposal.milestones}; includes QA, ops, and telemetry owners.
-              </p>
+              <p className="text-sm text-muted">{proposal.budgetScope}</p>
             </TitledSurface>
             <div className="grid gap-3 lg:grid-cols-2">
               <TitledSurface title="Team (locked)">
@@ -384,20 +360,13 @@ const ProposalPP: React.FC = () => {
           <CardTitle>Invision insight</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-text">
+          <p className="text-sm font-semibold text-text">
+            Role: {proposal.invisionInsight.role}
+          </p>
           <ul className="list-disc space-y-2 pl-5 text-muted">
-            <li>
-              Addresses liveness bottlenecks by adding redundant biometric
-              sequencers and cross-epoch checkpoints.
-            </li>
-            <li>
-              Focuses on validator neutrality: rollout reduces single-operator
-              dependence in failover events.
-            </li>
-            <li>alongside hardware budget.</li>
-            <li>
-              Risk note: requires chamber coordination for staged deployment and
-              rollback on adverse metrics.
-            </li>
+            {proposal.invisionInsight.bullets.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </CardContent>
       </Card>

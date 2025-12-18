@@ -40,37 +40,26 @@ export const proposalStageOptions: { value: ProposalStage; label: string }[] = [
 
 export const chamberProposals: ChamberProposal[] = [
   {
-    id: "sequencer-upgrade",
-    title: "Sequencer redundancy rollout",
-    meta: "Legate · Protocol Engineering",
+    id: "evm-dev-starter-kit",
+    title: "Humanode EVM Dev Starter Kit & Testing Sandbox",
+    meta: "Legate · Protocol chamber",
     summary:
-      "Enable redundant biometric sequencers to lower failover time and unlock epoch double commits.",
-    lead: "JohnDoe",
-    nextStep: "Awaiting quorum scheduling",
-    timing: "Scheduled · 02d 14h",
-    stage: "upcoming",
-  },
-  {
-    id: "vm-benchmarks",
-    title: "VM verifier benchmarks",
-    meta: "Consul · Protocol Engineering",
-    summary:
-      "Establish baseline performance telemetry for new WASM verifier prior to production slot.",
-    lead: "Victor",
-    nextStep: "Vote closes in",
-    timing: "Live · 05h 42m",
+      "Starter kit + sandbox so developers can deploy EVM dApps on Humanode in under 30 minutes.",
+    lead: "Jonas",
+    nextStep: "Formation · Milestone 1 in progress",
+    timing: "Live · Week 3/12",
     stage: "live",
   },
   {
-    id: "formation-slot-requests",
-    title: "Formation slot requests",
-    meta: "Legate · Formation Logistics",
+    id: "voluntary-commitment-staking",
+    title: "Voluntary Governor Commitment Staking",
+    meta: "Consul · Governance chamber",
     summary:
-      "Allocate three additional slot pools for biometrics research squads.",
-    lead: "Sesh",
-    nextStep: "Archived outcome",
-    timing: "Ended · Passed",
-    stage: "ended",
+      "Optional commitment staking + opt-in self-slashing without changing governance access or voting power.",
+    lead: "Mira",
+    nextStep: "Chamber vote",
+    timing: "Live · 3d 12h",
+    stage: "live",
   },
 ];
 
@@ -86,42 +75,36 @@ export const chamberGovernors: Governor[] = [
 export const chamberThreads: Thread[] = [
   {
     id: "thread-1",
-    title: "Sequencer redundancy rollout",
-    author: "JohnDoe",
-    replies: 4,
+    title: "EVM Dev Starter Kit — scope & milestone review",
+    author: "Jonas",
+    replies: 7,
     updated: "1h ago",
   },
   {
     id: "thread-2",
-    title: "VM verifier benchmarks",
-    author: "Victor",
-    replies: 11,
+    title: "Commitment staking — UX + slashing conditions",
+    author: "Mira",
+    replies: 12,
     updated: "3h ago",
-  },
-  {
-    id: "thread-3",
-    title: "Formation slot requests",
-    author: "Sesh",
-    replies: 6,
-    updated: "6h ago",
   },
 ];
 
 export const chamberChatLog: ChatMessage[] = [
   {
     id: "chat-1",
-    author: "JohnDoe",
-    message: "Milestone 2 patch deployed, please verify.",
+    author: "Jonas",
+    message: "SDK API surface draft is ready — looking for review on naming.",
   },
   {
     id: "chat-2",
-    author: "Victor",
-    message: "Treasury hook live, watching KPIs.",
+    author: "Mira",
+    message: "Added notes on voluntary vs mandatory stake framing for the UI.",
   },
   {
     id: "chat-3",
-    author: "Sesh",
-    message: "Need 2 reviewers for the new biometrics spec.",
+    author: "Jonas",
+    message:
+      "Sandbox + faucet flow: what’s the simplest onboarding UX we want?",
   },
 ];
 

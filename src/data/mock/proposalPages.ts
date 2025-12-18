@@ -1,3 +1,8 @@
+export type InvisionInsight = {
+  role: string;
+  bullets: string[];
+};
+
 export type PoolProposalPage = {
   title: string;
   proposer: string;
@@ -20,6 +25,11 @@ export type PoolProposalPage = {
   teamLocked: { name: string; role: string }[];
   openSlotNeeds: { title: string; desc: string }[];
   milestonesDetail: { title: string; desc: string }[];
+  summary: string;
+  overview: string;
+  executionPlan: string[];
+  budgetScope: string;
+  invisionInsight: InvisionInsight;
 };
 
 export type ChamberProposalPage = {
@@ -36,6 +46,11 @@ export type ChamberProposalPage = {
   engagedGovernors: number;
   activeGovernors: number;
   attachments: { id: string; title: string }[];
+  summary: string;
+  overview: string;
+  executionPlan: string[];
+  budgetScope: string;
+  invisionInsight: InvisionInsight;
 };
 
 export type FormationProposalPage = {
@@ -55,174 +70,655 @@ export type FormationProposalPage = {
   openSlots: { title: string; desc: string }[];
   milestonesDetail: { title: string; desc: string }[];
   attachments: { id: string; title: string }[];
+  summary: string;
+  overview: string;
+  executionPlan: string[];
+  budgetScope: string;
+  invisionInsight: InvisionInsight;
 };
 
 const poolProposals: Record<string, PoolProposalPage> = {
-  "sequencer-upgrade": {
-    title: "Sequencer redundancy rollout",
-    proposer: "John Doe",
-    proposerId: "john-doe",
-    chamber: "Protocol chamber",
-    focus: "Liveness & validators",
-    tier: "Legate",
-    budget: "210k HMND",
+  "humanode-dreamscapes-visual-lore": {
+    title: "Humanode Dreamscapes: Visual Lore Series",
+    proposer: "void-artist",
+    proposerId: "void-artist",
+    chamber: "Design chamber",
+    focus: "Visual lore & culture",
+    tier: "Ecclesiast",
+    budget: "9k HMND",
     cooldown: "Withdraw cooldown: 12h",
-    formationEligible: true,
-    teamSlots: "3 / 6",
-    milestones: "2",
+    formationEligible: false,
+    teamSlots: "1 / 1",
+    milestones: "3",
     upvotes: 18,
-    downvotes: 4,
-    attentionQuorum: 0.22,
+    downvotes: 6,
+    attentionQuorum: 0.2,
     activeGovernors: 100,
     upvoteFloor: 10,
     rules: [
-      "22% attention from active governors required.",
-      "At least 10% upvotes to move to chamber.",
+      "20% attention from active governors required.",
+      "At least 10% upvotes to move to chamber vote.",
+      "Deliverables must be high-res and usable across formats (print + social crops).",
+    ],
+    attachments: [
+      { id: "portfolio", title: "Portfolio: https://…/void-artist" },
+    ],
+    teamLocked: [{ name: "void-artist", role: "Visual artist & art director" }],
+    openSlotNeeds: [],
+    milestonesDetail: [
+      {
+        title: "M1 — Concepts & Sketches",
+        desc: "Concept sheet + roughs for 8–10 pieces, with short titles and one-sentence intent per artwork.",
+      },
+      {
+        title: "M2 — First Batch of Finals",
+        desc: "4–6 finished high-res artworks delivered, plus social crops and light feedback iteration.",
+      },
+      {
+        title: "M3 — Full Set & Asset Pack",
+        desc: "Complete 8–10 artwork set delivered with an asset pack and simple usage notes.",
+      },
+    ],
+    summary:
+      "Commission 8–10 strange, beautiful artworks that translate Humanode/Vortex ideas into visual lore—culture fertilizer, not explainers.",
+    overview:
+      "Humanode visuals are often product screenshots or generic graphics. Dreamscapes creates a coherent aesthetic world: symbolic pieces (Vortex engine room, Tier Decay, Proof of Biometric Uniqueness) usable for posters, banners, and community identity.",
+    executionPlan: [
+      "Week 0: brief alignment + moodboard and 3–4 style probes to lock direction.",
+      "Weeks 1–2: concepts and roughs for all pieces; pick the final list and priorities.",
+      "Weeks 3–4: finish 4–6 artworks; export social crops; incorporate light feedback.",
+      "Week 5: finish the full set and deliver the asset pack + usage notes.",
+    ],
+    budgetScope:
+      "Total ask: 9,000 HMND (2k concept/art direction, 6k creation, 1k exports/docs). Out of scope: motion/video, UI/UX work, and paid campaigns.",
+    invisionInsight: {
+      role: "Visual Artist / Culture",
+      bullets: [
+        "Proposals: 1 total · 1 approved (community-funded experiment)",
+        "Milestones: 2 / 2 completed · on time",
+        "Delegations: 0.3% active voting power from 3 Humanodes",
+        "Confidence: Medium delivery risk · 4.4 / 5",
+      ],
+    },
+  },
+  "biometric-account-recovery": {
+    title: "Biometric Account Recovery & Key Rotation Pallet",
+    proposer: "Arman",
+    proposerId: "arman",
+    chamber: "Engineering chamber",
+    focus: "Account safety & identity UX",
+    tier: "Citizen",
+    budget: "34k HMND",
+    cooldown: "Withdraw cooldown: 12h",
+    formationEligible: true,
+    teamSlots: "1 / 2",
+    milestones: "3",
+    upvotes: 44,
+    downvotes: 7,
+    attentionQuorum: 0.2,
+    activeGovernors: 100,
+    upvoteFloor: 10,
+    rules: [
+      "20% attention from active governors required.",
+      "At least 10% upvotes to move to chamber vote.",
       "Delegated votes are ignored in the pool.",
     ],
     attachments: [
-      { id: "rollout-plan", title: "Rollout plan (PDF)" },
-      { id: "telemetry-checklist", title: "Telemetry checklist (DOC)" },
-      { id: "budget-breakdown", title: "Budget breakdown (XLS)" },
+      { id: "github", title: "GitHub: https://github.com/cto-node" },
+      { id: "security-notes", title: "Security invariants (draft)" },
+      { id: "audit-scope", title: "Audit scope & shortlist (draft)" },
     ],
-    teamLocked: [
-      { name: "John Doe", role: "Lead · Protocol" },
-      { name: "Raamara", role: "Ops & rollout" },
-      { name: "Nyx", role: "Telemetry" },
-    ],
+    teamLocked: [{ name: "Arman", role: "Architect & reviewer" }],
     openSlotNeeds: [
       {
-        title: "SRE / Reliability",
-        desc: "Own failover playbooks and alert tuning during rollout.",
-      },
-      {
-        title: "QA engineer",
-        desc: "Validate checkpoints and regression-test liveness across clusters.",
-      },
-      {
-        title: "Tech writer",
-        desc: "Document runbooks and operator guides post-rollout.",
+        title: "Rust / Substrate engineer",
+        desc: "Implement pallet + tests; integrate with identity registry; respond to audit findings.",
       },
     ],
     milestonesDetail: [
       {
-        title: "Pilot deploy",
-        desc: "Shadow checkpoints on 2 clusters; collect liveness/latency baselines.",
+        title: "M1 — Pallet implemented & tested",
+        desc: "Core extrinsics (link/rotate/retire) + tests + integration hooks with identity registry.",
       },
       {
-        title: "Global rollout",
-        desc: "Stage to remaining clusters with rollback gates on regressions.",
+        title: "M2 — Audit completed",
+        desc: "External audit focused on takeover/replay paths; fixes applied; report published.",
       },
       {
-        title: "Handoff & docs",
-        desc: "Finalize dashboards, runbooks, and training for chamber ops.",
+        title: "M3 — Mainnet activation & docs",
+        desc: "Testnet rollout, staged tests, runtime upgrade scheduled, docs published on docs.humanode.io.",
       },
     ],
+    summary:
+      "Implement a small, audited Substrate pallet that lets a verified human rotate keys or recover access via Humanode biometric identity, under strict rules.",
+    overview:
+      "If a user loses or compromises their key today, their account is effectively dead. Humanode can confirm the same human via biometric uniqueness, so keys should be replaceable without breaking “one human” semantics.",
+    executionPlan: [
+      "Week 0: confirm engineer and auditor; lock invariants and integration boundaries.",
+      "Weeks 1–3: implement pallet + tests; design HumanID ↔ account mapping and cooldowns.",
+      "Weeks 4–6: external audit + fixes; publish report and merge final code.",
+      "Weeks 7–8: testnet → mainnet runtime upgrade; publish user/dev docs and link from frontends.",
+    ],
+    budgetScope:
+      "Total ask: 34,000 HMND for ~8 weeks (6k architect/review, 18k engineer, 10k external audit). Out of scope: changes to biometric verification flows, advanced social recovery, or broad wallet UI redesign.",
+    invisionInsight: {
+      role: "CTO / Protocol Architect",
+      bullets: [
+        "Proposals: 5 total · 5 approved · 0 abandoned",
+        "Milestones: 12 / 12 completed · avg delay +2 days",
+        "Budget: 210k HMND requested · 15k HMND returned",
+        "Governance: active in 100% of protocol-related proposals",
+        "Delegations: 4.3% active voting power from 31 Humanodes",
+        "Confidence: Very low delivery risk · 4.9 / 5",
+      ],
+    },
+  },
+  "humanode-ai-video-shorts": {
+    title: "Humanode AI Video Series: 3 Viral-Quality Shorts for Mass Reach",
+    proposer: "Artyom",
+    proposerId: "artyom",
+    chamber: "Design chamber",
+    focus: "High-quality shorts for mass reach",
+    tier: "Ecclesiast",
+    budget: "15k HMND",
+    cooldown: "Withdraw cooldown: 12h",
+    formationEligible: false,
+    teamSlots: "1 / 1",
+    milestones: "3",
+    upvotes: 22,
+    downvotes: 8,
+    attentionQuorum: 0.2,
+    activeGovernors: 100,
+    upvoteFloor: 10,
+    rules: [
+      "20% attention from active governors required.",
+      "At least 10% upvotes to move to chamber vote.",
+      "Deliverables include editable project files and an asset pack for reuse.",
+    ],
+    attachments: [
+      { id: "portfolio", title: "Portfolio: https://…/visual-node" },
+      { id: "tools", title: "Tooling list + licensing plan (draft)" },
+      { id: "style", title: "Style test snippets (draft)" },
+    ],
+    teamLocked: [{ name: "Artyom", role: "AI motion designer & producer" }],
+    openSlotNeeds: [],
+    milestonesDetail: [
+      {
+        title: "M1 — Scripts & Style Tests",
+        desc: "Scripts, storyboards, and AI style test snippets for all 3 videos delivered.",
+      },
+      {
+        title: "M2 — Video 1 & 2 Final",
+        desc: "Two final videos delivered in vertical + horizontal formats, with source project files.",
+      },
+      {
+        title: "M3 — Video 3 + Asset Pack",
+        desc: "Third video delivered plus asset pack and short usage guide for the ecosystem.",
+      },
+    ],
+    summary:
+      "Produce three premium-quality AI-powered short videos explaining Humanode and Vortex, optimized for X/TikTok/Shorts, with project files and an asset pack for reuse.",
+    overview:
+      "We need visuals one level above typical AI spam. This proposal funds a cohesive 3-video series with strong hooks, consistent style, proper sound design, and reusable assets for official and community channels.",
+    executionPlan: [
+      "Week 0: lock brief + messaging; purchase/upgrade required AI tooling and SFX/music libraries.",
+      "Weeks 1–2: scripts + storyboards + style tests for all 3 videos.",
+      "Weeks 3–4: produce Video 1 and Video 2; iterate once on feedback; deliver exports + project files.",
+      "Weeks 5–6: produce Video 3; compile asset pack + templates; deliver usage guide + handoff.",
+    ],
+    budgetScope:
+      "Total ask: 15,000 HMND (3k tools/assets, 10k production, 2k VO/freelance contingency). Out of scope: long-term content operations beyond the 3-video series.",
+    invisionInsight: {
+      role: "Visual & Content Creator",
+      bullets: [
+        "Track record: Humanode AI Video Contest winner",
+        "Focus: high-quality, emotionally engaging visual content",
+        "Confidence: Low delivery risk · 4.7 / 5",
+      ],
+    },
+  },
+  "ai-video-launch-distribution-sprint": {
+    title:
+      "AI Video Launch & Distribution Sprint: Turn Visual Assets into Reach",
+    proposer: "clip-captain",
+    proposerId: "clip-captain",
+    chamber: "Marketing chamber",
+    focus: "Distribution execution + playbook",
+    tier: "Ecclesiast",
+    budget: "18k HMND",
+    cooldown: "Withdraw cooldown: 12h",
+    formationEligible: true,
+    teamSlots: "1 / 3",
+    milestones: "3",
+    upvotes: 21,
+    downvotes: 7,
+    attentionQuorum: 0.2,
+    activeGovernors: 100,
+    upvoteFloor: 10,
+    rules: [
+      "20% attention from active governors required.",
+      "At least 10% upvotes to move to chamber vote.",
+      "No paid ads in v1; focus on coordinated organic distribution and experiments.",
+    ],
+    attachments: [
+      { id: "github", title: "GitHub: https://github.com/clip-captain" },
+    ],
+    teamLocked: [{ name: "clip-captain", role: "Campaign lead & strategist" }],
+    openSlotNeeds: [
+      {
+        title: "shorts-wizard",
+        desc: "Editor / repurposer for vertical clips, subtitles, hooks, and variants.",
+      },
+      {
+        title: "comms-anchor",
+        desc: "Community + posting ops (scheduling, replies, coordination with core comms).",
+      },
+    ],
+    milestonesDetail: [
+      {
+        title: "M1 — Content Kits & Calendar",
+        desc: "Content kits (clips, thumbnails, captions, CTAs) + 6-week posting calendar delivered for up to 3 core videos.",
+      },
+      {
+        title: "M2 — Campaign Live",
+        desc: "Multi-channel distribution executed with experiments and weekly tuning updates.",
+      },
+      {
+        title: "M3 — Report & Playbook",
+        desc: "Campaign results summarized and a reusable AI video launch playbook produced.",
+      },
+    ],
+    summary:
+      "A dedicated 6-week pod to distribute Humanode AI videos across channels, reuse assets aggressively, run hook/thumbnail/CTA experiments, and ship a repeatable launch playbook.",
+    overview:
+      "The failure mode is “publish once, then forget”. This proposal funds hands-on distribution: content kits, calendars, coordinated posting, community engagement, and measurement so videos turn into followers, community members, and potential Vortex participants.",
+    executionPlan: [
+      "Week 0: recruit team; sync with core comms on access, timing, and approval process; inventory assets.",
+      "Weeks 1–2: produce kits and calendar; align messaging and CTAs per channel.",
+      "Weeks 3–5: run the campaign; iterate based on performance; publish weekly mini-updates.",
+      "Week 6: wrap-up report + playbook for future launches.",
+    ],
+    budgetScope:
+      "Total ask: 18,000 HMND (7k lead, 6k editor, 5k comms ops). Out of scope: producing new videos, paid ads, and influencer deals.",
+    invisionInsight: {
+      role: "Content & Growth Operations",
+      bullets: [
+        "Proposals: 2 total · 2 approved",
+        "Milestones: 4 / 4 completed · avg delay +2 days",
+        "Budget: 22k HMND requested · 2k HMND returned",
+        "Delegations: 1.0% active voting power from 8 Humanodes",
+        "Confidence: Low delivery risk · 4.6 / 5",
+      ],
+    },
+  },
+  "vortex-field-experiments-s1": {
+    title: "Vortex Field Experiments: Season 1 (Find the True Believers)",
+    proposer: "Luka",
+    proposerId: "luka",
+    chamber: "Marketing chamber",
+    focus: "High-signal onboarding",
+    tier: "Ecclesiast",
+    budget: "24k HMND",
+    cooldown: "Withdraw cooldown: 12h",
+    formationEligible: true,
+    teamSlots: "1 / 3",
+    milestones: "3",
+    upvotes: 28,
+    downvotes: 9,
+    attentionQuorum: 0.2,
+    activeGovernors: 100,
+    upvoteFloor: 10,
+    rules: [
+      "20% attention from active governors required.",
+      "At least 10% upvotes to move to chamber vote.",
+      "No paid ads / airdrop farming incentives in this proposal scope.",
+    ],
+    attachments: [
+      { id: "github", title: "GitHub: https://github.com/signal-hacker" },
+      { id: "hub", title: "Season 1 hub page (draft)" },
+      { id: "briefs", title: "Experiment briefs & KPI targets (draft)" },
+    ],
+    teamLocked: [{ name: "Luka", role: "Campaign architect / growth" }],
+    openSlotNeeds: [
+      {
+        title: "Content & design generalist",
+        desc: "Threads, visuals, simple edits, and recaps for each experiment.",
+      },
+      {
+        title: "Community producer / mod",
+        desc: "Host clinics, run calls, onboard newcomers, and keep discussions healthy.",
+      },
+    ],
+    milestonesDetail: [
+      {
+        title: "M1 — Governance Puzzle Drop",
+        desc: "3–5 puzzles + debrief calls + recap thread + list of high-signal participants.",
+      },
+      {
+        title: "M2 — Vortex Problem Clinics",
+        desc: "3 live clinics + recordings/summaries + follow-up write-ups + recurring participant list.",
+      },
+      {
+        title: "M3 — Micro-Bounty Lab & Debrief",
+        desc: "10–15 thinking bounties + rewards + Season 1 report + onboarding map into Vortex.",
+      },
+    ],
+    summary:
+      "Run a 6-week series of small, weird, highly interactive experiments (puzzles, clinics, micro-bounties) to attract high-signal governance contributors into Vortex.",
+    overview:
+      "Instead of ads or low-signal campaigns, Season 1 uses interactive governance experiments that require thinking and creation, filtering out farmers and pulling in true believers.",
+    executionPlan: [
+      "Week 0: finalize team, channels, and minimal hub page + visual kit.",
+      "Weeks 1–2: run Puzzle Drop, debrief calls, and publish recap + high-signal list.",
+      "Weeks 3–4: run three Problem Clinics with external guests; publish summaries/clips.",
+      "Weeks 5–6: run Micro-Bounty Lab, reward best submissions, publish Season 1 debrief.",
+    ],
+    budgetScope:
+      "Total ask: 24,000 HMND for ~6 weeks (9k architect, 7k content/design, 5k community producer, 3k prizes/ops). Out of scope: paid ad campaigns and KOL packages.",
+    invisionInsight: {
+      role: "Growth & Community Experiments",
+      bullets: [
+        "Proposals: 3 total · 3 approved · 0 abandoned",
+        "Milestones: 6 / 6 completed · avg delay +2 days",
+        "Budget: 60k HMND requested · 4k HMND returned",
+        "Governance: voted in 80% last year; comments on distribution & narrative",
+        "Delegations: 1.2% active voting power from 9 Humanodes",
+        "Confidence: Low delivery risk · 4.5 / 5",
+      ],
+    },
   },
 };
 
 const chamberProposals: Record<string, ChamberProposalPage> = {
-  "adaptive-fee": {
-    title: "Adaptive Fee Shaping",
-    proposer: "Victor",
-    proposerId: "Victor",
-    chamber: "Economics & Treasury",
-    budget: "210k HMND",
-    impact: "Medium",
-    timeLeft: "05h 15m",
-    votes: { yes: 34, no: 18, abstain: 3 },
+  "fixed-governor-stake-spam-slashing": {
+    title: "Fixed Governor Stake & Spam Slashing Rule for Vortex",
+    proposer: "Elena",
+    proposerId: "elena",
+    chamber: "Economics chamber",
+    budget: "18k HMND",
+    impact: "High",
+    timeLeft: "11h 05m",
+    votes: { yes: 24, no: 15, abstain: 2 },
     attentionQuorum: 0.33,
     passingRule: "≥66.6% + 1 yes within quorum",
-    engagedGovernors: 55,
+    engagedGovernors: 41,
     activeGovernors: 100,
     attachments: [
-      { id: "fee-split-design", title: "Fee split design (PDF)" },
-      { id: "telemetry-checklist", title: "Telemetry checklist (DOC)" },
+      { id: "policy", title: "Spam definition & governance process (draft)" },
+      { id: "params", title: "Parameter sheet: stake, slash curve, cooldowns" },
     ],
+    summary:
+      "Introduce a fixed HMND staking requirement for governors and a simple spam slashing curve, keeping 1 human = 1 vote while making spam economically costly.",
+    overview:
+      "Adds a single gate (fixed governor stake) and a slashing hook for repeated spam proposals. Voting power remains equal; stake only enforces eligibility and discipline.",
+    executionPlan: [
+      "Week 0–1: confirm Substrate engineer; align spam definition and parameters with Governance chamber.",
+      "Weeks 2–3: publish spec (stake size, slash curve, cooldowns, tagging process).",
+      "Weeks 4–6: runtime implementation + tests + testnet scenario runs.",
+      "Weeks 7–8: mainnet activation + minimal monitoring + public post-deploy note.",
+    ],
+    budgetScope:
+      "Total ask: 18,000 HMND for ~8 weeks (7k economic/policy, 11k Substrate engineer). Out of scope: L1 tokenomics changes, voting power changes, and extensive UI work.",
+    invisionInsight: {
+      role: "Governance & Economics",
+      bullets: [
+        "Proposals: 4 total · 3 approved · 0 abandoned",
+        "Milestones: 8 / 9 completed · avg delay +3 days · 0 slashing",
+        "Budget: 160k HMND requested · 7k HMND returned",
+        "Governance: voted in 95% last year · 24 economic comments",
+        "Delegations: 2.4% active voting power from 19 Humanodes",
+        "Confidence: Low delivery risk · 4.6 / 5",
+      ],
+    },
+  },
+  "tier-decay-v1": {
+    title: "Tier Decay v1: Nominee → Ecclesiast → Legate → Consul → Citizen",
+    proposer: "Maksim",
+    proposerId: "maksim",
+    chamber: "General chamber",
+    budget: "13k HMND",
+    impact: "Medium",
+    timeLeft: "2d 18h",
+    votes: { yes: 27, no: 9, abstain: 2 },
+    attentionQuorum: 0.33,
+    passingRule: "≥66.6% + 1 yes within quorum",
+    engagedGovernors: 38,
+    activeGovernors: 100,
+    attachments: [
+      { id: "params", title: "Decay thresholds + warnings table (draft)" },
+      { id: "shadow", title: "Shadow-mode report template (draft)" },
+    ],
+    summary:
+      "Automatic tier decay for long-term inactive governors with warnings and clear re-tiering, keeping proposition rights aligned with real participation.",
+    overview:
+      "Tier Decay steps down proposition rights over consecutive inactive eras (Citizen → Consul → Legate → Ecclesiast → Nominee → Inactive), while preserving 1 human = 1 vote.",
+    executionPlan: [
+      "Week 0: inspect active-governor data and era history; lock v1 parameters.",
+      "Weeks 1–2: publish policy spec and incorporate feedback.",
+      "Weeks 3–4: implement tracking and run shadow mode for a few eras.",
+      "Weeks 5–6: enable decay and ship basic UX: tier + status + warnings.",
+    ],
+    budgetScope:
+      "Total ask: 13,000 HMND (5k spec/design + 8k part-time backend/data engineer). Out of scope: runtime changes and advanced notification integrations.",
+    invisionInsight: {
+      role: "Governance systems designer",
+      bullets: [
+        "Focus: anti-ossification and aligning tiers with real activity",
+        "Confidence: Low delivery risk",
+      ],
+    },
+  },
+  "voluntary-commitment-staking": {
+    title:
+      "Voluntary Governor Commitment Staking (No Mandatory Stake, No Plutocracy)",
+    proposer: "Mira",
+    proposerId: "mira",
+    chamber: "Governance chamber",
+    budget: "16k HMND",
+    impact: "Medium",
+    timeLeft: "3d 12h",
+    votes: { yes: 44, no: 6, abstain: 2 },
+    attentionQuorum: 0.33,
+    passingRule: "≥66.6% + 1 yes within quorum",
+    engagedGovernors: 52,
+    activeGovernors: 100,
+    attachments: [
+      { id: "spec-v1", title: "Voluntary Commitment Staking Spec v1" },
+    ],
+    summary:
+      "Optional HMND commitment staking to signal discipline and opt into self-slashing, without changing governance access or voting power (1 human = 1 vote).",
+    overview:
+      "Introduce a voluntary “Commitment Stake” module: humans may stake any amount as a public signal and optionally attach self-slashing conditions tied to milestones or behavior, without gating governance or affecting voting power.",
+    executionPlan: [
+      "Week 0–1: confirm Substrate engineer, define constraints (optional, no voting-power impact).",
+      "Weeks 2–3: publish spec + UX notes (linking stake to proposal/milestone pledges).",
+      "Weeks 4–6: implement module + tests, deploy to testnet and run an internal trial.",
+      "Weeks 7–8: mainnet activation + guidelines, update insights to show stake + self-slash history.",
+    ],
+    budgetScope:
+      "Total ask: 16,000 HMND for ~8 weeks. Breakdown: 6k economic design/spec + 10k Substrate engineer. Out of scope: any mandatory stake requirements, voting power changes, or complex reputation scoring beyond simple display.",
+    invisionInsight: {
+      role: "Governance & Public Goods Economics",
+      bullets: [
+        "Proposals: 3 total · 3 approved · 0 abandoned",
+        "Milestones: 7 / 7 completed · avg delay +2 days · 0 slashing",
+        "Budget: 95k HMND requested · 5k HMND returned",
+        "Governance: voted in 90% last year · 20 comments on inclusivity/incentives",
+        "Delegations: 1.6% active voting power from 14 Humanodes",
+        "Confidence: Low delivery risk · 4.5 / 5",
+      ],
+    },
   },
 };
 
 const formationProposals: Record<string, FormationProposalPage> = {
-  "deterrence-sim-lab": {
-    title: "Deterrence Sim Lab",
-    chamber: "Research",
-    proposer: "Research Lab",
-    proposerId: "john-doe",
+  "evm-dev-starter-kit": {
+    title: "Humanode EVM Dev Starter Kit & Testing Sandbox",
+    chamber: "Protocol chamber",
+    proposer: "Jonas",
+    proposerId: "jonas",
     budget: "180k HMND",
     impact: "High",
-    timeLeft: "12d",
-    teamSlots: "3 / 6",
-    milestones: "2 / 3",
-    progress: "68%",
+    timeLeft: "12w",
+    teamSlots: "1 / 3",
+    milestones: "1 / 3",
+    progress: "24%",
     stageData: [
-      { title: "Budget allocated", description: "HMND", value: "180k" },
-      { title: "Team slots", description: "Taken / Total", value: "3 / 6" },
-      {
-        title: "Deployment progress",
-        description: "Reported completion",
-        value: "68%",
-      },
+      { title: "Budget allocated", description: "HMND", value: "18k / 180k" },
+      { title: "Team slots", description: "Taken / Total", value: "1 / 3" },
+      { title: "Milestones", description: "Completed / Total", value: "1 / 3" },
     ],
     stats: [
-      { label: "Lead chamber", value: "Research" },
-      { label: "Next check-in", value: "Epoch 186" },
+      { label: "Lead chamber", value: "Protocol chamber" },
+      { label: "Duration", value: "12 weeks" },
     ],
-    lockedTeam: [
-      { name: "John Doe", role: "Lead · Research" },
-      { name: "Nyx", role: "Telemetry & Ops" },
-      { name: "Raamara", role: "QA" },
-    ],
+    lockedTeam: [{ name: "Jonas", role: "Lead engineer" }],
     openSlots: [
       {
-        title: "SRE / Reliability",
-        desc: "Own rollout stability and failover drills.",
+        title: "EVM full-stack developer",
+        desc: "Example dApps, sandbox UI, local setup + integration with Humanode EVM endpoints.",
       },
       {
-        title: "QA engineer",
-        desc: "Validate milestones and regression suite.",
-      },
-      {
-        title: "Tech writer",
-        desc: "Document runbooks and Formation reports.",
+        title: "Technical writer / DevRel",
+        desc: "Docs + tutorials, quickstarts, walkthrough videos, and early builder feedback loop.",
       },
     ],
     milestonesDetail: [
       {
-        title: "Pilot deploy",
-        desc: "Shadow checkpoints on 2 clusters; collect liveness baselines.",
+        title: "M1 — SDK & Template Ready",
+        desc: "TypeScript SDK + base dApp template implemented, tested, and released (v0.1.0).",
       },
       {
-        title: "Global rollout",
-        desc: "Stage to remaining clusters with rollback gates on regressions.",
+        title: "M2 — Sandbox Online",
+        desc: "Public testnet sandbox + faucet + one-command local dev setup and “Getting started” docs.",
       },
       {
-        title: "Handoff & docs",
-        desc: "Finalize dashboards, runbooks, and training for chamber ops.",
+        title: "M3 — Docs & Beta Launch",
+        desc: "Full docs + short walkthrough videos; closed beta with 3–5 teams and critical fixes merged.",
       },
     ],
     attachments: [
-      { id: "simulation-playbook", title: "Simulation playbook (PDF)" },
-      { id: "milestone-breakdown", title: "Milestone breakdown (XLS)" },
+      { id: "tech-spec", title: "Technical spec (Notion / gist)" },
+      {
+        id: "repo-draft",
+        title: "Draft repo: humanode-network/evm-dev-starter-kit",
+      },
+      { id: "docs-outline", title: "Rough docs outline" },
     ],
+    summary:
+      "Build an EVM dev starter kit + public testing sandbox to reduce friction for new Humanode builders.",
+    overview:
+      "Deliver a TypeScript SDK, templates, sandbox + faucet, and full docs so developers can deploy dApps on Humanode in under 30 minutes.",
+    executionPlan: [
+      "Week 0–1: finalize requirements, recruit remaining roles, set up repos and CI skeleton.",
+      "Weeks 2–4: ship SDK + base template (v0.1.0) with minimal tests and quickstart.",
+      "Weeks 5–8: deploy public sandbox + faucet, ship one-command local dev setup.",
+      "Weeks 9–12: publish full docs + videos, run a beta with 3–5 teams, integrate feedback.",
+    ],
+    budgetScope:
+      "Total ask: 180,000 HMND for 12 weeks, unlocked by milestones (plus small upfront Formation tranche).",
+    invisionInsight: {
+      role: "Core Builder – Engineering",
+      bullets: [
+        "Proposals: 6 total · 5 approved · 0 abandoned",
+        "Milestones: 13 / 14 completed · avg delay +4 days · 0 slashing",
+        "Confidence: Low delivery risk · 4.7 / 5",
+      ],
+    },
+  },
+  "mev-safe-dex-v1-launch-sprint": {
+    title: "Humanode MEV-Safe DEX v1 + Launch Sprint",
+    chamber: "Engineering chamber",
+    proposer: "defi-synth",
+    proposerId: "defi-synth",
+    budget: "245k HMND",
+    impact: "High",
+    timeLeft: "16w",
+    teamSlots: "3 / 5",
+    milestones: "2 / 4",
+    progress: "46%",
+    stageData: [
+      { title: "Budget allocated", description: "HMND", value: "98k / 245k" },
+      { title: "Team slots", description: "Filled / Total", value: "3 / 5" },
+      { title: "Milestones", description: "Completed / Total", value: "2 / 4" },
+    ],
+    stats: [
+      { label: "Lead chamber", value: "Engineering chamber" },
+      { label: "Audit", value: "In progress" },
+    ],
+    lockedTeam: [
+      { name: "defi-synth", role: "Protocol lead" },
+      { name: "mev-ops", role: "MEV / relayer engineer (recruiting)" },
+      { name: "frontend-loop", role: "Frontend dApp dev (recruiting)" },
+    ],
+    openSlots: [
+      {
+        title: "liq-pilot",
+        desc: "Liquidity onboarding, pool setup, and partner coordination (part-time).",
+      },
+      {
+        title: "launch-captain",
+        desc: "Marketing lead for distribution + launch execution + reporting.",
+      },
+    ],
+    milestonesDetail: [
+      {
+        title: "M1 — Contracts MVP",
+        desc: "Spec + tested contracts + fee-to-nodes module; Biostaker/getHMND compatibility at contract layer.",
+      },
+      {
+        title: "M2 — Protected swaps + UI",
+        desc: "Protected swap path on testnet + frontend alpha + bridge panel.",
+      },
+      {
+        title: "M3 — Audit + Mainnet",
+        desc: "External audit, fixes, and mainnet deployment with core pools.",
+      },
+      {
+        title: "M4 — Launch sprint",
+        desc: "Liquidity onboarding + coordinated launch sprint + playbook + first-month summary.",
+      },
+    ],
+    attachments: [
+      { id: "github", title: "GitHub: https://github.com/defi-synth" },
+      { id: "audit", title: "Audit vendor scope (draft)" },
+      { id: "launch", title: "Launch kit outline (draft)" },
+    ],
+    summary:
+      "Ship a Humanode-native DEX with protected swaps and fee-to-nodes routing, then run a coordinated launch sprint to onboard liquidity and users.",
+    overview:
+      "A DEX launch needs liquidity, trust, and repeated distribution. This project covers contracts + MEV protection + frontend + audit, plus a launch pod to drive adoption.",
+    executionPlan: [
+      "Weeks 1–4: contracts MVP + tests/fuzzing.",
+      "Weeks 5–8: protected swaps on testnet + frontend alpha.",
+      "Weeks 9–12: audit + fixes + mainnet deploy.",
+      "Weeks 13–16: liquidity onboarding + marketing launch sprint + reporting.",
+    ],
+    budgetScope:
+      "Total ask: 245,000 HMND including audit and launch pod. Out of scope: paid influencer packages and any unparameterized tokenomics changes.",
+    invisionInsight: {
+      role: "DeFi engineer (shipping + adoption)",
+      bullets: [
+        "Focus: AMMs/routers/incentives and production launches",
+        "Confidence: Low delivery risk (subject to audit)",
+      ],
+    },
   },
 };
 
 export function getPoolProposalPage(id?: string) {
-  return (
-    poolProposals[id ?? "sequencer-upgrade"] ??
-    poolProposals["sequencer-upgrade"]
-  );
+  const first = Object.values(poolProposals)[0];
+  return (id ? poolProposals[id] : undefined) ?? first;
 }
 
 export function getChamberProposalPage(id?: string) {
   return (
-    chamberProposals[id ?? "adaptive-fee"] ?? chamberProposals["adaptive-fee"]
+    (id ? chamberProposals[id] : undefined) ??
+    chamberProposals["voluntary-commitment-staking"]
   );
 }
 
 export function getFormationProposalPage(id?: string) {
-  return (
-    formationProposals[id ?? "deterrence-sim-lab"] ??
-    formationProposals["deterrence-sim-lab"]
-  );
+  const first = Object.values(formationProposals)[0];
+  return (id ? formationProposals[id] : undefined) ?? first;
 }

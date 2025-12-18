@@ -112,11 +112,7 @@ const ProposalDraft: React.FC = () => {
               className="space-y-2 px-3 py-3"
             >
               <p className="text-sm leading-relaxed text-muted">
-                Redundant sequencers across clusters with cross-epoch
-                checkpointing to keep biometric validation live during
-                failovers. Includes telemetry surfacing, alerting hooks, and
-                rollback gates tied to liveness SLOs. Targets neutral failover
-                without privileging any validator set.
+                {draftDetails.rationale}
               </p>
             </TitledSurface>
             <TitledSurface
@@ -127,21 +123,9 @@ const ProposalDraft: React.FC = () => {
               className="space-y-2 px-3 py-3"
             >
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
-                <li>
-                  Pilot (2 weeks): 2 clusters, shadow checkpoints, watch
-                  liveness/latency.
-                </li>
-                <li>
-                  Rollout (next 4 weeks): stage to remaining clusters with
-                  checkpoint cadence.
-                </li>
-                <li>
-                  Observability: dashboards, alerts on failover duration, revert
-                  on &gt;1% liveness regression for 2 epochs.
-                </li>
-                <li>
-                  Post-rollout: document runbooks and handoff to chamber ops.
-                </li>
+                {draftDetails.checklist.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </TitledSurface>
             <TitledSurface
@@ -151,12 +135,7 @@ const ProposalDraft: React.FC = () => {
               title="Budget &amp; scope"
               className="space-y-2 px-3 py-3"
             >
-              <p className="text-sm text-muted">
-                210k HMND covering hardware, telemetry integration, and rollout
-                validation. Team: {draftDetails.teamSlots} with milestone target
-                of {draftDetails.milestones.length}; includes QA, ops, and
-                telemetry owners.
-              </p>
+              <p className="text-sm text-muted">{draftDetails.budgetScope}</p>
             </TitledSurface>
           </Surface>
 
@@ -234,16 +213,13 @@ const ProposalDraft: React.FC = () => {
           <CardTitle>Invision insight</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-text">
+          <p className="text-sm font-semibold text-muted">
+            {draftDetails.invisionInsight.role}
+          </p>
           <ul className="list-disc space-y-2 pl-5 text-muted">
-            <li>
-              Addresses liveness bottlenecks by adding redundant biometric
-              sequencers and cross-epoch checkpoints.
-            </li>
-            <li>
-              Focuses on validator neutrality: rollout reduces single-operator
-              dependence in failover events.
-            </li>
-            <li>Risk note: requires staged deployment with rollback gates.</li>
+            {draftDetails.invisionInsight.bullets.map((bullet) => (
+              <li key={bullet}>{bullet}</li>
+            ))}
           </ul>
         </CardContent>
       </Card>
