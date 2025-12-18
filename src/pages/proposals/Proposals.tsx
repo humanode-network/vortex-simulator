@@ -66,6 +66,16 @@ const Proposals: React.FC = () => {
       });
   }, [search, stageFilter, chamberFilter, sortBy]);
 
+  const chamberOptions = useMemo(() => {
+    const unique = Array.from(new Set(proposalData.map((p) => p.chamber))).sort(
+      (a, b) => a.localeCompare(b),
+    );
+    return [
+      { value: "All chambers", label: "All chambers" },
+      ...unique.map((chamber) => ({ value: chamber, label: chamber })),
+    ];
+  }, []);
+
   const toggleProposal = (id: string) => {
     setExpanded((current) => (current === id ? null : id));
   };
@@ -110,14 +120,7 @@ const Proposals: React.FC = () => {
           {
             key: "chamberFilter",
             label: "Chamber",
-            options: [
-              { value: "All chambers", label: "All chambers" },
-              { value: "Protocol Engineering", label: "Protocol Engineering" },
-              { value: "Economics & Treasury", label: "Economics & Treasury" },
-              { value: "Security & Infra", label: "Security & Infra" },
-              { value: "Constitutional", label: "Constitutional" },
-              { value: "Social Impact", label: "Social Impact" },
-            ],
+            options: chamberOptions,
           },
           {
             key: "sortBy",

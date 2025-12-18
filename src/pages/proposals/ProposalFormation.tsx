@@ -126,11 +126,7 @@ const ProposalFormation: React.FC = () => {
           <CardTitle>Summary</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-muted">
-          <p>
-            Simulation track for deterrence scenarios; focuses on reliability
-            under adversarial conditions. Formation build with staged milestones
-            and open roles.
-          </p>
+          <p>{project.summary}</p>
           <div className="grid gap-2 text-sm text-text sm:grid-cols-2 lg:grid-cols-4">
             {[
               { label: "Budget ask", value: project.budget },
@@ -149,32 +145,18 @@ const ProposalFormation: React.FC = () => {
           <div className="space-y-4 text-text">
             <TitledSurface title="Project overview">
               <p className="text-sm leading-relaxed text-muted">
-                Simulation and tooling for deterrence drills; centers on
-                redundancy and rollback gates. Ties into Research chamber
-                oversight and Formation delivery.
+                {project.overview}
               </p>
             </TitledSurface>
             <TitledSurface title="Execution plan">
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
-                <li>
-                  Pilot milestones on two clusters; capture baselines and
-                  regressions.
-                </li>
-                <li>
-                  Roll out to remaining clusters with staged checkpoints and
-                  rollback triggers.
-                </li>
-                <li>
-                  Document and hand off runbooks to chamber ops and Formation
-                  PM.
-                </li>
+                {project.executionPlan.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </TitledSurface>
             <TitledSurface title="Budget & scope">
-              <p className="text-sm text-muted">
-                180k HMND covering simulation infra, telemetry, and
-                documentation. Includes QA, ops, and writer roles.
-              </p>
+              <p className="text-sm text-muted">{project.budgetScope}</p>
             </TitledSurface>
             <AttachmentList items={project.attachments} />
           </div>

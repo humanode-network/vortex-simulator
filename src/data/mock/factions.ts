@@ -25,7 +25,7 @@ export const factions: Faction[] = [
       "Tighten liveness guarantees for sequencers and biometric checkpoints.",
     ],
     initiatives: [
-      "Sequencer redundancy rollout",
+      "Humanode EVM Dev Starter Kit & Testing Sandbox",
       "Validator neutrality charter",
       "Cross-shard liveness probes",
     ],
@@ -119,7 +119,7 @@ export const factions: Faction[] = [
       "Prototype privacy-preserving biometric circuits.",
     ],
     initiatives: [
-      "Deterrence sim lab",
+      "Commitment staking slashing conditions review",
       "Privacy circuit sprint",
       "Threat model atlas",
     ],

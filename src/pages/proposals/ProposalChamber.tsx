@@ -7,7 +7,6 @@ import {
 } from "@/components/primitives/card";
 import { Button } from "@/components/primitives/button";
 import { cn } from "@/lib/utils";
-import { HintLabel } from "@/components/Hint";
 import ProposalStageBar from "@/components/ProposalStageBar";
 import { Surface } from "@/components/Surface";
 import { StatTile } from "@/components/StatTile";
@@ -130,10 +129,7 @@ const ProposalChamber: React.FC = () => {
           <CardTitle>Summary</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-muted">
-          <p>
-            Dynamic fee split that feeds Formation, treasury, and biometric
-            maintenance based on network stress and quorum activity.
-          </p>
+          <p>{proposal.summary}</p>
           <div className="grid gap-2 text-sm text-text sm:grid-cols-2 lg:grid-cols-4">
             {[
               { label: "Budget ask", value: proposal.budget },
@@ -152,33 +148,18 @@ const ProposalChamber: React.FC = () => {
           <div className="space-y-4 text-text">
             <TitledSurface title="Proposal overview">
               <p className="text-sm leading-relaxed text-muted">
-                Adjusts fee splits dynamically to balance treasury, Formation,
-                and biometric maintenance. Aims to align incentives with network
-                stress signals.
+                {proposal.overview}
               </p>
             </TitledSurface>
             <TitledSurface title="Execution plan">
               <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
-                <li>
-                  Pilot dynamic split on low-traffic hours; observe treasury
-                  inflow variance.
-                </li>
-                <li>
-                  Rollout to all chambers with 24h monitoring; revert if
-                  treasury drawdown exceeds target.
-                </li>
-                <li>
-                  Publish dashboards for fee split telemetry and alert
-                  thresholds.
-                </li>
+                {proposal.executionPlan.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </TitledSurface>
             <TitledSurface title="Budget & scope">
-              <p className="text-sm text-muted">
-                210k HMND covering telemetry work, contract changes, and
-                validation. Focused on Economics chamber with cross-chamber
-                reporting.
-              </p>
+              <p className="text-sm text-muted">{proposal.budgetScope}</p>
             </TitledSurface>
             <AttachmentList items={proposal.attachments} />
           </div>
@@ -192,14 +173,14 @@ const ProposalChamber: React.FC = () => {
               {
                 title: "Voting quorum",
                 description: "Strict 33% active governors",
-                value: "Met · 34%",
-                tone: "ok",
+                value: `${engaged >= quorumNeeded ? "Met" : "Pending"} · ${quorumPercent}%`,
+                tone: engaged >= quorumNeeded ? "ok" : "warn",
               },
               {
                 title: "Passing rule",
                 description: "≥66.6% + 1 yes",
-                value: "Current 57%",
-                tone: "warn",
+                value: `Current ${yesPercentOfQuorum}% yes`,
+                tone: yesPercentOfQuorum >= 67 ? "ok" : "warn",
               },
               {
                 title: "Time left",
@@ -233,10 +214,10 @@ const ProposalChamber: React.FC = () => {
 
           <ul className="grid gap-2 text-sm text-text md:grid-cols-2">
             {[
-              { label: "Votes casted", value: "34" },
+              { label: "Votes casted", value: String(engaged) },
               {
-                label: "Tier requirement",
-                value: <HintLabel termId="tier4_consul">Consul</HintLabel>,
+                label: "Active governors",
+                value: String(proposal.activeGovernors),
               },
             ].map((stat) => (
               <Surface
@@ -263,7 +244,7 @@ const ProposalChamber: React.FC = () => {
             <div className="flex flex-wrap gap-2">
               <Button asChild size="sm">
                 <Link
-                  to={`/app/proposals/${id ?? "adaptive-fee-shaping"}/chamber`}
+                  to={`/app/proposals/${id ?? "voluntary-commitment-staking"}/chamber`}
                 >
                   Open proposal
                 </Link>

@@ -157,7 +157,7 @@ export const humanNodeProfile = {
       detail: "Filed follow-ups for two flaky sensors before sign-off.",
     },
     {
-      title: "Deterrence sim drill",
+      title: "EVM sandbox beta drill",
       action: "Activated standby",
       context: "Security & infra",
       detail: "Ran pager playbook and escalated to infra for acknowledgement.",

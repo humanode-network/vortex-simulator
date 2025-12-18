@@ -179,7 +179,7 @@ export const humanNodes: HumanNode[] = [
     mm: 89,
     formationCapable: true,
     active: true,
-    formationProject: "Deterrence drills",
+    formationProject: "EVM sandbox beta",
     tags: ["security", "infra"],
   },
   {

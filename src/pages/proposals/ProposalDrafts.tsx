@@ -18,28 +18,13 @@ type Draft = {
 
 const drafts: Draft[] = [
   {
-    id: "draft-telemetry",
-    title: "Mesh Telemetry Upgrade",
-    chamber: "Protocol Engineering",
-    tier: "Legate",
-    summary: "Refine telemetry ingestion for sequencer failover playbooks.",
-    updated: "2025-03-28",
-  },
-  {
-    id: "draft-fee-ramp",
-    title: "Adaptive Fee Ramp",
-    chamber: "Economics & Treasury",
-    tier: "Consul",
-    summary: "Set fee ramps tied to quorum activity and biometric load.",
-    updated: "2025-03-22",
-  },
-  {
-    id: "draft-formation-kit",
-    title: "Formation Ops Kit",
-    chamber: "Formation Logistics",
-    tier: "Tribune",
-    summary: "Starter kit for squads: playbooks, dashboards, and SLOs.",
-    updated: "2025-03-19",
+    id: "draft-vortex-ux-v1",
+    title: "Vortex Governance Hub UX Refresh & Design System v1",
+    chamber: "Product & UX chamber",
+    tier: "Ecclesiast",
+    summary:
+      "UX audit + design system + redesigned core flows, delivered as dev-ready Figma and basic tokens.",
+    updated: "2026-01-09",
   },
 ];
 

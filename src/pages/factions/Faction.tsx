@@ -84,16 +84,20 @@ const Faction: React.FC = () => {
   ];
 
   const initiatives = [
-    { title: "Deterrence sim lab", stage: "Launched", location: "Formation" },
     {
-      title: "Sequencer redundancy rollout",
-      stage: <HintLabel termId="chamber_vote">Chamber vote</HintLabel>,
+      title: "Humanode EVM Dev Starter Kit & Testing Sandbox",
+      stage: <HintLabel termId="proposal_pools">Proposal pool</HintLabel>,
       location: "Protocol chamber",
     },
     {
-      title: "Treasury split recalibration",
-      stage: <HintLabel termId="proposal_pools">Proposal pool</HintLabel>,
-      location: "Treasury chamber",
+      title: "Voluntary Governor Commitment Staking",
+      stage: <HintLabel termId="chamber_vote">Chamber vote</HintLabel>,
+      location: "Governance chamber",
+    },
+    {
+      title: "EVM Sandbox Infrastructure",
+      stage: "Gathering team",
+      location: "Formation",
     },
     { title: "Guild ops stack", stage: "Launched", location: "Formation" },
     {

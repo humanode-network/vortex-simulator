@@ -84,7 +84,7 @@ const activity: HistoryItem[] = [
     date: "Epoch 173",
   },
   {
-    title: "Deterrence sim drill",
+    title: "EVM sandbox beta drill",
     action: "Activated standby",
     context: "Security & infra",
     detail: "Ran pager playbook and escalated to infra for acknowledgement.",
