@@ -144,7 +144,7 @@ API handlers read environment variables at runtime. If `DATABASE_URL` is not set
 For a persistent public demo:
 
 1. Provision a serverless Postgres database (Neon is the v1 target).
-2. Set Pages project environment variables:
+2. Set runtime environment variables:
    - `DATABASE_URL`
    - `SESSION_SECRET`
    - `ADMIN_SECRET` (if admin endpoints are used)
@@ -154,7 +154,7 @@ For a persistent public demo:
 ## Type checking
 
 - UI + client types: `yarn exec tsc -p tsconfig.json --noEmit`
-- API handlers: `yarn exec tsc -p functions/tsconfig.json --noEmit`
+- API handlers: `yarn exec tsc -p api/tsconfig.json --noEmit`
 
 ## DB (Phase 2c)
 

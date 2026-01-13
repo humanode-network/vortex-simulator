@@ -59,7 +59,7 @@ Guards applied to every command:
 The repo intentionally uses two TS projects:
 
 - UI + shared client types: `tsconfig.json` (covers `src/` + `tests/`)
-- API handlers: `functions/tsconfig.json` (covers `functions/` + local helper `.d.ts` typing)
+- API handlers: `api/tsconfig.json` (covers `api/` + local helper `.d.ts` typing)
 
 This keeps editor tooling for API handlers isolated while leaving the frontend TS config lean.
 

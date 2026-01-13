@@ -74,10 +74,10 @@ All state-changing actions go through the API and are validated against:
 
 This repo is currently a single frontend app. The backend can live alongside it as:
 
-- `functions/api/*` (API handlers routes)
-- `functions/_lib/*` (shared server helpers)
-- `functions/_lib/pages.d.ts` (local typing for `ApiHandler` in editors)
-- `functions/tsconfig.json` (separate TS project for `functions/`)
+- `api/routes/*` (API handlers routes)
+- `api/_lib/*` (shared server helpers)
+- `api/_lib/pages.d.ts` (local typing for `ApiHandler` in editors)
+- `api/tsconfig.json` (separate TS project for `api/`)
 - `db/*` (Drizzle schema + migrations)
 - `scripts/*` (seed/import jobs)
 - `src/server/domain/*` (future: shared domain engine)
