@@ -11,4 +11,4 @@ Frontend for the Vortex Simulator (UI mockup + client-side flows).
 
 - This repo contains only frontend code (`src/`, `public/`).
 - Backend lives in `humanode-network/vortex-simulator-server`.
-- Docs live in `humanode-network/vortex-cimulator-docs`.
+- Docs live in `humanode-network/vortex-simulator-docs`.
