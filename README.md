@@ -1,32 +1,14 @@
-# Vortex Experimental Mockups
+# Vortex Simulator — Web
 
-This repo ships:
+Frontend for the Vortex Simulator (UI mockup + client-side flows).
 
-1. A React UI mockup of Vortex (Humanode governance hub)
-2. An off-chain “simulation backend” served from `/api/*` (API handlers)
+## Local dev
 
-Humanode mainnet is used only as a read-only eligibility gate; all simulated governance state lives off-chain.
+- Run the UI: `yarn dev`
+- The UI expects the backend at `/api/*` (configure your reverse proxy in dev/prod).
 
-## Stack
+## Repo boundaries
 
-- React with React Router
-- Rsbuild
-- Tailwind v4 (via PostCSS) + token-driven CSS (`src/styles/base.css`)
-- Yarn (Node version: `.node-version`)
-- API handlers in `api/` + Postgres via Drizzle
-- `db/` – Drizzle schema + migrations + seed builders
-- `scripts/` – DB seed/clear + local API runner
-- `prolog/vortexopedia.pl` – Prolog glossary mirror
-- `public/landing/` – landing page assets (see `public/landing/README.md`)
-
-## Shared Patterns
-
-- **Hints**: `HintLabel` for inline glossary popups; `PageHint` for page-level help overlays.
-- **Search**: `SearchBar` component standardizes the search row across pages.
-- **Status/Stage bars**: proposal pages share a stage bar for Draft → Pool → Chamber vote → Formation.
-
-## Notes
-
-- `dist/` is generated build output.
-- Keep glossary entries in sync between `src/data/vortexopedia.ts` and `prolog/vortexopedia.pl` if you edit definitions.
-- DB-backed dev requires `DATABASE_URL` + `yarn db:migrate && yarn db:seed` (see `docs/simulation/vortex-simulation-local-dev.md`).
+- This repo contains only frontend code (`src/`, `public/`).
+- Backend lives in `humanode-network/vortex-simulator-server`.
+- Docs live in `humanode-network/vortex-simulator-docs`.
