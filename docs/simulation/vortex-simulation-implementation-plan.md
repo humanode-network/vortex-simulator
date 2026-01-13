@@ -8,15 +8,7 @@ For a paper-aligned module map (paper → docs → code), see `docs/simulation/v
 
 Implemented (v1 simulation backend):
 
-<<<<<<< HEAD
-- API handlers under `functions/`
-=======
-<<<<<<< Updated upstream
-- Cloudflare Pages Functions under `functions/`
-=======
 - API handlers under `api/`
->>>>>>> Stashed changes
->>>>>>> 5e32f02 (Eliminated functions (getting ready for migration))
 - Auth + gate (wallet signature + mainnet eligibility):
   - `GET /api/health`
   - `POST /api/auth/nonce` (sets `vortex_nonce` cookie)
