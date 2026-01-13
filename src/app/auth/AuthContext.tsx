@@ -219,7 +219,7 @@ export function AuthSidebarPanel() {
   const gateError =
     auth.authenticated && !auth.eligible
       ? auth.gateReason === "rpc_not_configured"
-        ? "Gate RPC is not configured. Set `HUMANODE_RPC_URL` in the Pages environment or set `humanodeRpcUrl` in `/sim-config.json` (or use `DEV_BYPASS_GATE=true` for local dev)."
+        ? "Gate RPC is not configured. Set `HUMANODE_RPC_URL` in the runtime environment or set `humanodeRpcUrl` in `/sim-config.json` (or use `DEV_BYPASS_GATE=true` for local dev)."
         : auth.gateReason === "rpc_error"
           ? "Gate RPC request failed. Check that `HUMANODE_RPC_URL` (or `/sim-config.json`) is reachable and supports `state_getStorage`."
           : null
