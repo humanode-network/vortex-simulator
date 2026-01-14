@@ -10,7 +10,7 @@
     "build": "rsbuild build",
     "preview": "rsbuild preview",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "yarn -s typecheck && yarn -s build",
+    "test": "yarn typecheck && yarn build",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:clear": "node --experimental-transform-types scripts/db-clear.ts",
