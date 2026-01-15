@@ -10,6 +10,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "yarn typecheck",
     "verify": "yarn typecheck && yarn build",
+=======
+
     "prettier:check": "prettier --list-different .",
     "prettier:fix": "prettier --write ."
   },
