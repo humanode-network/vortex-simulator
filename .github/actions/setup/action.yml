@@ -20,6 +20,10 @@ runs:
     - run: corepack enable
       shell: bash
 
+    - name: Validate package.json
+      run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
+      shell: bash
+
     - run: yarn install --immutable
       shell: bash
       if: "inputs.skip-yarn-install != 'true'"
